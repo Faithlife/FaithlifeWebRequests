@@ -1,12 +1,12 @@
-# ProjectName
+# Faithlife.WebRequests
 
-**ProjectName** description
+**Faithlife.WebRequests** description
 
 ## Installation
 
-ProjectName should be installed [via NuGet](https://www.nuget.org/packages/ProjectName).
+Faithlife.WebRequests should be installed [via NuGet](https://www.nuget.org/packages/Faithlife.WebRequests).
 
 ## Documentation
 
-* [Reference Documentation](ProjectName.md)
+* [Reference Documentation](Faithlife.WebRequests.md)
 
