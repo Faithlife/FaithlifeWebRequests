@@ -1,0 +1,120 @@
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Faithlife.Utility;
+
+namespace Faithlife.WebRequests
+{
+	/// <summary>
+	/// A web service request.
+	/// </summary>
+	public class WebServiceRequest<TResponse> : WebServiceRequestBase<TResponse>
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="WebServiceRequest"/> class.
+		/// </summary>
+		/// <param name="uri">The URI.</param>
+		public WebServiceRequest(Uri uri)
+			: base(uri)
+		{
+			m_handlers = new Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>>();
+		}
+
+		/// <summary>
+		/// Gets the response handlers.
+		/// </summary>
+		public Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>> Handlers
+		{
+			get { return m_handlers; }
+		}
+
+		/// <summary>
+		/// Overrides HandleResponseCore.
+		/// </summary>
+		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<TResponse> info)
+		{
+			foreach (var handler in m_handlers)
+			{
+				if (await handler(info).ConfigureAwait(true))
+					return true;
+			}
+			return false;
+		}
+
+		readonly Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>> m_handlers;
+	}
+
+	/// <summary>
+	/// A web service request.
+	/// </summary>
+	public class WebServiceRequest : WebServiceRequestBase<WebServiceResponse>
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="WebServiceRequest"/> class.
+		/// </summary>
+		/// <param name="uri">The URI.</param>
+		public WebServiceRequest(Uri uri)
+			: base(uri)
+		{
+			AcceptedStatusCodes = s_defaultAcceptedStatusCodes;
+		}
+
+		/// <summary>
+		/// Gets or sets the accepted status codes.
+		/// </summary>
+		/// <value>The accepted status codes; if null, all status codes are accepted.</value>
+		/// <remarks>The default value of this property contains HttpStatusCode.OK and HttpStatusCode.Created.</remarks>
+		public ReadOnlyCollection<HttpStatusCode> AcceptedStatusCodes { get; set; }
+
+		/// <summary>
+		/// Called to create the response.
+		/// </summary>
+		/// <param name="proposedResponse">The proposed response.</param>
+		/// <returns>The response.</returns>
+		/// <remarks>The default implementation simply returns the proposed response.</remarks>
+		protected virtual Task<WebServiceResponse> CreateResponseAsync(WebServiceResponse proposedResponse)
+		{
+			return Task.FromResult(proposedResponse);
+		}
+
+		/// <summary>
+		/// Overrides OnWebRequestCreated.
+		/// </summary>
+		protected override void OnWebRequestCreated(HttpRequestMessage request)
+		{
+			base.OnWebRequestCreated(request);
+
+			// if the client has disabled automatic redirection and hasn't changed the default accepted status codes, then
+			//   allow redirect status codes to be passed through
+			if (DisableAutoRedirect && object.ReferenceEquals(AcceptedStatusCodes, s_defaultAcceptedStatusCodes))
+				AcceptedStatusCodes = s_defaultAcceptedStatusCodesWithRedirect;
+		}
+
+		/// <summary>
+		/// Overrides HandleResponseCore.
+		/// </summary>
+		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<WebServiceResponse> info)
+		{
+			HttpStatusCode statusCode = info.WebResponse.StatusCode;
+			HttpHeaders headers = info.WebResponse.Headers;
+			HttpContent responseContent = info.WebResponse.Content;
+
+			WebServiceResponse response = new WebServiceResponse(this, statusCode, headers, responseContent);
+
+			if (AcceptedStatusCodes != null && !AcceptedStatusCodes.Contains(statusCode))
+				throw WebServiceResponseUtility.CreateWebServiceException(response);
+
+			info.Response = await CreateResponseAsync(response).ConfigureAwait(false);
+			return true;
+		}
+
+		static readonly ReadOnlyCollection<HttpStatusCode> s_defaultAcceptedStatusCodes = ListUtility.CreateReadOnlyCollection(HttpStatusCode.OK, HttpStatusCode.Created);
+		static readonly ReadOnlyCollection<HttpStatusCode> s_defaultAcceptedStatusCodesWithRedirect = ListUtility.CreateReadOnlyCollection(HttpStatusCode.OK, HttpStatusCode.Created,
+			HttpStatusCode.Moved, HttpStatusCode.Redirect, HttpStatusCode.RedirectMethod,  HttpStatusCode.RedirectKeepVerb );
+	}
+}
