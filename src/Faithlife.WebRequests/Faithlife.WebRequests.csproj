@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <TargetFrameworks>netstandard1.4;netstandard2.0;net46</TargetFrameworks>
     <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net46' and '$(MONO_ROOT)' != ''">$(MONO_ROOT)/lib/mono/4.6-api/</FrameworkPathOverride>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -12,13 +12,14 @@
     <PackageProjectUrl>https://github.com/Faithlife/FaithlifeWebRequests</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/Faithlife/FaithlifeWebRequests/blob/master/VersionHistory.md#released</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/Faithlife/FaithlifeWebRequests.git</RepositoryUrl>
+    <Description>Strongly-typed web service request client library</Description>
     <Authors>Faithlife Corporation</Authors>
     <Copyright>Copyright 2017 Faithlife Corporation</Copyright>
     <SourceLinkUrl>https://raw.githubusercontent.com/Faithlife/FaithlifeWebRequests/{commit}/*</SourceLinkUrl>
     <SourceLinkOriginUrl>https://github.com/Faithlife/FaithlifeWebRequests.git</SourceLinkOriginUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Faithlife.Json" Version="0.1.0" />
+    <PackageReference Include="Faithlife.Json" Version="0.1.1" />
     <PackageReference Include="Faithlife.Utility" Version="0.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="SourceLink.Create.GitHub" Version="2.1.0" PrivateAssets="all" />
