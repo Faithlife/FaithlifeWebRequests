@@ -2,4 +2,5 @@
 
 *.cs text diff=csharp
 *.csproj text merge=union
+*.png binary
 *.sln text eol=crlf merge=union
