@@ -7,9 +7,11 @@ is updated in preparation for publishing an updated NuGet package.
 
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [SemVer](http://semver.org).
 
-* [patch] Fix cookie handling in `WebServiceRequestBase`.
-
 ## Released
+
+### 0.1.2
+
+* [patch] Fix cookie handling in `WebServiceRequestBase`.
 
 ### 0.1.1
 
