@@ -332,9 +332,12 @@ namespace Faithlife.WebRequests
 			if (Settings == null || Settings.CookieManager == null)
 				return;
 
-			string cookieHeader = headers.GetValues("Set-Cookie")?.Join("; ");
-			if (!cookieHeader.IsNullOrEmpty())
-				Settings.CookieManager.SetCookies(requestUri, cookieHeader);
+			if (headers.TryGetValues("Set-Cookie", out var values))
+			{
+				string cookieHeader = values.Join("; ");
+				if (cookieHeader != "")
+					Settings.CookieManager.SetCookies(requestUri, cookieHeader);
+			}
 		}
 
 		const string c_octetStreamContentType = "application/octet-stream";
