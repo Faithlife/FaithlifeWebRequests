@@ -261,12 +261,10 @@ namespace Faithlife.WebRequests
 			{
 				if (!await HandleResponseCoreAsync(info).ConfigureAwait(false))
 				{
-					if (cancellationToken.IsCancellationRequested)
-						return default(TResponse);
+					cancellationToken.ThrowIfCancellationRequested();
 					throw new WebServiceException("Web response not handled.", webRequest.Method?.Method, RequestUri);
 				}
-				if (cancellationToken.IsCancellationRequested)
-					return default(TResponse);
+				cancellationToken.ThrowIfCancellationRequested();
 
 				try
 				{
