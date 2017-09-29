@@ -1,7 +1,5 @@
 # Faithlife.WebRequests assembly
 
-The assembly `Faithlife.WebRequests.dll` has 36 public types in 2 namespaces.
-
 ## Faithlife.WebRequests namespace
 
 | public type | description |
