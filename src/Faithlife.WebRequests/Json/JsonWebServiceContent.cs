@@ -102,7 +102,7 @@ namespace Faithlife.WebRequests.Json
 			// don't let StreamWriter close the stream
 			using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
 			using (StreamWriter writer = new StreamWriter(wrappingStream))
-				await writer.WriteBatchedAsync(Json, 4096, WorkState.None).ConfigureAwait(false);
+				await writer.WriteAsync(Json).ConfigureAwait(false);
 		}
 
 		protected override bool TryComputeLength(out long length)

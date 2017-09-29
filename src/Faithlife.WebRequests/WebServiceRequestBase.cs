@@ -145,35 +145,18 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// Gets the response.
 		/// </summary>
-		/// <returns>Makes a web request, blocking until the request has returned a response.</returns>
-		public TResponse GetResponse()
-		{
-			return GetResponse(WorkState.None);
-		}
-
-		/// <summary>
-		/// Gets the response.
-		/// </summary>
-		/// <param name="workState">The work state.</param>
+		/// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
 		/// <returns>Makes a web request, blocking until the request has returned a response. Returns default(TResponse) if cancelled.</returns>
-		public TResponse GetResponse(IWorkState workState)
+		public TResponse GetResponse(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			// wait for async, which supports timeout
-			return GetResponseAsync(workState).GetAwaiter().GetResult();
+			return GetResponseAsync(cancellationToken).GetAwaiter().GetResult();
 		}
 
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public Task<TResponse> GetResponseAsync()
-		{
-			return GetResponseAsync(WorkState.None);
-		}
-
-		/// <summary>
-		/// Gets the response asynchronously.
-		/// </summary>
-		public async Task<TResponse> GetResponseAsync(IWorkState workState)
+		public async Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			HttpClient client;
 			HttpRequestMessage webRequest = CreateWebRequest(out client);
@@ -181,16 +164,8 @@ namespace Faithlife.WebRequests
 			if (requestContent != null)
 				webRequest.Content = requestContent;
 			// TODO: get the web response (without throwing an exception for unsuccessful status codes)
-			HttpResponseMessage response = await client.SendAsync(webRequest, workState.CancellationToken).ConfigureAwait(false);
-			return await HandleResponseAsync(webRequest, response, workState).ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Gets the response asynchronously.
-		/// </summary>
-		public Task<TResponse> GetResponseAsync(CancellationToken cancellationToken)
-		{
-			return GetResponseAsync(WorkState.FromCancellationToken(cancellationToken));
+			HttpResponseMessage response = await client.SendAsync(webRequest, cancellationToken).ConfigureAwait(false);
+			return await HandleResponseAsync(webRequest, response, cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -289,19 +264,19 @@ namespace Faithlife.WebRequests
 			return requestContent;
 		}
 
-		private async Task<TResponse> HandleResponseAsync(HttpRequestMessage webRequest, HttpResponseMessage webResponse, IWorkState workState)
+		private async Task<TResponse> HandleResponseAsync(HttpRequestMessage webRequest, HttpResponseMessage webResponse, CancellationToken cancellationToken)
 		{
 			// handle web response
-			WebServiceResponseHandlerInfo<TResponse> info = new WebServiceResponseHandlerInfo<TResponse>(webResponse, workState);
+			WebServiceResponseHandlerInfo<TResponse> info = new WebServiceResponseHandlerInfo<TResponse>(webResponse, cancellationToken);
 			try
 			{
 				if (!await HandleResponseCoreAsync(info).ConfigureAwait(false))
 				{
-					if (workState.Canceled)
+					if (cancellationToken.IsCancellationRequested)
 						return default(TResponse);
 					throw new WebServiceException("Web response not handled.", webRequest.Method?.Method, RequestUri);
 				}
-				if (workState.Canceled)
+				if (cancellationToken.IsCancellationRequested)
 					return default(TResponse);
 
 				try

@@ -1,41 +1,9 @@
-# JsonWebServiceRequest.GetResponseAsync method (1 of 3)
+# JsonWebServiceRequest.GetResponseAsync method
 
 Gets the response asynchronously.
 
 ```csharp
-public Task<JsonWebServiceResponse> GetResponseAsync()
-```
-
-## See Also
-
-* class [JsonWebServiceResponse](../JsonWebServiceResponse.md)
-* class [JsonWebServiceRequest](../JsonWebServiceRequest.md)
-* namespace [Faithlife.WebRequests.Json](../../Faithlife.WebRequests.md)
-
----
-
-# JsonWebServiceRequest.GetResponseAsync method (2 of 3)
-
-Gets the response asynchronously.
-
-```csharp
-public Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken)
-```
-
-## See Also
-
-* class [JsonWebServiceResponse](../JsonWebServiceResponse.md)
-* class [JsonWebServiceRequest](../JsonWebServiceRequest.md)
-* namespace [Faithlife.WebRequests.Json](../../Faithlife.WebRequests.md)
-
----
-
-# JsonWebServiceRequest.GetResponseAsync method (3 of 3)
-
-Gets the response asynchronously.
-
-```csharp
-public Task<JsonWebServiceResponse> GetResponseAsync(IWorkState workState)
+public Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 ```
 
 ## See Also

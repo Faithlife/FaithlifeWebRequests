@@ -3,13 +3,13 @@
 Initializes a new instance of the [`WebServiceResponseHandlerInfo`](../WebServiceResponseHandlerInfo-1.md) class.
 
 ```csharp
-protected WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, IWorkState workState)
+protected WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, CancellationToken cancellationToken)
 ```
 
 | parameter | description |
 | --- | --- |
 | webResponse | The web response. |
-| workState | State of the work. |
+| cancellationToken | The token to monitor for cancellation requests. |
 
 ## See Also
 

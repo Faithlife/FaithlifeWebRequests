@@ -29,33 +29,17 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the response.
 		/// </summary>
 		/// <returns>Makes a web request, blocking until the request has returned a response.</returns>
-		public new JsonWebServiceResponse GetResponse()
+		public new JsonWebServiceResponse GetResponse(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return (JsonWebServiceResponse) base.GetResponse();
+			return (JsonWebServiceResponse) base.GetResponse(cancellationToken);
 		}
 
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public new async Task<JsonWebServiceResponse> GetResponseAsync()
+		public new async Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return (JsonWebServiceResponse) await base.GetResponseAsync().ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Gets the response asynchronously.
-		/// </summary>
-		public new async Task<JsonWebServiceResponse> GetResponseAsync(IWorkState workState)
-		{
-			return (JsonWebServiceResponse) await base.GetResponseAsync(workState).ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Gets the response asynchronously.
-		/// </summary>
-		public new Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken)
-		{
-			return GetResponseAsync(WorkState.FromCancellationToken(cancellationToken));
+			return (JsonWebServiceResponse) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -119,25 +103,17 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the response.
 		/// </summary>
 		/// <returns>Makes a web request, blocking until the request has returned a response.</returns>
-		public new JsonWebServiceResponse<TResponseValue> GetResponse()
+		public new JsonWebServiceResponse<TResponseValue> GetResponse(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return (JsonWebServiceResponse<TResponseValue>) base.GetResponse();
+			return (JsonWebServiceResponse<TResponseValue>) base.GetResponse(cancellationToken);
 		}
 
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync()
+		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return (JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync().ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Gets the response asynchronously.
-		/// </summary>
-		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(IWorkState workState)
-		{
-			return (JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync(workState).ConfigureAwait(false);
+			return (JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>
