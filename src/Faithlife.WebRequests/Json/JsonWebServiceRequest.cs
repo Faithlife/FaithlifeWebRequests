@@ -131,7 +131,7 @@ namespace Faithlife.WebRequests.Json
 				}
 				catch (JsonSerializationException x)
 				{
-					// got JSON that can't be deseririalized (error information, perhaps; allowed for non-OK)
+					// got JSON that can't be deserialized (error information, perhaps; allowed for non-OK)
 					string message = "Response JSON could not be deserialized to {0}: {1} / JSON: {2}".FormatInvariant(typeof(TResponseValue), x.Message, json);
 					if (statusCode == HttpStatusCode.OK)
 						throw WebServiceResponseUtility.CreateWebServiceException(proposedResponse, message, x);
