@@ -26,15 +26,6 @@ namespace Faithlife.WebRequests.Json
 		}
 
 		/// <summary>
-		/// Gets the response.
-		/// </summary>
-		/// <returns>Makes a web request, blocking until the request has returned a response.</returns>
-		public new JsonWebServiceResponse GetResponse(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return (JsonWebServiceResponse) base.GetResponse(cancellationToken);
-		}
-
-		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
 		public new async Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -98,15 +89,6 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <value>The input settings (used when converting the response from JSON).</value>
 		public JsonInputSettings InputSettings { get; set; }
-
-		/// <summary>
-		/// Gets the response.
-		/// </summary>
-		/// <returns>Makes a web request, blocking until the request has returned a response.</returns>
-		public new JsonWebServiceResponse<TResponseValue> GetResponse(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return (JsonWebServiceResponse<TResponseValue>) base.GetResponse(cancellationToken);
-		}
 
 		/// <summary>
 		/// Gets the response asynchronously.

@@ -143,17 +143,6 @@ namespace Faithlife.WebRequests
 		}
 
 		/// <summary>
-		/// Gets the response.
-		/// </summary>
-		/// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-		/// <returns>Makes a web request, blocking until the request has returned a response. Returns default(TResponse) if cancelled.</returns>
-		public TResponse GetResponse(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			// wait for async, which supports timeout
-			return GetResponseAsync(cancellationToken).GetAwaiter().GetResult();
-		}
-
-		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
 		public async Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))

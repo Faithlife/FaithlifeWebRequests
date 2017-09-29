@@ -11,7 +11,6 @@ public class JsonWebServiceRequest : WebServiceRequest
 | name | description |
 | --- | --- |
 | [JsonWebServiceRequest](JsonWebServiceRequest/JsonWebServiceRequest.md)(…) | Initializes a new instance of the JsonWebServiceRequest class. |
-| [GetResponse](JsonWebServiceRequest/GetResponse.md)(…) | Gets the response. |
 | [GetResponseAsync](JsonWebServiceRequest/GetResponseAsync.md)(…) | Gets the response asynchronously. |
 
 ## Protected Members
