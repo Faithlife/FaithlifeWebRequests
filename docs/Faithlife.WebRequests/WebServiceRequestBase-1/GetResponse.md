@@ -1,33 +1,14 @@
-# WebServiceRequestBase&lt;TResponse&gt;.GetResponse method (1 of 2)
+# WebServiceRequestBase&lt;TResponse&gt;.GetResponse method
 
 Gets the response.
 
 ```csharp
-public TResponse GetResponse()
-```
-
-## Return Value
-
-Makes a web request, blocking until the request has returned a response.
-
-## See Also
-
-* class [WebServiceRequestBase&lt;TResponse&gt;](../WebServiceRequestBase-1.md)
-* namespace [Faithlife.WebRequests](../../Faithlife.WebRequests.md)
-
----
-
-# WebServiceRequestBase&lt;TResponse&gt;.GetResponse method (2 of 2)
-
-Gets the response.
-
-```csharp
-public TResponse GetResponse(IWorkState workState)
+public TResponse GetResponse(CancellationToken cancellationToken = default(CancellationToken))
 ```
 
 | parameter | description |
 | --- | --- |
-| workState | The work state. |
+| cancellationToken | The token to monitor for cancellation requests. |
 
 ## Return Value
 

@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http;
-using Faithlife.Utility.Threading;
+using System.Threading;
 
 namespace Faithlife.WebRequests
 {
@@ -13,46 +13,37 @@ namespace Faithlife.WebRequests
 		/// Initializes a new instance of the <see cref="WebServiceResponseHandlerInfo&lt;TResponse&gt;"/> class.
 		/// </summary>
 		/// <param name="webResponse">The web response.</param>
-		/// <param name="workState">State of the work.</param>
-		protected WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, IWorkState workState)
+		/// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+		protected WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, CancellationToken cancellationToken)
 		{
-			m_webResponse = webResponse;
-			m_workState = workState;
+			WebResponse = webResponse;
+			CancellationToken = cancellationToken;
 		}
 
 		/// <summary>
 		/// Gets the web response.
 		/// </summary>
 		/// <value>The web response.</value>
-		public HttpResponseMessage WebResponse
-		{
-			get { return m_webResponse; }
-		}
+		public HttpResponseMessage WebResponse { get; private set; }
 
 		/// <summary>
 		/// True if the content has been read from the web response.
 		/// </summary>
 		/// <value>True if the content has been read from the web response.</value>
-		public bool IsContentRead
-		{
-			get { return m_isContentRead; }
-		}
+		public bool IsContentRead { get; private set; }
 
 		/// <summary>
 		/// Gets the work state.
 		/// </summary>
 		/// <value>The work state.</value>
-		public IWorkState WorkState
-		{
-			get { return m_workState; }
-		}
+		public CancellationToken CancellationToken { get; }
 
 		/// <summary>
 		/// Marks the content as having been read from the web response.
 		/// </summary>
 		public void MarkContentAsRead()
 		{
-			m_isContentRead = true;
+			IsContentRead = true;
 		}
 
 		/// <summary>
@@ -61,14 +52,10 @@ namespace Faithlife.WebRequests
 		/// <returns>The detached web response.</returns>
 		public HttpResponseMessage DetachWebResponse()
 		{
-			HttpResponseMessage webResponse = m_webResponse;
-			m_webResponse = null;
+			HttpResponseMessage webResponse = WebResponse;
+			WebResponse = null;
 			return webResponse;
 		}
-
-		HttpResponseMessage m_webResponse;
-		bool m_isContentRead;
-		readonly IWorkState m_workState;
 	}
 
 	/// <summary>
@@ -80,9 +67,9 @@ namespace Faithlife.WebRequests
 		/// Initializes a new instance of the <see cref="WebServiceResponseHandlerInfo&lt;TResponse&gt;"/> class.
 		/// </summary>
 		/// <param name="webResponse">The web response.</param>
-		/// <param name="workState">State of the work.</param>
-		public WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, IWorkState workState)
-			: base(webResponse, workState)
+		/// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+		public WebServiceResponseHandlerInfo(HttpResponseMessage webResponse, CancellationToken cancellationToken)
+			: base(webResponse, cancellationToken)
 		{
 		}
 

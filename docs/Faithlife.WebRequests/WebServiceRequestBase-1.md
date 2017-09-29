@@ -10,10 +10,8 @@ public abstract class WebServiceRequestBase<TResponse> : WebServiceRequestBase
 
 | name | description |
 | --- | --- |
-| [GetResponse](WebServiceRequestBase-1/GetResponse.md)() | Gets the response. |
 | [GetResponse](WebServiceRequestBase-1/GetResponse.md)(…) | Gets the response. |
-| [GetResponseAsync](WebServiceRequestBase-1/GetResponseAsync.md)() | Gets the response asynchronously. |
-| [GetResponseAsync](WebServiceRequestBase-1/GetResponseAsync.md)(…) | Gets the response asynchronously. (2 methods) |
+| [GetResponseAsync](WebServiceRequestBase-1/GetResponseAsync.md)(…) | Gets the response asynchronously. |
 
 ## Protected Members
 

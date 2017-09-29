@@ -1,39 +1,9 @@
-# WebServiceRequestBase&lt;TResponse&gt;.GetResponseAsync method (1 of 3)
+# WebServiceRequestBase&lt;TResponse&gt;.GetResponseAsync method
 
 Gets the response asynchronously.
 
 ```csharp
-public Task<TResponse> GetResponseAsync()
-```
-
-## See Also
-
-* class [WebServiceRequestBase&lt;TResponse&gt;](../WebServiceRequestBase-1.md)
-* namespace [Faithlife.WebRequests](../../Faithlife.WebRequests.md)
-
----
-
-# WebServiceRequestBase&lt;TResponse&gt;.GetResponseAsync method (2 of 3)
-
-Gets the response asynchronously.
-
-```csharp
-public Task<TResponse> GetResponseAsync(CancellationToken cancellationToken)
-```
-
-## See Also
-
-* class [WebServiceRequestBase&lt;TResponse&gt;](../WebServiceRequestBase-1.md)
-* namespace [Faithlife.WebRequests](../../Faithlife.WebRequests.md)
-
----
-
-# WebServiceRequestBase&lt;TResponse&gt;.GetResponseAsync method (3 of 3)
-
-Gets the response asynchronously.
-
-```csharp
-public Task<TResponse> GetResponseAsync(IWorkState workState)
+public Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 ```
 
 ## See Also

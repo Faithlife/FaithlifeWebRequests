@@ -3,7 +3,7 @@
 Gets the response.
 
 ```csharp
-public JsonWebServiceResponse<TResponseValue> GetResponse()
+public JsonWebServiceResponse<TResponseValue> GetResponse(CancellationToken cancellationToken = default(CancellationToken))
 ```
 
 ## Return Value
