@@ -10,7 +10,7 @@ public abstract class WebServiceResponseHandlerInfo
 
 | name | description |
 | --- | --- |
-| [CancellationToken](WebServiceResponseHandlerInfo/CancellationToken.md) { get; } | Gets the work state. |
+| [CancellationToken](WebServiceResponseHandlerInfo/CancellationToken.md) { get; } | Gets the cancellation token. |
 | [IsContentRead](WebServiceResponseHandlerInfo/IsContentRead.md) { get; } | True if the content has been read from the web response. |
 | [WebResponse](WebServiceResponseHandlerInfo/WebResponse.md) { get; } | Gets the web response. |
 | [DetachWebResponse](WebServiceResponseHandlerInfo/DetachWebResponse.md)() | Detaches the web response. |
