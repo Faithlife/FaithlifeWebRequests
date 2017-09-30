@@ -1,6 +1,6 @@
 # WebServiceResponseHandlerInfo.CancellationToken property
 
-Gets the work state.
+Gets the cancellation token.
 
 ```csharp
 public CancellationToken CancellationToken { get; }
@@ -8,7 +8,7 @@ public CancellationToken CancellationToken { get; }
 
 ## Property Value
 
-The work state.
+The cancellation token.
 
 ## See Also
 

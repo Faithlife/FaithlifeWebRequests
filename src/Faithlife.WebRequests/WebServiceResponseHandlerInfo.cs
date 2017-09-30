@@ -33,9 +33,9 @@ namespace Faithlife.WebRequests
 		public bool IsContentRead { get; private set; }
 
 		/// <summary>
-		/// Gets the work state.
+		/// Gets the cancellation token.
 		/// </summary>
-		/// <value>The work state.</value>
+		/// <value>The cancellation token.</value>
 		public CancellationToken CancellationToken { get; }
 
 		/// <summary>
