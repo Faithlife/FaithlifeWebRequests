@@ -1,6 +1,6 @@
 # Faithlife.WebRequests
 
-Description
+Strongly-typed web service request client library.
 
 ## Build Status
 
