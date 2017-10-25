@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -7,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
-using Faithlife.Utility.Threading;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -44,7 +42,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="value">The value.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonOutputSettings settings)
+		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings settings)
 		{
 			return new JsonWebServiceContent<TValue>(value, settings);
 		}
@@ -147,7 +145,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="value">The content.</param>
 		/// <param name="settings">The settings.</param>
 		/// <remarks>JsonUtility.ToJson is called just in time when the JSON content is needed.</remarks>
-		protected internal JsonWebServiceContent(TValue value, JsonOutputSettings settings)
+		protected internal JsonWebServiceContent(TValue value, JsonSettings settings)
 		{
 			m_value = value;
 			m_outputSettings = settings;
@@ -163,6 +161,6 @@ namespace Faithlife.WebRequests.Json
 		}
 
 		readonly TValue m_value;
-		readonly JsonOutputSettings m_outputSettings;
+		readonly JsonSettings m_outputSettings;
 	}
 }

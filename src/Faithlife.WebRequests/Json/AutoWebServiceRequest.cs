@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Faithlife.Utility;
-using Faithlife.Utility.Invariant;
 using Faithlife.Json;
 
 namespace Faithlife.WebRequests.Json
@@ -39,10 +38,10 @@ namespace Faithlife.WebRequests.Json
 		}
 
 		/// <summary>
-		/// Gets or sets the JSON input settings.
+		/// Gets or sets the JSON settings.
 		/// </summary>
-		/// <value>The json input settings.</value>
-		public JsonInputSettings JsonInputSettings { get; set; }
+		/// <value>The json settings.</value>
+		public JsonSettings JsonSettings { get; set; }
 
 		/// <summary>
 		/// Creates an empty response.
@@ -158,7 +157,7 @@ namespace Faithlife.WebRequests.Json
 			else if (webResponse.HasJson() || webResponse.Content.Headers.ContentType == null)
 			{
 				info.MarkContentAsRead();
-				content = await webResponse.GetJsonAsAsync(propertyType, JsonInputSettings).ConfigureAwait(false);
+				content = await webResponse.GetJsonAsAsync(propertyType, JsonSettings).ConfigureAwait(false);
 			}
 
 			if (content == null)

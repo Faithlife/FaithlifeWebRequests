@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Faithlife.Utility;
-using Faithlife.Utility.Threading;
 
 namespace Faithlife.WebRequests
 {
@@ -188,14 +187,14 @@ namespace Faithlife.WebRequests
 			if (AdditionalHeaders != null)
 				request.Headers.AddWebHeaders(AdditionalHeaders);
 
-			if (!Accept.IsNullOrEmpty())
+			if (!string.IsNullOrEmpty(Accept))
 				request.Headers.Accept.ParseAdd(Accept);
 
 			string userAgent = UserAgent ?? settings.UserAgent;
-			if (!userAgent.IsNullOrEmpty())
+			if (!string.IsNullOrEmpty(userAgent))
 				request.Headers.UserAgent.ParseAdd(userAgent);
 
-			if (!Referer.IsNullOrEmpty())
+			if (!string.IsNullOrEmpty(Referer))
 				request.Headers.Add("Referer", Referer);
 
 			if (settings.Disable100Continue)
@@ -280,7 +279,7 @@ namespace Faithlife.WebRequests
 			{
 				// dispose HttpResponseMessage unless detached
 				if (info.WebResponse != null)
-					((IDisposable)info.DetachWebResponse()).Dispose();
+					((IDisposable) info.DetachWebResponse()).Dispose();
 			}
 
 			// return result

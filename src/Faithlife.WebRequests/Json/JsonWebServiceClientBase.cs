@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Faithlife.Utility;
 
 namespace Faithlife.WebRequests.Json
@@ -55,7 +56,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The web request URI.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected Uri GetRequestUri(string relativeUriPattern, object uriParameters)
+		protected Uri GetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
 		{
 			if (relativeUriPattern == null)
 				throw new ArgumentNullException("relativeUriPattern");
@@ -94,7 +95,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, object uriParameters)
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
 		{
 			return DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, uriParameters));
 		}
@@ -115,7 +116,7 @@ namespace Faithlife.WebRequests.Json
 		{
 		}
 
-		private Uri DoGetRequestUri(string relativeUriPattern, object uriParameters)
+		private Uri DoGetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
 		{
 			string uriText = m_baseUri.AbsoluteUri;
 
@@ -133,7 +134,7 @@ namespace Faithlife.WebRequests.Json
 		{
 			WebServiceRequestSettings requestSettings = m_clientSettings.RequestSettings ?? (m_clientSettings.RequestSettingsCreator != null ? m_clientSettings.RequestSettingsCreator() : null);
 
-			AutoWebServiceRequest<TResponse> request = new AutoWebServiceRequest<TResponse>(uri) { JsonInputSettings = m_clientSettings.JsonInputSettings }.WithSettings(requestSettings);
+			AutoWebServiceRequest<TResponse> request = new AutoWebServiceRequest<TResponse>(uri) { JsonSettings = m_clientSettings.JsonSettings }.WithSettings(requestSettings);
 
 			OnRequestCreated(request);
 

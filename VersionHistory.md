@@ -9,6 +9,13 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 
 ## Released
 
+### 0.2.0
+
+* [major] Adapt to breaking changes in `Faithlife.Json`.
+  * `JsonInputSettings` and `JsonOutputSettings` were merged into `JsonSettings`.
+  * `GetRequestUri` now uses `IEnumerable<KeyValuePair<string, object>>` instead of an anonymous `object`.
+* [major] Change `AcceptedStatusCodes` to use `IReadOnlyList<HttpStatusCode>`.
+
 ### 0.1.2
 
 * [patch] Fix cookie handling in `WebServiceRequestBase`.

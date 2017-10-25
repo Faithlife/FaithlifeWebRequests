@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
-using Faithlife.Utility.Threading;
 using Newtonsoft.Json;
 
 namespace Faithlife.WebRequests.Json
@@ -85,10 +84,10 @@ namespace Faithlife.WebRequests.Json
 		}
 
 		/// <summary>
-		/// Gets or sets the input settings.
+		/// Gets or sets the JSON settings.
 		/// </summary>
-		/// <value>The input settings (used when converting the response from JSON).</value>
-		public JsonInputSettings InputSettings { get; set; }
+		/// <value>The JSON settings (used when converting the response from JSON).</value>
+		public JsonSettings JsonSettings { get; set; }
 
 		/// <summary>
 		/// Gets the response asynchronously.
@@ -121,7 +120,7 @@ namespace Faithlife.WebRequests.Json
 				try
 				{
 					// parse JSON to desired value
-					TResponseValue value = JsonUtility.FromJson<TResponseValue>(json, InputSettings);
+					TResponseValue value = JsonUtility.FromJson<TResponseValue>(json, JsonSettings);
 					return new JsonWebServiceResponse<TResponseValue>(this, statusCode, headers, JsonWebServiceContent.FromValue(value));
 				}
 				catch (JsonReaderException x)
