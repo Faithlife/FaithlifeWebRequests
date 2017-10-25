@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <VersionPrefix>0.1.2</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <TargetFrameworks>netstandard1.4;netstandard2.0;net461</TargetFrameworks>
     <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net461' and '$(MONO_ROOT)' != ''">$(MONO_ROOT)/lib/mono/4.6.1-api/</FrameworkPathOverride>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -19,8 +19,8 @@
     <SourceLinkOriginUrl>https://github.com/Faithlife/FaithlifeWebRequests.git</SourceLinkOriginUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Faithlife.Json" Version="0.1.1" />
-    <PackageReference Include="Faithlife.Utility" Version="0.3.0" />
+    <PackageReference Include="Faithlife.Json" Version="0.2.0" />
+    <PackageReference Include="Faithlife.Utility" Version="0.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="SourceLink.Create.GitHub" Version="2.1.0" PrivateAssets="all" />
     <PackageReference Include="SourceLink.Test" Version="2.1.0" PrivateAssets="all" />

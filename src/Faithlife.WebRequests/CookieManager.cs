@@ -102,7 +102,10 @@ namespace Faithlife.WebRequests
 			{
 				empty = m_setUris.Count == 0;
 				if (!empty)
-					m_setUris.ForEach(uri => m_cookieContainer.GetCookies(uri).Cast<Cookie>().ForEach(x => x.Expires = expires));
+				{
+					foreach (var cookie in m_setUris.SelectMany(uri => m_cookieContainer.GetCookies(uri).Cast<Cookie>()))
+						cookie.Expires = expires;
+				}
 			}
 
 			if (!empty)

@@ -23,9 +23,9 @@ namespace Faithlife.WebRequests.Json
 		public Func<WebServiceRequestSettings> RequestSettingsCreator { get; set; }
 
 		/// <summary>
-		/// Gets or sets the json input settings.
+		/// Gets or sets the JSON settings.
 		/// </summary>
-		/// <value>The json input settings.</value>
-		public JsonInputSettings JsonInputSettings { get; set; }
+		/// <value>The JSON settings.</value>
+		public JsonSettings JsonSettings { get; set; }
 	}
 }

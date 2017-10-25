@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		/// <value>The accepted status codes; if null, all status codes are accepted.</value>
 		/// <remarks>The default value of this property contains HttpStatusCode.OK and HttpStatusCode.Created.</remarks>
-		public ReadOnlyCollection<HttpStatusCode> AcceptedStatusCodes { get; set; }
+		public IReadOnlyList<HttpStatusCode> AcceptedStatusCodes { get; set; }
 
 		/// <summary>
 		/// Called to create the response.
@@ -113,8 +114,8 @@ namespace Faithlife.WebRequests
 			return true;
 		}
 
-		static readonly ReadOnlyCollection<HttpStatusCode> s_defaultAcceptedStatusCodes = ListUtility.CreateReadOnlyCollection(HttpStatusCode.OK, HttpStatusCode.Created);
-		static readonly ReadOnlyCollection<HttpStatusCode> s_defaultAcceptedStatusCodesWithRedirect = ListUtility.CreateReadOnlyCollection(HttpStatusCode.OK, HttpStatusCode.Created,
-			HttpStatusCode.Moved, HttpStatusCode.Redirect, HttpStatusCode.RedirectMethod,  HttpStatusCode.RedirectKeepVerb );
+		static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodes = new[] { HttpStatusCode.OK, HttpStatusCode.Created };
+		static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodesWithRedirect = new[] { HttpStatusCode.OK, HttpStatusCode.Created,
+			HttpStatusCode.Moved, HttpStatusCode.Redirect, HttpStatusCode.RedirectMethod,  HttpStatusCode.RedirectKeepVerb };
 	}
 }

@@ -30,7 +30,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="contentValue">The content value.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The request.</returns>
-		public static TWebServiceRequest WithJsonContent<TWebServiceRequest, TContentValue>(this TWebServiceRequest request, TContentValue contentValue, JsonOutputSettings settings) where TWebServiceRequest : WebServiceRequestBase
+		public static TWebServiceRequest WithJsonContent<TWebServiceRequest, TContentValue>(this TWebServiceRequest request, TContentValue contentValue, JsonSettings settings) where TWebServiceRequest : WebServiceRequestBase
 		{
 			request.Content = JsonWebServiceContent.FromValue(contentValue, settings);
 			return request;
@@ -43,9 +43,9 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="request">The request.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The request.</returns>
-		public static JsonWebServiceRequest<TResponseContent> WithInputSettings<TResponseContent>(this JsonWebServiceRequest<TResponseContent> request, JsonInputSettings settings)
+		public static JsonWebServiceRequest<TResponseContent> WithJsonSettings<TResponseContent>(this JsonWebServiceRequest<TResponseContent> request, JsonSettings settings)
 		{
-			request.InputSettings = settings;
+			request.JsonSettings = settings;
 			return request;
 		}
 	}
