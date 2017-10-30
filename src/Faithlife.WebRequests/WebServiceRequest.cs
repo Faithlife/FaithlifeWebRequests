@@ -41,7 +41,7 @@ namespace Faithlife.WebRequests
 		{
 			foreach (var handler in m_handlers)
 			{
-				if (await handler(info).ConfigureAwait(true))
+				if (await handler(info).ConfigureAwait(false))
 					return true;
 			}
 			return false;
