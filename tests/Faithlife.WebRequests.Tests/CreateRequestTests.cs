@@ -14,9 +14,10 @@ namespace Faithlife.WebRequests.Tests
 		{
 			var client = CreateMockClient();
 
-			var parameters = new Dictionary<string, object>();
-			parameters.Add("id", "1234");
-			parameters.Add("test", "1");
+			var parameters = new Dictionary<string, object> {
+				["id"] = "1234",
+				["test"] = "1",
+			};
 
 			var request = client.CreateRequest<object>("tests/{id}", parameters.ToList());
 
