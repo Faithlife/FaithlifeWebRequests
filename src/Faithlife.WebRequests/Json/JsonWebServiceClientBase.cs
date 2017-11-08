@@ -70,15 +70,15 @@ namespace Faithlife.WebRequests.Json
 		/// Creates a web request URI using the specified relative URI pattern and parameters.
 		/// </summary>
 		/// <param name="relativeUriPattern">The relative URI pattern.</param>
-		/// <param name="parameters">The URI parameters.</param>
+		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The web request URI.</returns>
 		/// <remarks>Each pair of parameters represents a key and a value. See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected Uri GetRequestUri(string relativeUriPattern, params string[] parameters)
+		protected Uri GetRequestUri(string relativeUriPattern, params string[] uriParameters)
 		{
 			if (relativeUriPattern == null)
 				throw new ArgumentNullException("relativeUriPattern");
 
-			return DoGetRequestUri(relativeUriPattern, parameters);
+			return DoGetRequestUri(relativeUriPattern, uriParameters);
 		}
 
 		/// <summary>
@@ -120,12 +120,12 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <typeparam name="TResponse">The type of the response.</typeparam>
 		/// <param name="relativeUriPattern">The relative URI pattern.</param>
-		/// <param name="parameters">The URI parameters.</param>
+		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
 		/// <remarks>Each pair of parameters represents a key and a value. See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] parameters)
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] uriParameters)
 		{
-			return DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, parameters));
+			return DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, uriParameters));
 		}
 
 		/// <summary>
@@ -158,14 +158,14 @@ namespace Faithlife.WebRequests.Json
 			return uri;
 		}
 
-		private Uri DoGetRequestUri(string relativeUriPattern, params string[] parameters)
+		private Uri DoGetRequestUri(string relativeUriPattern, params string[] uriParameters)
 		{
 			string uriText = m_baseUri.AbsoluteUri;
 
 			if (!string.IsNullOrEmpty(relativeUriPattern))
 				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
 
-			Uri uri = parameters != null ? UriUtility.FromPattern(uriText, parameters) : new Uri(uriText);
+			Uri uri = uriParameters != null ? UriUtility.FromPattern(uriText, uriParameters) : new Uri(uriText);
 
 			OnGetRequestUri(ref uri);
 
