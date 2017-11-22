@@ -61,6 +61,12 @@ namespace Faithlife.WebRequests
 		public HttpContent Content { get; set; }
 
 		/// <summary>
+		/// Gets or sets the If-Match header.
+		/// </summary>
+		/// <value>The If-Match ETag.</value>
+		public string IfMatch { get; set; }
+
+		/// <summary>
 		/// Gets or sets if modified since.
 		/// </summary>
 		/// <value>If modified since.</value>
@@ -218,6 +224,9 @@ namespace Faithlife.WebRequests
 				request.Headers.Authorization = AuthenticationHeaderValue.Parse(authorizationHeader);
 
 			handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+			if (IfMatch != null)
+				request.Headers.IfMatch.ParseAdd(IfMatch);
 
 			if (IfModifiedSince.HasValue)
 				request.Headers.IfModifiedSince = IfModifiedSince.Value;
