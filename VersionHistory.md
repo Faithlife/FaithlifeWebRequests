@@ -11,6 +11,10 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 
 ## Released
 
+### 0.3.0
+
+* [minor] Add If-Match header support.
+
 ### 0.2.0
 
 * [major] Adapt to breaking changes in `Faithlife.Json`.
