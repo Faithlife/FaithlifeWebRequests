@@ -146,10 +146,7 @@ namespace Faithlife.WebRequests.Json
 
 		private Uri DoGetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
 		{
-			string uriText = m_baseUri.AbsoluteUri;
-
-			if (!string.IsNullOrEmpty(relativeUriPattern))
-				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
+			string uriText = JoinUriWithRelativePattern(m_baseUri, relativeUriPattern);
 
 			Uri uri = uriParameters != null ? UriUtility.FromPattern(uriText, uriParameters) : new Uri(uriText);
 
@@ -160,16 +157,23 @@ namespace Faithlife.WebRequests.Json
 
 		private Uri DoGetRequestUri(string relativeUriPattern, params string[] uriParameters)
 		{
-			string uriText = m_baseUri.AbsoluteUri;
-
-			if (!string.IsNullOrEmpty(relativeUriPattern))
-				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
+			string uriText = JoinUriWithRelativePattern(m_baseUri, relativeUriPattern);
 
 			Uri uri = uriParameters != null ? UriUtility.FromPattern(uriText, uriParameters) : new Uri(uriText);
 
 			OnGetRequestUri(ref uri);
 
 			return uri;
+		}
+
+		private static string JoinUriWithRelativePattern(Uri baseUri, string relativeUriPattern)
+		{
+			string uriText = baseUri.AbsoluteUri;
+
+			if (!string.IsNullOrEmpty(relativeUriPattern))
+				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
+
+			return uriText;
 		}
 
 		private AutoWebServiceRequest<TResponse> DoCreateRequest<TResponse>(Uri uri)
