@@ -16,6 +16,11 @@ namespace Faithlife.WebRequests.Json
 		public HttpResponseHeaders Headers { get; private set; }
 
 		/// <summary>
+		/// Gets whether or not the response's content was able to be mapped to a strongly typed property corresponding to the HTTP status code.
+		/// </summary>
+		public bool IsStatusCodeHandled { get; private set; }
+
+		/// <summary>
 		/// Gets the HTTP status code on the response.
 		/// </summary>
 		public HttpStatusCode StatusCode => m_responseStatusCode ?? throw new InvalidOperationException("Response data has not yet been populated.");
@@ -36,6 +41,15 @@ namespace Faithlife.WebRequests.Json
 				responseContentLength: m_responseContentLength,
 				responseContentPreview: m_responseContentPreview,
 				innerException: innerException);
+		}
+
+		/// <summary>
+		/// Throws an exception if the response's content was unable to be mapped to a strongly typed property corresponding to the HTTP status code.
+		/// </summary>
+		public void ThrowIfStatusCodeNotHandled(string message = null)
+		{
+			if (!IsStatusCodeHandled)
+				throw CreateException(message ?? "Status code not handled.");
 		}
 
 		/// <summary>
@@ -65,8 +79,9 @@ namespace Faithlife.WebRequests.Json
 			}
 		}
 
-		internal Task OnResponseHandledAsync(WebServiceResponseHandlerInfo info)
+		internal Task OnResponseHandledAsync(WebServiceResponseHandlerInfo info, bool isStatusCodeHandled)
 		{
+			IsStatusCodeHandled = isStatusCodeHandled;
 			return OnResponseHandledCoreAsync(info);
 		}
 
