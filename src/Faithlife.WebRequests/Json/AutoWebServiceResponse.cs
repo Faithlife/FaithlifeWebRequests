@@ -11,6 +11,16 @@ namespace Faithlife.WebRequests.Json
 	public abstract class AutoWebServiceResponse
 	{
 		/// <summary>
+		/// Gets the HTTP headers on the response.
+		/// </summary>
+		public HttpResponseHeaders Headers { get; private set; }
+
+		/// <summary>
+		/// Gets the HTTP status code on the response.
+		/// </summary>
+		public HttpStatusCode StatusCode => m_responseStatusCode ?? throw new InvalidOperationException("Response data has not yet been populated.");
+
+		/// <summary>
 		/// Creates an exception for the response.
 		/// </summary>
 		/// <returns>A new exception for the response.</returns>
@@ -21,7 +31,7 @@ namespace Faithlife.WebRequests.Json
 				requestMethod: m_requestMethod,
 				requestUri: m_requestUri,
 				responseStatusCode: m_responseStatusCode,
-				responseHeaders: m_responseHeaders,
+				responseHeaders: Headers,
 				responseContentType: m_responseContentType,
 				responseContentLength: m_responseContentLength,
 				responseContentPreview: m_responseContentPreview,
@@ -44,7 +54,7 @@ namespace Faithlife.WebRequests.Json
 			m_requestMethod = info.WebResponse.RequestMessage.Method.Method;
 			m_requestUri = info.WebResponse.RequestMessage.RequestUri;
 			m_responseStatusCode = info.WebResponse.StatusCode;
-			m_responseHeaders = info.WebResponse.Headers;
+			Headers = info.WebResponse.Headers;
 			m_responseContentType = info.WebResponse.Content?.Headers?.ContentType?.ToString();
 			m_responseContentLength = info.WebResponse.Content?.Headers?.ContentLength;
 
@@ -63,7 +73,6 @@ namespace Faithlife.WebRequests.Json
 		string m_requestMethod;
 		Uri m_requestUri;
 		HttpStatusCode? m_responseStatusCode;
-		HttpHeaders m_responseHeaders;
 		string m_responseContentType;
 		long? m_responseContentLength;
 		string m_responseContentPreview;
