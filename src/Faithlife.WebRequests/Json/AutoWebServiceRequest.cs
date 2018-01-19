@@ -76,10 +76,6 @@ namespace Faithlife.WebRequests.Json
 				isStatusCodeHandled = true;
 			}
 
-			// make sure status code is handled
-			if (!isStatusCodeHandled)
-				throw await CreateExceptionAsync(info, "Status code not handled.").ConfigureAwait(false);
-
 			// read headers
 			foreach (var header in webResponse.Headers)
 			{
@@ -114,7 +110,7 @@ namespace Faithlife.WebRequests.Json
 			// allow response to read extra data
 			AutoWebServiceResponse autoWebServiceResponse = response as AutoWebServiceResponse;
 			if (autoWebServiceResponse != null)
-				await autoWebServiceResponse.OnResponseHandledAsync(info).ConfigureAwait(false);
+				await autoWebServiceResponse.OnResponseHandledAsync(info, isStatusCodeHandled).ConfigureAwait(false);
 
 			// detach response if necessary
 			if (content is WebResponseStream)
