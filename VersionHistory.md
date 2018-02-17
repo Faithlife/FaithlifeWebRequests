@@ -7,10 +7,14 @@ is updated in preparation for publishing an updated NuGet package.
 
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [SemVer](http://semver.org).
 
-* [patch] Change the only ConfigureAwait(true) to ConfigureAwait(false).
 * [minor] Add `params string[]` option to `CreateRequest`.
 
 ## Released
+
+### 0.3.0
+
+* [patch] Change the only ConfigureAwait(true) to ConfigureAwait(false).
+* [minor] Add If-Match header support.
 
 ### 0.2.0
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 
@@ -184,6 +183,19 @@ namespace Faithlife.WebRequests
 		public static TWebServiceRequest WithContent<TWebServiceRequest>(this TWebServiceRequest request, HttpContent content) where TWebServiceRequest : WebServiceRequestBase
 		{
 			request.Content = content;
+			return request;
+		}
+
+		/// <summary>
+		/// Sets the IfMatch of the WebServiceRequest.
+		/// </summary>
+		/// <typeparam name="TWebServiceRequest">The type of the web service request.</typeparam>
+		/// <param name="request">The request.</param>
+		/// <param name="eTag">The ETag.</param>
+		/// <returns>The request.</returns>
+		public static TWebServiceRequest WithIfMatch<TWebServiceRequest>(this TWebServiceRequest request, string eTag) where TWebServiceRequest : WebServiceRequestBase
+		{
+			request.IfMatch = eTag;
 			return request;
 		}
 
