@@ -8,6 +8,7 @@ is updated in preparation for publishing an updated NuGet package.
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [SemVer](http://semver.org).
 
 * [minor] Add `params string[]` option to `CreateRequest`.
+* [major] Adapt to breaking changes in `Faithlife.Json`.
 
 ## Released
 

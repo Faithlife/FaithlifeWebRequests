@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
+using System.Threading;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -179,7 +180,7 @@ namespace Faithlife.WebRequests.Json
 			}
 		}
 
-		private sealed class WebResponseStream : WrappingStream
+		private sealed class WebResponseStream : WrappingStreamBase
 		{
 			public static async Task<WebResponseStream> CreateAsync(HttpResponseMessage webResponse)
 			{
@@ -192,6 +193,18 @@ namespace Faithlife.WebRequests.Json
 			{
 				m_webResponse = webResponse;
 			}
+
+			public override int Read(byte[] buffer, int offset, int count)
+				=> WrappedStream.Read(buffer, offset, count);
+
+			public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+				=> WrappedStream.ReadAsync(buffer, offset, count, cancellationToken);
+
+			public override void Write(byte[] buffer, int offset, int count)
+				=> throw new NotSupportedException();
+
+			public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+				=> throw new NotSupportedException();
 
 			protected override void Dispose(bool disposing)
 			{
