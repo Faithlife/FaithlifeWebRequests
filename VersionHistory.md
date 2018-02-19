@@ -12,7 +12,7 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 ### 0.4.0
 
 * [minor] Add `params string[]` option to `CreateRequest`.
-* [major] Adapt to breaking changes in `Faithlife.Json`.
+* [major] Adapt to breaking changes in `Faithlife.Utility`.
 
 ### 0.3.0
 
