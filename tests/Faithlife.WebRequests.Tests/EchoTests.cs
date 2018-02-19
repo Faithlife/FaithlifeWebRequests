@@ -7,8 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Faithlife.Json;
 using Faithlife.WebRequests.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Faithlife.WebRequests.Tests
@@ -41,10 +39,17 @@ namespace Faithlife.WebRequests.Tests
 				}
 			}
 
-			m_listenerTask = Task.Run(() => {
-				while (true)
+			m_listenerCts = new CancellationTokenSource();
+			var cancellationToken = m_listenerCts.Token;
+			m_listenerTask = Task.Run(async () =>
+			{
+				var waitIndefinitely = Task.Delay(-1, cancellationToken);
+				while (m_listener.IsListening)
 				{
-					var context = m_listener.GetContext();
+					var getContext = m_listener.GetContextAsync();
+					await Task.WhenAny(getContext, waitIndefinitely);
+					cancellationToken.ThrowIfCancellationRequested();
+					var context = await getContext;
 					EchoRequestDto requestDto = null;
 					if (context.Request.HasEntityBody && context.Request.ContentType == "application/json")
 					{
@@ -73,16 +78,10 @@ namespace Faithlife.WebRequests.Tests
 		}
 
 		[OneTimeTearDown]
-		public async Task TearDownAsync()
+		public void TearDown()
 		{
 			m_listener.Stop();
-			try
-			{
-				await m_listenerTask;
-			}
-			catch (HttpListenerException)
-			{
-			}
+			m_listenerCts.Cancel();
 		}
 
 		[Test]
@@ -150,5 +149,6 @@ namespace Faithlife.WebRequests.Tests
 		HttpListener m_listener;
 		string m_uriPrefix;
 		Task m_listenerTask;
+		CancellationTokenSource m_listenerCts;
 	}
 }
