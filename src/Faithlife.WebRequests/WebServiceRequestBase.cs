@@ -157,9 +157,17 @@ namespace Faithlife.WebRequests
 			HttpContent requestContent = GetRequestContent(webRequest);
 			if (requestContent != null)
 				webRequest.Content = requestContent;
-			// TODO: get the web response (without throwing an exception for unsuccessful status codes)
-			HttpResponseMessage response = await client.SendAsync(webRequest, cancellationToken).ConfigureAwait(false);
-			return await HandleResponseAsync(webRequest, response, cancellationToken).ConfigureAwait(false);
+			var trace = Settings?.StartTrace?.Invoke(webRequest);
+			try
+			{
+				// TODO: get the web response (without throwing an exception for unsuccessful status codes)
+				HttpResponseMessage response = await client.SendAsync(webRequest, cancellationToken).ConfigureAwait(false);
+				return await HandleResponseAsync(webRequest, response, cancellationToken).ConfigureAwait(false);
+			}
+			finally
+			{
+				trace?.Dispose();
+			}
 		}
 
 		/// <summary>

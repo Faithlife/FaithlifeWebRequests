@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Http;
 
 namespace Faithlife.WebRequests
 {
@@ -78,6 +79,13 @@ namespace Faithlife.WebRequests
 		/// Called when an error occurs while building a request or handling a response.
 		/// </summary>
 		public Action<WebServiceErrorInfo> ErrorReporter { get; set; }
+
+		/// <summary>
+		/// A <see cref="Func{HttpRequestMessage, IDisposable}"/> that, if set, is called to start
+		/// a trace when a web request begins; its return value will be disposed when the web
+		/// request ends.
+		/// </summary>
+		public Func<HttpRequestMessage, IDisposable> StartTrace { get; set; }
 
 		/// <summary>
 		/// Clones this instance.
