@@ -7,12 +7,12 @@ namespace Faithlife.WebRequests.Json
 	/// <summary>
 	/// AutoWebServiceRequest responses with an explicitly set status code. 
 	/// </summary>
-	public abstract class ExplicitStatusResponse : AutoWebServiceResponse
+	public class GenericStatusCodeResponse : AutoWebServiceResponse
 	{
 		/// <summary>
 		/// Exposes the response status code.
 		/// </summary>
-		public HttpStatusCode StatusCode { get; internal set; } // internal instead of private to avoid being compiled away
+		public HttpStatusCode StatusCode { get; private set; }
 
 		/// <summary>
 		/// Exposes the response headers.

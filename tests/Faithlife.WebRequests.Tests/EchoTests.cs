@@ -134,9 +134,9 @@ namespace Faithlife.WebRequests.Tests
 		[TestCase(HttpStatusCode.BadGateway)]
 		[TestCase(HttpStatusCode.ServiceUnavailable)]
 		[TestCase(HttpStatusCode.GatewayTimeout)]
-		public async Task EchoExplicitStatusResponse(HttpStatusCode statusCode)
+		public async Task EchoGenericStatusCodeResponse(HttpStatusCode statusCode)
 		{
-			var request = new AutoWebServiceRequest<EchoResponseExplicitStatusResponse>(new Uri(m_uriPrefix + "echo"))
+			var request = new AutoWebServiceRequest<GenericStatusCodeResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
 
 			var response = await request.GetResponseAsync();
@@ -154,9 +154,9 @@ namespace Faithlife.WebRequests.Tests
 		[TestCase(HttpStatusCode.BadGateway)]
 		[TestCase(HttpStatusCode.ServiceUnavailable)]
 		[TestCase(HttpStatusCode.GatewayTimeout)]
-		public async Task EchoExplicitStatusAsIntResponse(HttpStatusCode statusCode)
+		public async Task EchoGenericStatusCodeAsIntResponse(HttpStatusCode statusCode)
 		{
-			var request = new AutoWebServiceRequest<EchoResponseExplicitStatusAsIntResponse>(new Uri(m_uriPrefix + "echo"))
+			var request = new AutoWebServiceRequest<EchoResponseGenericStatusCodeAsIntResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
 
 			var response = await request.GetResponseAsync();
@@ -185,10 +185,7 @@ namespace Faithlife.WebRequests.Tests
 			public bool NoContent { get; set; }
 		}
 
-		class EchoResponseExplicitStatusResponse : ExplicitStatusResponse
-		{}
-
-		class EchoResponseExplicitStatusAsIntResponse : AutoWebServiceResponse
+		class EchoResponseGenericStatusCodeAsIntResponse : AutoWebServiceResponse
 		{
 			public int StatusCode { get; internal set; }
 		}

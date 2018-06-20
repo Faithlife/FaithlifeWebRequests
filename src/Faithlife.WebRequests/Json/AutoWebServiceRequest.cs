@@ -78,7 +78,7 @@ namespace Faithlife.WebRequests.Json
 				isStatusCodeHandled = true;
 			}
 
-			PropertyInfo statusCodeProperty = GetProperty(responseType, nameof(HttpResponseMessage.StatusCode));
+			PropertyInfo statusCodeProperty = GetProperty(responseType, "StatusCode");
 			if (statusCodeProperty != null && statusCodeProperty.CanWrite)
 			{
 				Type statusCodePropertyType = statusCodeProperty.PropertyType;
@@ -143,7 +143,12 @@ namespace Faithlife.WebRequests.Json
 
 		private static PropertyInfo GetProperty(Type type, string propertyName)
 		{
-			return type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod != null && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+			var property = type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod != null && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+
+			if (property != null && property.SetMethod == null)
+				property = property.DeclaringType.GetRuntimeProperty(property.Name);
+
+			return property;
 		}
 
 		private async Task<object> ReadContentAsAsync(WebServiceResponseHandlerInfo<TResponse> info, Type propertyType)
