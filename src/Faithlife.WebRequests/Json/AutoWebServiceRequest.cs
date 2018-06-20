@@ -67,13 +67,28 @@ namespace Faithlife.WebRequests.Json
 			bool isStatusCodeHandled = false;
 			HttpStatusCode statusCode = webResponse.StatusCode;
 			string statusCodeText = statusCode.ToString();
-			PropertyInfo statusCodeProperty = GetProperty(responseType, statusCodeText);
+			PropertyInfo resultProperty = GetProperty(responseType, statusCodeText);
 			object content = null;
+
+			if (resultProperty != null && resultProperty.CanWrite)
+			{
+				Type resultPropertyType = resultProperty.PropertyType;
+				content = await ReadContentAsAsync(info, resultPropertyType).ConfigureAwait(false);
+				resultProperty.SetValue(response, content, null);
+				isStatusCodeHandled = true;
+			}
+
+			PropertyInfo statusCodeProperty = GetProperty(responseType, nameof(HttpResponseMessage.StatusCode));
 			if (statusCodeProperty != null && statusCodeProperty.CanWrite)
 			{
 				Type statusCodePropertyType = statusCodeProperty.PropertyType;
-				content = await ReadContentAsAsync(info, statusCodePropertyType).ConfigureAwait(false);
-				statusCodeProperty.SetValue(response, content, null);
+				if (statusCodePropertyType == typeof(HttpStatusCode))
+					statusCodeProperty.SetValue(response, webResponse.StatusCode, null);
+				else if (statusCodePropertyType == typeof(int))
+					statusCodeProperty.SetValue(response, (int) webResponse.StatusCode, null);
+				else
+					throw await CreateExceptionAsync(info, "Web response status code cannot be read as {0}.".FormatInvariant(statusCodePropertyType));
+
 				isStatusCodeHandled = true;
 			}
 
