@@ -124,6 +124,45 @@ namespace Faithlife.WebRequests.Tests
 			Assert.AreEqual(HttpStatusCode.InternalServerError, exception.ResponseStatusCode);
 		}
 
+		[TestCase(HttpStatusCode.OK)]
+		[TestCase(HttpStatusCode.Created)]
+		[TestCase(HttpStatusCode.BadRequest)]
+		[TestCase(HttpStatusCode.Unauthorized)]
+		[TestCase(HttpStatusCode.Forbidden)]
+		[TestCase(HttpStatusCode.NotFound)]
+		[TestCase(HttpStatusCode.InternalServerError)]
+		[TestCase(HttpStatusCode.BadGateway)]
+		[TestCase(HttpStatusCode.ServiceUnavailable)]
+		[TestCase(HttpStatusCode.GatewayTimeout)]
+		public async Task EchoGenericStatusCodeResponse(HttpStatusCode statusCode)
+		{
+			var request = new AutoWebServiceRequest<GenericStatusCodeResponse>(new Uri(m_uriPrefix + "echo"))
+				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
+
+			var response = await request.GetResponseAsync();
+			Assert.AreEqual(statusCode, response.StatusCode);
+			CollectionAssert.IsNotEmpty(response.Headers);
+		}
+
+		[TestCase(HttpStatusCode.OK)]
+		[TestCase(HttpStatusCode.Created)]
+		[TestCase(HttpStatusCode.BadRequest)]
+		[TestCase(HttpStatusCode.Unauthorized)]
+		[TestCase(HttpStatusCode.Forbidden)]
+		[TestCase(HttpStatusCode.NotFound)]
+		[TestCase(HttpStatusCode.InternalServerError)]
+		[TestCase(HttpStatusCode.BadGateway)]
+		[TestCase(HttpStatusCode.ServiceUnavailable)]
+		[TestCase(HttpStatusCode.GatewayTimeout)]
+		public async Task EchoGenericStatusCodeAsIntResponse(HttpStatusCode statusCode)
+		{
+			var request = new AutoWebServiceRequest<EchoResponseGenericStatusCodeAsIntResponse>(new Uri(m_uriPrefix + "echo"))
+				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
+
+			var response = await request.GetResponseAsync();
+			Assert.AreEqual((int) statusCode, response.StatusCode);
+		}
+
 		class EchoRequestDto
 		{
 			public string Message { get; set; }
@@ -144,6 +183,11 @@ namespace Faithlife.WebRequests.Tests
 		{
 			public EchoResponseDto OK { get; set; }
 			public bool NoContent { get; set; }
+		}
+
+		class EchoResponseGenericStatusCodeAsIntResponse : AutoWebServiceResponse
+		{
+			public int StatusCode { get; internal set; }
 		}
 
 		HttpListener m_listener;
