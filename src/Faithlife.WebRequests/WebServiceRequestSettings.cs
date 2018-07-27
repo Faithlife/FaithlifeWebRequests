@@ -23,7 +23,7 @@ namespace Faithlife.WebRequests
 		public string UserAgent { get; set; }
 
 		/// <summary>
-		/// Gets or sets the cookie manager.
+		/// Gets or sets the cookie manager. If <see cref="GetHttpClient"/> is set, then this property is ignored.
 		/// </summary>
 		/// <value>The cookie manager.</value>
 		public CookieManager CookieManager { get; set; }
@@ -86,6 +86,12 @@ namespace Faithlife.WebRequests
 		/// request ends.
 		/// </summary>
 		public Func<HttpRequestMessage, IDisposable> StartTrace { get; set; }
+
+		/// <summary>
+		/// A delegate that, if set, is called to retrieve an <see cref="HttpClient"/>.
+		/// If this property is set, then <see cref="CookieManager"/> and <see cref="WebServiceRequestBase.DisableAutoRedirect"/> are ignored.
+		/// </summary>
+		public Func<HttpClient> GetHttpClient { get; set; }
 
 		/// <summary>
 		/// Clones this instance.
