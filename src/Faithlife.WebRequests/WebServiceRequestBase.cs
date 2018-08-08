@@ -79,7 +79,7 @@ namespace Faithlife.WebRequests
 		public string IfNoneMatch { get; set; }
 
 		/// <summary>
-		/// Gets or sets the timeout.
+		/// Gets or sets the timeout. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
 		/// </summary>
 		/// <value>The timeout.</value>
 		public TimeSpan? Timeout { get; set; }
@@ -125,7 +125,7 @@ namespace Faithlife.WebRequests
 		public ByteRange Range { get; set; }
 
 		/// <summary>
-		/// True if HTTP redirects should not be followed automatically.
+		/// True if HTTP redirects should not be followed automatically. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
 		/// </summary>
 		public bool DisableAutoRedirect { get; set; }
 
@@ -188,12 +188,34 @@ namespace Faithlife.WebRequests
 		{
 		}
 
-		private HttpRequestMessage CreateWebRequest(out HttpClient client)
+		private HttpClientHandler CreateHttpClientHandler(WebServiceRequestSettings settings)
 		{
-			WebServiceRequestSettings settings = Settings ?? new WebServiceRequestSettings();
-			var request = new HttpRequestMessage(new HttpMethod(Method ?? "GET"), RequestUri);
 			var handler = new HttpClientHandler();
-			client = new HttpClient(handler);
+			if (settings.CookieManager != null)
+				handler.CookieContainer = settings.CookieManager.CookieContainer;
+
+			handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+			if (DisableAutoRedirect)
+				handler.AllowAutoRedirect = false;
+
+			return handler;
+		}
+
+		private HttpClient CreateHttpClient(WebServiceRequestSettings settings)
+		{
+			if (settings.GetHttpClient != null)
+				return settings.GetHttpClient();
+
+			var client = new HttpClient(CreateHttpClientHandler(settings));
+			var timeout = Timeout ?? settings.DefaultTimeout;
+			client.Timeout = timeout ?? System.Threading.Timeout.InfiniteTimeSpan;
+			return client;
+		}
+
+		private HttpRequestMessage CreateHttpRequestMessage(WebServiceRequestSettings settings)
+		{
+			var request = new HttpRequestMessage(new HttpMethod(Method ?? "GET"), RequestUri);
 
 			if (settings.DefaultHeaders != null)
 				request.Headers.AddWebHeaders(settings.DefaultHeaders);
@@ -204,7 +226,7 @@ namespace Faithlife.WebRequests
 			if (!string.IsNullOrEmpty(Accept))
 				request.Headers.Accept.ParseAdd(Accept);
 
-			string userAgent = UserAgent ?? settings.UserAgent;
+			var userAgent = UserAgent ?? settings.UserAgent;
 			if (!string.IsNullOrEmpty(userAgent))
 				request.Headers.UserAgent.ParseAdd(userAgent);
 
@@ -220,18 +242,9 @@ namespace Faithlife.WebRequests
 			if (settings.Host != null)
 				request.Headers.Host = settings.Host;
 
-			TimeSpan? timeout = Timeout ?? settings.DefaultTimeout;
-			if (timeout.HasValue)
-				client.Timeout = timeout.Value;
-
-			if (settings.CookieManager != null)
-				handler.CookieContainer = settings.CookieManager.CookieContainer;
-
-			string authorizationHeader = settings.AuthorizationHeader ?? (settings.AuthorizationHeaderCreator != null ? settings.AuthorizationHeaderCreator(new WebServiceRequestInfo(request)) : null);
+			var authorizationHeader = settings.AuthorizationHeader ?? settings.AuthorizationHeaderCreator?.Invoke(new WebServiceRequestInfo(request));
 			if (authorizationHeader != null)
 				request.Headers.Authorization = AuthenticationHeaderValue.Parse(authorizationHeader);
-
-			handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
 
 			if (IfMatch != null)
 				request.Headers.IfMatch.ParseAdd(IfMatch);
@@ -242,20 +255,18 @@ namespace Faithlife.WebRequests
 			if (IfNoneMatch != null)
 				request.Headers.IfNoneMatch.ParseAdd(IfNoneMatch);
 
-			if (DisableAutoRedirect)
-				handler.AllowAutoRedirect = false;
-
 			if (Range != null)
-			{
-				if (!Range.HasEnd)
-					request.Headers.Range = new RangeHeaderValue(Range.From, null);
-				else
-					request.Headers.Range = new RangeHeaderValue(Range.From, Range.To);
-			}
+				request.Headers.Range = new RangeHeaderValue(Range.From, Range.HasEnd ? Range.To : default(long?));
 
 			OnWebRequestCreated(request);
-
 			return request;
+		}
+
+		private HttpRequestMessage CreateWebRequest(out HttpClient client)
+		{
+			var settings = Settings ?? new WebServiceRequestSettings();
+			client = CreateHttpClient(settings);
+			return CreateHttpRequestMessage(settings);
 		}
 
 		private HttpContent GetRequestContent(HttpRequestMessage webRequest)
