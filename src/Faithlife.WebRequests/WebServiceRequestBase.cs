@@ -79,7 +79,7 @@ namespace Faithlife.WebRequests
 		public string IfNoneMatch { get; set; }
 
 		/// <summary>
-		/// Gets or sets the timeout.
+		/// Gets or sets the timeout. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
 		/// </summary>
 		/// <value>The timeout.</value>
 		public TimeSpan? Timeout { get; set; }
@@ -205,11 +205,12 @@ namespace Faithlife.WebRequests
 
 		private HttpClient CreateHttpClient(WebServiceRequestSettings settings)
 		{
-			var client = settings.GetHttpClient?.Invoke() ?? new HttpClient(CreateHttpClientHandler(settings));
+			if (settings.GetHttpClient != null)
+				return settings.GetHttpClient();
 
+			var client = new HttpClient(CreateHttpClientHandler(settings));
 			var timeout = Timeout ?? settings.DefaultTimeout;
 			client.Timeout = timeout ?? System.Threading.Timeout.InfiniteTimeSpan;
-
 			return client;
 		}
 

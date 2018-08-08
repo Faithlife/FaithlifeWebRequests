@@ -51,7 +51,7 @@ namespace Faithlife.WebRequests
 		public WebHeaderCollection DefaultHeaders { get; set; }
 
 		/// <summary>
-		/// Gets or sets the default timeout.
+		/// Gets or sets the default timeout. If <see cref="GetHttpClient"/> is set, then this property is ignored.
 		/// </summary>
 		/// <value>The default timeout.</value>
 		public TimeSpan? DefaultTimeout { get; set; }
@@ -88,9 +88,11 @@ namespace Faithlife.WebRequests
 		public Func<HttpRequestMessage, IDisposable> StartTrace { get; set; }
 
 		/// <summary>
-		/// A delegate that, if set, is called to retrieve an <see cref="HttpClient"/>.
-		/// If this property is set, then <see cref="CookieManager"/> and <see cref="WebServiceRequestBase.DisableAutoRedirect"/> are ignored.
+		/// A delegate that, if set, is called to retrieve an <see cref="HttpClient"/>. If this property is set, then the consumer is responsible for the entire lifetime of the <see cref="HttpClient"/>, including disposal.
 		/// </summary>
+		/// <remarks>
+		/// If this property is set, then <see cref="CookieManager"/>, <see cref="WebServiceRequestBase.DisableAutoRedirect"/>, <see cref="DefaultTimeout"/>, and <see cref="WebServiceRequestBase.Timeout"/> are ignored.
+		/// </remarks>
 		public Func<HttpClient> GetHttpClient { get; set; }
 
 		/// <summary>
