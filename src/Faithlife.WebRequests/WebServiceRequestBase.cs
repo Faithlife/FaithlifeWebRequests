@@ -188,7 +188,6 @@ namespace Faithlife.WebRequests
 		{
 		}
 
-
 		private HttpClientHandler CreateHttpClientHandler(WebServiceRequestSettings settings)
 		{
 			var handler = new HttpClientHandler();
@@ -257,7 +256,7 @@ namespace Faithlife.WebRequests
 				request.Headers.IfNoneMatch.ParseAdd(IfNoneMatch);
 
 			if (Range != null)
-				request.Headers.Range = new RangeHeaderValue(Range.From, Range.HasEnd ? Range.To : null as long?);
+				request.Headers.Range = new RangeHeaderValue(Range.From, Range.HasEnd ? Range.To : default(long?));
 
 			OnWebRequestCreated(request);
 			return request;
