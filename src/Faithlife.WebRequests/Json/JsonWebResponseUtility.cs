@@ -21,7 +21,8 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>True if the response content uses the JSON content type ("application/json") and the content is not empty.</returns>
 		public static bool HasJson(this HttpResponseMessage response)
 		{
-			bool hasJson = response.Content?.Headers.ContentLength > 0;
+			// Allow null ContentLength
+			bool hasJson = response.Content?.Headers.ContentLength != 0;
 			string contentType = response.Content?.Headers.ContentType?.ToString();
 			hasJson &= !string.IsNullOrEmpty(contentType) && contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
 

@@ -7,6 +7,8 @@ is updated in preparation for publishing an updated NuGet package.
 
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [SemVer](http://semver.org).
 
+* [patch] Accept json responses without Content-Length set.
+
 ## Released
 
 ### 0.6.0
