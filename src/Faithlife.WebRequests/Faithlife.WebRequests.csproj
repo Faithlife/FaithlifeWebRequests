@@ -17,6 +17,7 @@
     <Copyright>Copyright 2017 Faithlife Corporation</Copyright>
     <SourceLinkUrl>https://raw.githubusercontent.com/Faithlife/FaithlifeWebRequests/{commit}/*</SourceLinkUrl>
     <SourceLinkOriginUrl>https://github.com/Faithlife/FaithlifeWebRequests.git</SourceLinkOriginUrl>
+    <Description></Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Faithlife.Json" Version="0.3.0" />
@@ -29,6 +30,9 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.0" />
     <PackageReference Include="System.Net.WebHeaderCollection" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.4' OR '$(TargetFramework)' == 'net461'">
     <PackageReference Include="System.ValueTuple" Version="4.3.0" />
   </ItemGroup>
 </Project>
