@@ -116,6 +116,16 @@ namespace Faithlife.WebRequests.Tests
 		}
 
 		[Test]
+		public async Task EchoPlainTextResponseAsync()
+		{
+			var request = new WebServiceRequest(new Uri(m_uriPrefix + "echo"));
+			var response = await request.GetResponseAsync();
+			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+			var contentString = await response.Content.ReadAsStringAsync();
+			Assert.IsNotEmpty(contentString);
+		}
+
+		[Test]
 		public void EchoInternalError()
 		{
 			var request = new AutoWebServiceRequest<EchoResponseResponse>(new Uri(m_uriPrefix + "echo"))

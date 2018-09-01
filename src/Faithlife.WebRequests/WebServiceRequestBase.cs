@@ -161,7 +161,7 @@ namespace Faithlife.WebRequests
 			try
 			{
 				// TODO: get the web response (without throwing an exception for unsuccessful status codes)
-				HttpResponseMessage response = await client.SendAsync(webRequest, cancellationToken).ConfigureAwait(false);
+				HttpResponseMessage response = await client.SendAsync(webRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 				return await HandleResponseAsync(webRequest, response, cancellationToken).ConfigureAwait(false);
 			}
 			finally

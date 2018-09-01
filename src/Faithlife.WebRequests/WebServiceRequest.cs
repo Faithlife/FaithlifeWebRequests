@@ -111,6 +111,8 @@ namespace Faithlife.WebRequests
 				throw WebServiceResponseUtility.CreateWebServiceException(response);
 
 			info.Response = await CreateResponseAsync(response).ConfigureAwait(false);
+			if (!info.IsContentRead)
+				info.DetachWebResponse();
 			return true;
 		}
 
