@@ -7,13 +7,12 @@ is updated in preparation for publishing an updated NuGet package.
 
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [SemVer](http://semver.org).
 
-* [patch] Detach `WebServiceResponse.Content` to allow it to be read as a stream.
-
 ## Released
 
 ### 0.6.1
 
 * [patch] Accept json responses without Content-Length set.
+* [patch] Detach `WebServiceResponse.Content` to allow it to be read as a stream.
 
 ### 0.6.0
 
