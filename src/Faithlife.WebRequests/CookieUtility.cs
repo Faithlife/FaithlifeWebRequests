@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Net;
+using System.Text;
 
 namespace Faithlife.WebRequests
 {
@@ -17,18 +18,18 @@ namespace Faithlife.WebRequests
 		/// <returns>A string in the Set-Cookie HTTP header format.</returns>
 		public static string ToSetCookieHeaderValue(this Cookie cookie)
 		{
-			string strHeader = cookie.ToString();
+			StringBuilder strHeader = new StringBuilder(cookie.ToString());
 			if (!string.IsNullOrEmpty(cookie.Domain))
-				strHeader += "; domain=" + cookie.Domain;
+				strHeader.Append($"; domain={cookie.Domain}");
 			if (!string.IsNullOrEmpty(cookie.Path))
-				strHeader += "; path=" + cookie.Path;
+				strHeader.Append($"; path={cookie.Path}");
 			if (cookie.Expires > DateTime.MinValue)
-				strHeader += "; expires=" + cookie.Expires.ToUniversalTime().ToString(@"ddd, dd-MMM-yyyy HH:mm:ss G\MT", CultureInfo.InvariantCulture);
+				strHeader.Append("; expires=" + cookie.Expires.ToUniversalTime().ToString(@"ddd, dd-MMM-yyyy HH:mm:ss G\MT", CultureInfo.InvariantCulture));
 			if (cookie.HttpOnly)
-				strHeader += "; HttpOnly";
+				strHeader.Append("; HttpOnly");
 			if (cookie.Secure)
-				strHeader += "; secure";
-			return strHeader;
+				strHeader.Append("; secure");
+			return strHeader.ToString();
 		}
 	}
 }
