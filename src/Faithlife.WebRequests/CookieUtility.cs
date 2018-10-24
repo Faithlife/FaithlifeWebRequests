@@ -20,7 +20,7 @@ namespace Faithlife.WebRequests
 		{
 			StringBuilder strHeader = new StringBuilder(cookie.ToString());
 			if (!string.IsNullOrEmpty(cookie.Domain))
-				strHeader.Append($"; domain={cookie.Domain}");
+				strHeader.Append("; domain=").Append(cookie.Domain);
 			if (!string.IsNullOrEmpty(cookie.Path))
 				strHeader.Append($"; path={cookie.Path}");
 			if (cookie.Expires > DateTime.MinValue)
