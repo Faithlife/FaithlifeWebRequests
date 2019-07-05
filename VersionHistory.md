@@ -8,6 +8,10 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 
 ## Released
 
+### 0.7.1
+
+* Remove `System.Net.Http` dependency on .NET 4.7.2.
+
 ### 0.7.0
 
 * Update minimum target frameworks to .NET Standard 2.0, .NET 4.7.2.
