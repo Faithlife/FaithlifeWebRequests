@@ -8,6 +8,10 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 
 ## Released
 
+### 0.7.0
+
+* Update minimum target frameworks to .NET Standard 2.0, .NET 4.7.2.
+
 ### 0.6.1
 
 * [patch] Accept json responses without Content-Length set.
