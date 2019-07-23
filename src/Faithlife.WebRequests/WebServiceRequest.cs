@@ -90,10 +90,12 @@ namespace Faithlife.WebRequests
 		{
 			base.OnWebRequestCreated(request);
 
+#pragma warning disable CS0618
 			// if the client has disabled automatic redirection and hasn't changed the default accepted status codes, then
 			//   allow redirect status codes to be passed through
 			if (DisableAutoRedirect && object.ReferenceEquals(AcceptedStatusCodes, s_defaultAcceptedStatusCodes))
 				AcceptedStatusCodes = s_defaultAcceptedStatusCodesWithRedirect;
+#pragma warning restore CS0618
 		}
 
 		/// <summary>

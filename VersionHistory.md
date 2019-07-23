@@ -6,6 +6,8 @@ Describe changes here when they're committed to the `master` branch. Move them t
 
 Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in accordance with [Semantic Versioning](https://semver.org/).
 
+* [minor] Add `WebServiceRequestSettings.HttpClientFactory` and obsolete other settings for getting or configuring the `HttpClient`.
+
 ## Released
 
 ### 0.7.1

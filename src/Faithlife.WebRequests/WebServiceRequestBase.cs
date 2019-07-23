@@ -125,8 +125,9 @@ namespace Faithlife.WebRequests
 		public ByteRange Range { get; set; }
 
 		/// <summary>
-		/// True if HTTP redirects should not be followed automatically. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
+		/// True if HTTP redirects should not be followed automatically. If <see cref="WebServiceRequestSettings.HttpClientFactory"/> or <see cref="WebServiceRequestSettings.GetHttpClient"/> are set, then this property is ignored.
 		/// </summary>
+		[Obsolete("Use HttpClientFactory")]
 		public bool DisableAutoRedirect { get; set; }
 
 		readonly Uri m_uri;
@@ -152,9 +153,10 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		public async Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			HttpClient client;
-			HttpRequestMessage webRequest = CreateWebRequest(out client);
-			HttpContent requestContent = GetRequestContent(webRequest);
+			var settings = Settings ?? new WebServiceRequestSettings();
+			var client = CreateHttpClient(settings);
+			var webRequest = CreateHttpRequestMessage(settings);
+			var requestContent = GetRequestContent(webRequest);
 			if (requestContent != null)
 				webRequest.Content = requestContent;
 			var trace = Settings?.StartTrace?.Invoke(webRequest);
@@ -188,6 +190,7 @@ namespace Faithlife.WebRequests
 		{
 		}
 
+#pragma warning disable CS0618
 		private HttpClientHandler CreateHttpClientHandler(WebServiceRequestSettings settings)
 		{
 			var handler = new HttpClientHandler();
@@ -204,6 +207,13 @@ namespace Faithlife.WebRequests
 
 		private HttpClient CreateHttpClient(WebServiceRequestSettings settings)
 		{
+			if (settings.HttpClientFactory != null)
+			{
+				return settings.HttpClientName != null ?
+					settings.HttpClientFactory.CreateClient(settings.HttpClientName) :
+					settings.HttpClientFactory.CreateClient();
+			}
+
 			if (settings.GetHttpClient != null)
 				return settings.GetHttpClient();
 
@@ -261,13 +271,7 @@ namespace Faithlife.WebRequests
 			OnWebRequestCreated(request);
 			return request;
 		}
-
-		private HttpRequestMessage CreateWebRequest(out HttpClient client)
-		{
-			var settings = Settings ?? new WebServiceRequestSettings();
-			client = CreateHttpClient(settings);
-			return CreateHttpRequestMessage(settings);
-		}
+#pragma warning restore CS0618
 
 		private HttpContent GetRequestContent(HttpRequestMessage webRequest)
 		{
@@ -314,6 +318,7 @@ namespace Faithlife.WebRequests
 			return info.Response;
 		}
 
+#pragma warning disable CS0618
 		private void SetCookie(HttpResponseHeaders headers, Uri requestUri)
 		{
 			if (headers == null)
@@ -328,6 +333,7 @@ namespace Faithlife.WebRequests
 					Settings.CookieManager.SetCookies(requestUri, cookieHeader);
 			}
 		}
+#pragma warning restore CS0618
 
 		const string c_octetStreamContentType = "application/octet-stream";
 	}
