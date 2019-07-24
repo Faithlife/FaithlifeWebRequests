@@ -8,6 +8,11 @@ Prefix the description of the change with `[major]`, `[minor]` or `[patch]` in a
 
 ## Released
 
+### 0.8.0
+
+* Wrap more exceptions thrown from `WebServiceRequestBase.GetResponseAsync` in `WebServiceException`.
+* Rethrow `ArgumentException` thrown from `JsonWebResponseUtility.GetJsonAsAsync` as `WebServiceException`: [#20](https://github.com/Faithlife/FaithlifeWebRequests/issues/20).
+
 ### 0.7.1
 
 * Remove `System.Net.Http` dependency on .NET 4.7.2.
