@@ -157,16 +157,19 @@ namespace Faithlife.WebRequests
 			HttpContent requestContent = GetRequestContent(webRequest);
 			if (requestContent != null)
 				webRequest.Content = requestContent;
-			var trace = Settings?.StartTrace?.Invoke(webRequest);
-			try
+			using (Settings?.StartTrace?.Invoke(webRequest))
 			{
-				// TODO: get the web response (without throwing an exception for unsuccessful status codes)
-				HttpResponseMessage response = await client.SendAsync(webRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+				HttpResponseMessage response;
+				try
+				{
+					response = await client.SendAsync(webRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+				}
+				catch (Exception ex) when (ShouldWrapException(ex))
+				{
+					throw new WebServiceException(message: "Error building request.", requestMethod: webRequest.Method.Method, requestUri: webRequest.RequestUri, innerException: ex);
+				}
+
 				return await HandleResponseAsync(webRequest, response, cancellationToken).ConfigureAwait(false);
-			}
-			finally
-			{
-				trace?.Dispose();
 			}
 		}
 
@@ -303,6 +306,10 @@ namespace Faithlife.WebRequests
 					throw new WebServiceException("Failure setting cookie.", requestMethod: webRequest.Method?.Method, requestUri: RequestUri, innerException: ex);
 				}
 			}
+			catch (Exception ex) when (ShouldWrapException(ex))
+			{
+				throw HttpResponseMessageUtility.CreateWebServiceException(webResponse, "Error handling response.", ex);
+			}
 			finally
 			{
 				// dispose HttpResponseMessage unless detached
@@ -327,6 +334,16 @@ namespace Faithlife.WebRequests
 				if (cookieHeader != "")
 					Settings.CookieManager.SetCookies(requestUri, cookieHeader);
 			}
+		}
+
+		private static bool ShouldWrapException(Exception exception)
+		{
+			// InvalidDataException can be thrown if GZip stream header returned from server is invalid.
+			return
+				exception is HttpRequestException ||
+				exception is IOException ||
+				exception is InvalidDataException ||
+				exception is ProtocolViolationException;
 		}
 
 		const string c_octetStreamContentType = "application/octet-stream";
