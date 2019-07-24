@@ -71,8 +71,13 @@ namespace Faithlife.WebRequests.Json
 		{
 			try
 			{
+				// StreamReader will throw an ArgumentException when Stream.CanRead is false. It's suspected that this
+				// might happen if the HTTP request is canceled (via HttpClient.Timeout) before the response is read.
+				var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				if (!responseStream.CanRead)
+					throw HttpResponseMessageUtility.CreateWebServiceException(response, "Response stream is not readable.");
+
 				// parse JSON to desired value
-				Stream responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 				using (WrappingStream wrappingStream = new WrappingStream(responseStream, Ownership.None))
 				using (StreamReader reader = new StreamReader(wrappingStream))
 					return JsonUtility.FromJsonTextReader(reader, type, jsonSettings);
