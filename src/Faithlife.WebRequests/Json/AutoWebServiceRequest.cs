@@ -87,7 +87,7 @@ namespace Faithlife.WebRequests.Json
 				else if (statusCodePropertyType == typeof(int))
 					statusCodeProperty.SetValue(response, (int) webResponse.StatusCode, null);
 				else
-					throw await CreateExceptionAsync(info, "Web response status code cannot be read as {0}.".FormatInvariant(statusCodePropertyType));
+					throw await CreateExceptionAsync(info, "Web response status code cannot be read as {0}.".FormatInvariant(statusCodePropertyType)).ConfigureAwait(false);
 
 				isStatusCodeHandled = true;
 			}
