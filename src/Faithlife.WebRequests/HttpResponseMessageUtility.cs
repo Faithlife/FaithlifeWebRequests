@@ -54,15 +54,23 @@ namespace Faithlife.WebRequests
 		/// <returns>The content preview.</returns>
 		public static async Task<string> ReadContentPreviewAsync(HttpResponseMessage response)
 		{
-			Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-			using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
-			using (StreamReader reader = new StreamReader(stream))
+			try
 			{
-				char[] buffer = new char[c_contentPreviewCharacterCount];
-				int readCount = await reader.ReadBlockAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
-				if (readCount == buffer.Length)
-					buffer[readCount - 1] = '\u2026';
-				return new string(buffer, 0, readCount);
+				Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
+				using (StreamReader reader = new StreamReader(stream))
+				{
+					char[] buffer = new char[c_contentPreviewCharacterCount];
+					int readCount = await reader.ReadBlockAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+					if (readCount == buffer.Length)
+						buffer[readCount - 1] = '\u2026';
+					return new string(buffer, 0, readCount);
+				}
+			}
+			catch (Exception)
+			{
+				// ignore failure to read a content preview
+				return null;
 			}
 		}
 
