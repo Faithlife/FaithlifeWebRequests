@@ -19,10 +19,7 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <param name="json">The JSON.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent FromJson(string json)
-		{
-			return new JsonWebServiceContent(json);
-		}
+		public static JsonWebServiceContent FromJson(string json) => new JsonWebServiceContent(json);
 
 		/// <summary>
 		/// Creates a new instance of the JsonWebServiceContent class from a value to be serialized.
@@ -30,10 +27,8 @@ namespace Faithlife.WebRequests.Json
 		/// <typeparam name="TValue">The type of the value.</typeparam>
 		/// <param name="value">The value.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value)
-		{
-			return new JsonWebServiceContent<TValue>(value);
-		}
+		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value) =>
+			new JsonWebServiceContent<TValue>(value);
 
 		/// <summary>
 		/// Creates a new instance of the JsonWebServiceContent class from a value to be serialized.
@@ -42,19 +37,14 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="value">The value.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings settings)
-		{
-			return new JsonWebServiceContent<TValue>(value, settings);
-		}
+		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings settings) =>
+			new JsonWebServiceContent<TValue>(value, settings);
 
 		/// <summary>
 		/// Gets the JSON.
 		/// </summary>
 		/// <value>The JSON.</value>
-		public string? Json
-		{
-			get { return m_json ?? (m_json = GenerateJson()); }
-		}
+		public string? Json => m_json ?? (m_json = GenerateJson());
 
 		/// <summary>
 		/// The content type for JSON, i.e. "application/json".
@@ -151,10 +141,7 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the JSON.
 		/// </summary>
 		/// <value>The JSON.</value>
-		protected override string GenerateJson()
-		{
-			return JsonUtility.ToJson(Value, m_outputSettings);
-		}
+		protected override string GenerateJson() => JsonUtility.ToJson(Value, m_outputSettings);
 
 		readonly JsonSettings? m_outputSettings;
 	}

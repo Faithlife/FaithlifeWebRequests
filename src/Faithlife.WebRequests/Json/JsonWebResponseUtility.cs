@@ -53,10 +53,7 @@ namespace Faithlife.WebRequests.Json
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
-		public static Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type)
-		{
-			return response.GetJsonAsAsync(type, null);
-		}
+		public static Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type) => response.GetJsonAsAsync(type, null);
 
 		/// <summary>
 		/// Parses the JSON into an object of the specified type.
@@ -104,10 +101,7 @@ namespace Faithlife.WebRequests.Json
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response)
-		{
-			return response.GetJsonAsAsync<T>(null);
-		}
+		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response) => response.GetJsonAsAsync<T>(null);
 
 		/// <summary>
 		/// Parses the JSON into an object of the specified type.
@@ -118,9 +112,7 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>An object of the specified type.</returns>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings? jsonSettings)
-		{
-			return response.GetJsonAsAsync(typeof(T), jsonSettings).ContinueWith(x => (T) x.Result);
-		}
+		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings? jsonSettings) =>
+			response.GetJsonAsAsync(typeof(T), jsonSettings).ContinueWith(x => (T) x.Result);
 	}
 }

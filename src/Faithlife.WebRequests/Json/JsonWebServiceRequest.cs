@@ -27,10 +27,8 @@ namespace Faithlife.WebRequests.Json
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public new async Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return (JsonWebServiceResponse) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
-		}
+		public new async Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default) =>
+			(JsonWebServiceResponse) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
 
 		/// <summary>
 		/// Called to create the response.
@@ -92,10 +90,8 @@ namespace Faithlife.WebRequests.Json
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(CancellationToken cancellationToken = default)
-		{
-			return (JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
-		}
+		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(CancellationToken cancellationToken = default) =>
+			(JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
 
 		/// <summary>
 		/// Called to create the response.

@@ -146,10 +146,9 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public async Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+		public async Task<TResponse> GetResponseAsync(CancellationToken cancellationToken = default)
 		{
-			HttpClient client;
-			HttpRequestMessage webRequest = CreateWebRequest(out client);
+			var webRequest = CreateWebRequest(out var client);
 			var requestContent = GetRequestContent(webRequest);
 			if (requestContent is object)
 				webRequest.Content = requestContent;

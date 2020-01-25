@@ -31,10 +31,7 @@ namespace Faithlife.WebRequests.Json
 		/// Creates a web request URI.
 		/// </summary>
 		/// <returns>The web request URI.</returns>
-		protected Uri GetRequestUri()
-		{
-			return DoGetRequestUri(null);
-		}
+		protected Uri GetRequestUri() => DoGetRequestUri(null);
 
 		/// <summary>
 		/// Creates a web request URI using the specified relative URI.
@@ -68,10 +65,8 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <typeparam name="TResponse">The type of the response.</typeparam>
 		/// <returns>The new AutoWebServiceRequest.</returns>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>()
-		{
-			return DoCreateRequest<TResponse>(GetRequestUri());
-		}
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>() =>
+			DoCreateRequest<TResponse>(GetRequestUri());
 
 		/// <summary>
 		/// Creates a new AutoWebServiceRequest using the specified relative URI.
@@ -79,10 +74,8 @@ namespace Faithlife.WebRequests.Json
 		/// <typeparam name="TResponse">The type of the response.</typeparam>
 		/// <param name="relativeUri">The relative URI.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUri)
-		{
-			return DoCreateRequest<TResponse>(GetRequestUri(relativeUri));
-		}
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUri) =>
+			DoCreateRequest<TResponse>(GetRequestUri(relativeUri));
 
 		/// <summary>
 		/// Creates a new AutoWebServiceRequest using the specified relative URI pattern and parameters.
@@ -92,10 +85,8 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
-		{
-			return DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, uriParameters));
-		}
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters) =>
+			DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, uriParameters));
 
 		/// <summary>
 		/// Creates a new AutoWebServiceRequest using the specified relative URI pattern and parameters.
@@ -105,10 +96,8 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="parameters">The URI parameters.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
 		/// <remarks>Each pair of parameters represents a key and a value. See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] parameters)
-		{
-			return DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, parameters));
-		}
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] parameters) =>
+			DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, parameters));
 
 		/// <summary>
 		/// Called to modify the request URI before it is sent.

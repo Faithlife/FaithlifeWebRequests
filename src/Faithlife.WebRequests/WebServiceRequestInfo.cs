@@ -26,7 +26,7 @@ namespace Faithlife.WebRequests
 			if (method is null)
 				throw new ArgumentNullException(nameof(method));
 			if (method.Length == 0)
-				throw new ArgumentException("'method' must not be empty", "method");
+				throw new ArgumentException("'method' must not be empty", nameof(method));
 
 			Uri = uri;
 			Method = method;

@@ -59,12 +59,6 @@ namespace Faithlife.WebRequests.Json
 		/// <value>The value, if any.</value>
 		/// <remarks>The Value will be null if the response content was not JSON or could not be
 		/// deserialized into an instance of TValue.</remarks>
-		public TValue Value
-		{
-			get
-			{
-				return Content is JsonWebServiceContent<TValue> content ? content.Value : default!;
-			}
-		}
+		public TValue Value => Content is JsonWebServiceContent<TValue> content ? content.Value : default!;
 	}
 }

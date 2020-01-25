@@ -99,9 +99,6 @@ namespace Faithlife.WebRequests
 		/// Clones this instance.
 		/// </summary>
 		/// <returns>The clone.</returns>
-		public WebServiceRequestSettings Clone()
-		{
-			return (WebServiceRequestSettings) MemberwiseClone();
-		}
+		public WebServiceRequestSettings Clone() => (WebServiceRequestSettings) MemberwiseClone();
 	}
 }

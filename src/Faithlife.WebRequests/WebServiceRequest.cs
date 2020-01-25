@@ -73,10 +73,8 @@ namespace Faithlife.WebRequests
 		/// <param name="proposedResponse">The proposed response.</param>
 		/// <returns>The response.</returns>
 		/// <remarks>The default implementation simply returns the proposed response.</remarks>
-		protected virtual Task<WebServiceResponse> CreateResponseAsync(WebServiceResponse proposedResponse)
-		{
-			return Task.FromResult(proposedResponse);
-		}
+		protected virtual Task<WebServiceResponse> CreateResponseAsync(WebServiceResponse proposedResponse) =>
+			Task.FromResult(proposedResponse);
 
 		/// <summary>
 		/// Overrides OnWebRequestCreated.

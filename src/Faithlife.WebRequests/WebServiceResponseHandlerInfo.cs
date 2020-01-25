@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 
@@ -41,10 +40,7 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// Marks the content as having been read from the web response.
 		/// </summary>
-		public void MarkContentAsRead()
-		{
-			IsContentRead = true;
-		}
+		public void MarkContentAsRead() => IsContentRead = true;
 
 		/// <summary>
 		/// Detaches the web response.

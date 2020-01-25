@@ -49,10 +49,7 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <returns>An empty response.</returns>
 		/// <remarks>The default implementation uses the default constructor.</remarks>
-		protected virtual TResponse CreateResponse()
-		{
-			return Activator.CreateInstance<TResponse>();
-		}
+		protected virtual TResponse CreateResponse() => Activator.CreateInstance<TResponse>();
 
 		/// <summary>
 		/// Overrides HandleResponseCore.
