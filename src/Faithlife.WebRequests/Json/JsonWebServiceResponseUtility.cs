@@ -70,9 +70,9 @@ namespace Faithlife.WebRequests.Json
 			try
 			{
 				// parse JSON to desired value
-				using (Stream responseStream = await response.Content!.ReadAsStreamAsync().ConfigureAwait(false))
-				using (StreamReader reader = new StreamReader(responseStream))
-					return JsonUtility.FromJsonTextReader<T>(reader, jsonSettings);
+				using var responseStream = await response.Content!.ReadAsStreamAsync().ConfigureAwait(false);
+				using var reader = new StreamReader(responseStream);
+				return JsonUtility.FromJsonTextReader<T>(reader, jsonSettings);
 			}
 			catch (JsonReaderException x)
 			{

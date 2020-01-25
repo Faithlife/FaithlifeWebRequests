@@ -57,15 +57,13 @@ namespace Faithlife.WebRequests
 			try
 			{
 				Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-				using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
-				using (StreamReader reader = new StreamReader(stream))
-				{
-					char[] buffer = new char[c_contentPreviewCharacterCount];
-					int readCount = await reader.ReadBlockAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
-					if (readCount == buffer.Length)
-						buffer[readCount - 1] = '\u2026';
-					return new string(buffer, 0, readCount);
-				}
+				using var wrappingStream = new WrappingStream(stream, Ownership.None);
+				using var reader = new StreamReader(stream);
+				char[] buffer = new char[c_contentPreviewCharacterCount];
+				int readCount = await reader.ReadBlockAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+				if (readCount == buffer.Length)
+					buffer[readCount - 1] = '\u2026';
+				return new string(buffer, 0, readCount);
 			}
 			catch (Exception)
 			{

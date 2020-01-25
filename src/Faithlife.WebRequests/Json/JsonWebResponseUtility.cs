@@ -79,9 +79,9 @@ namespace Faithlife.WebRequests.Json
 					throw HttpResponseMessageUtility.CreateWebServiceException(response, "Response stream is not readable.");
 
 				// parse JSON to desired value
-				using (WrappingStream wrappingStream = new WrappingStream(responseStream, Ownership.None))
-				using (StreamReader reader = new StreamReader(wrappingStream))
-					return JsonUtility.FromJsonTextReader(reader, type, jsonSettings);
+				using var wrappingStream = new WrappingStream(responseStream, Ownership.None);
+				using var reader = new StreamReader(wrappingStream);
+				return JsonUtility.FromJsonTextReader(reader, type, jsonSettings);
 			}
 			catch (JsonReaderException x)
 			{

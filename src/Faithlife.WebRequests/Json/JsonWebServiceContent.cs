@@ -98,15 +98,14 @@ namespace Faithlife.WebRequests.Json
 		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context)
 		{
 			// don't let StreamWriter close the stream
-			using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
-			using (StreamWriter writer = new StreamWriter(wrappingStream))
-				await writer.WriteAsync(Json).ConfigureAwait(false);
+			using var wrappingStream = new WrappingStream(stream, Ownership.None);
+			using var writer = new StreamWriter(wrappingStream);
+			await writer.WriteAsync(Json).ConfigureAwait(false);
 		}
 
 		protected override bool TryComputeLength(out long length)
 		{
 			length = Json is object ? Encoding.UTF8.GetByteCount(Json) : 0;
-
 			return Json is object;
 		}
 

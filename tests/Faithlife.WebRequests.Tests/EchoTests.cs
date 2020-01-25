@@ -53,9 +53,9 @@ namespace Faithlife.WebRequests.Tests
 					EchoRequestDto? requestDto = null;
 					if (context.Request.HasEntityBody && context.Request.ContentType == "application/json")
 					{
-						using (var inputStream = context.Request.InputStream)
-						using (var textReader = new StreamReader(inputStream))
-							requestDto = JsonUtility.FromJsonTextReader<EchoRequestDto>(textReader);
+						using var inputStream = context.Request.InputStream;
+						using var textReader = new StreamReader(inputStream);
+						requestDto = JsonUtility.FromJsonTextReader<EchoRequestDto>(textReader);
 					}
 					context.Response.StatusCode = requestDto?.StatusCode ?? 200;
 					if (requestDto?.SendContent != false)
