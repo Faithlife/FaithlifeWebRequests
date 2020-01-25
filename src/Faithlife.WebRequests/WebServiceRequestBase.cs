@@ -25,17 +25,14 @@ namespace Faithlife.WebRequests
 			if (uri.Scheme != "http" && uri.Scheme != "https")
 				throw new ArgumentException("Expected URI with http or https scheme; received {0}".FormatInvariant(uri.Scheme));
 
-			m_uri = uri;
+			RequestUri = uri;
 		}
 
 		/// <summary>
 		/// Gets the request URI.
 		/// </summary>
 		/// <value>The request URI.</value>
-		public Uri RequestUri
-		{
-			get { return m_uri; }
-		}
+		public Uri RequestUri { get; }
 
 		/// <summary>
 		/// Gets or sets the settings.
@@ -129,7 +126,6 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		public bool DisableAutoRedirect { get; set; }
 
-		readonly Uri m_uri;
 		string? m_method;
 	}
 

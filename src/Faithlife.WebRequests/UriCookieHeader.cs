@@ -14,29 +14,20 @@ namespace Faithlife.WebRequests
 		/// <param name="cookieHeader">The cookie header.</param>
 		public UriCookieHeader(Uri uri, string cookieHeader)
 		{
-			m_uri = uri;
-			m_cookieHeader = cookieHeader;
+			Uri = uri;
+			CookieHeader = cookieHeader;
 		}
 
 		/// <summary>
 		/// Gets the URI.
 		/// </summary>
 		/// <value>The URI.</value>
-		public Uri Uri
-		{
-			get { return m_uri; }
-		}
+		public Uri Uri { get; }
 
 		/// <summary>
 		/// Gets the cookie header.
 		/// </summary>
 		/// <value>The cookie header.</value>
-		public string CookieHeader
-		{
-			get { return m_cookieHeader; }
-		}
-
-		readonly Uri m_uri;
-		readonly string m_cookieHeader;
+		public string CookieHeader { get; }
 	}
 }

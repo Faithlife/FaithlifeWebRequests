@@ -18,7 +18,7 @@ namespace Faithlife.WebRequests
 		public CookieManager()
 		{
 			m_objLock = new object();
-			m_cookieContainer = new CookieContainer();
+			CookieContainer = new CookieContainer();
 			m_setUris = new HashSet<Uri>();
 		}
 
@@ -30,7 +30,7 @@ namespace Faithlife.WebRequests
 		public string GetCookieHeader(Uri uri)
 		{
 			lock (m_objLock)
-				return m_cookieContainer.GetCookieHeader(uri);
+				return CookieContainer.GetCookieHeader(uri);
 		}
 
 		/// <summary>
@@ -47,10 +47,7 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// Returns a reference to the <see cref="CookieContainer"/> for this instance. 
 		/// </summary>
-		public CookieContainer CookieContainer
-		{
-			get { return m_cookieContainer; }
-		}
+		public CookieContainer CookieContainer { get; }
 
 		/// <summary>
 		/// Adds <see cref="UriCookieHeader"/> instances for one or more cookies from an HTTP cookie header to the <see cref="CookieManager"/> for a specific URI.
@@ -65,7 +62,7 @@ namespace Faithlife.WebRequests
 				m_setUris.Add(uri);
 
 				// store the cookies
-				m_cookieContainer.SetCookies(uri, cookieHeader);
+				CookieContainer.SetCookies(uri, cookieHeader);
 			}
 
 			CookiesChanged?.Invoke(this, EventArgs.Empty);
@@ -78,7 +75,7 @@ namespace Faithlife.WebRequests
 		{
 			// return pairs of URIs and Set-Cookie header value for each URI registered with the CookieManager
 			lock (m_objLock)
-				return m_setUris.Select(uri => new UriCookieHeader(uri, m_cookieContainer.GetCookies(uri).Cast<Cookie>().Select(c => c.ToSetCookieHeaderValue()).Join(","))).ToList().AsReadOnly();
+				return m_setUris.Select(uri => new UriCookieHeader(uri, CookieContainer.GetCookies(uri).Cast<Cookie>().Select(c => c.ToSetCookieHeaderValue()).Join(","))).ToList().AsReadOnly();
 		}
 
 		/// <summary>
@@ -88,7 +85,7 @@ namespace Faithlife.WebRequests
 		{
 			// return pairs of URIs and Cookies for each URI registered with the CookieManager
 			lock (m_objLock)
-				return m_setUris.SelectMany(uri => m_cookieContainer.GetCookies(uri).Cast<Cookie>().Select(cookie => new UriCookie(uri, cookie))).ToList().AsReadOnly();
+				return m_setUris.SelectMany(uri => CookieContainer.GetCookies(uri).Cast<Cookie>().Select(cookie => new UriCookie(uri, cookie))).ToList().AsReadOnly();
 		}
 
 		/// <summary>
@@ -103,7 +100,7 @@ namespace Faithlife.WebRequests
 				empty = m_setUris.Count == 0;
 				if (!empty)
 				{
-					foreach (var cookie in m_setUris.SelectMany(uri => m_cookieContainer.GetCookies(uri).Cast<Cookie>()))
+					foreach (var cookie in m_setUris.SelectMany(uri => CookieContainer.GetCookies(uri).Cast<Cookie>()))
 						cookie.Expires = expires;
 				}
 			}
@@ -118,7 +115,6 @@ namespace Faithlife.WebRequests
 		public event EventHandler? CookiesChanged;
 
 		readonly object m_objLock;
-		readonly CookieContainer m_cookieContainer;
 		readonly HashSet<Uri> m_setUris;
 	}
 }

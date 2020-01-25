@@ -12,18 +12,12 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// The request URI.
 		/// </summary>
-		public Uri Uri
-		{
-			get { return m_uri; }
-		}
+		public Uri Uri { get; }
 
 		/// <summary>
 		/// The request HTTP method.
 		/// </summary>
-		public string? Method
-		{
-			get { return m_method; }
-		}
+		public string? Method { get; }
 
 		internal WebServiceRequestInfo(Uri uri, string method)
 		{
@@ -34,8 +28,8 @@ namespace Faithlife.WebRequests
 			if (method.Length == 0)
 				throw new ArgumentException("'method' must not be empty", "method");
 
-			m_uri = uri;
-			m_method = method;
+			Uri = uri;
+			Method = method;
 		}
 
 		internal WebServiceRequestInfo(HttpRequestMessage request)
@@ -43,11 +37,8 @@ namespace Faithlife.WebRequests
 			if (request is null)
 				throw new ArgumentNullException(nameof(request));
 
-			m_uri = request.RequestUri;
-			m_method = request.Method?.Method;
+			Uri = request.RequestUri;
+			Method = request.Method?.Method;
 		}
-
-		readonly Uri m_uri;
-		readonly string? m_method;
 	}
 }

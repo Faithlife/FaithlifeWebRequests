@@ -15,29 +15,20 @@ namespace Faithlife.WebRequests
 		/// <param name="cookie">The cookie.</param>
 		public UriCookie(Uri uri, Cookie cookie)
 		{
-			m_uri = uri;
-			m_cookie = cookie;
+			Uri = uri;
+			Cookie = cookie;
 		}
 
 		/// <summary>
 		/// Gets the URI.
 		/// </summary>
 		/// <value>The URI.</value>
-		public Uri Uri
-		{
-			get { return m_uri; }
-		}
+		public Uri Uri { get; }
 
 		/// <summary>
 		/// Gets the cookie.
 		/// </summary>
 		/// <value>The cookie.</value>
-		public Cookie Cookie
-		{
-			get { return m_cookie; }
-		}
-
-		readonly Uri m_uri;
-		readonly Cookie m_cookie;
+		public Cookie Cookie { get; }
 	}
 }

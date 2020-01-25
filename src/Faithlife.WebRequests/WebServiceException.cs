@@ -54,77 +54,56 @@ namespace Faithlife.WebRequests
 		public WebServiceException(string? message = null, string? requestMethod = null, Uri? requestUri = null, HttpStatusCode? responseStatusCode = null, HttpHeaders? responseHeaders = null, string? responseContentType = null, long? responseContentLength = null, string? responseContentPreview = null, Exception? innerException = null)
 			: base(message, innerException)
 		{
-			m_requestMethod = requestMethod;
-			m_requestUri = requestUri;
-			m_responseStatusCode = responseStatusCode;
-			m_responseHeaders = responseHeaders;
-			m_responseContentType = responseContentType;
-			m_responseContentLength = responseContentLength;
-			m_responseContentPreview = responseContentPreview;
+			RequestMethod = requestMethod;
+			RequestUri = requestUri;
+			ResponseStatusCode = responseStatusCode;
+			ResponseHeaders = responseHeaders;
+			ResponseContentType = responseContentType;
+			ResponseContentLength = responseContentLength;
+			ResponseContentPreview = responseContentPreview;
 		}
 
 		/// <summary>
 		/// Gets the request method.
 		/// </summary>]
 		/// <value>The request method.</value>
-		public string? RequestMethod
-		{
-			get { return m_requestMethod; }
-		}
+		public string? RequestMethod { get; }
 
 		/// <summary>
 		/// Gets the request URI.
 		/// </summary>
 		/// <value>The request URI.</value>
-		public Uri? RequestUri
-		{
-			get { return m_requestUri; }
-		}
+		public Uri? RequestUri { get; }
 
 		/// <summary>
 		/// Gets the response status code.
 		/// </summary>
 		/// <value>The response status code.</value>
-		public HttpStatusCode? ResponseStatusCode
-		{
-			get { return m_responseStatusCode; }
-		}
+		public HttpStatusCode? ResponseStatusCode { get; }
 
 		/// <summary>
 		/// Gets the response headers.
 		/// </summary>
 		/// <value>The response headers.</value>
-		public HttpHeaders? ResponseHeaders
-		{
-			get { return m_responseHeaders; }
-		}
+		public HttpHeaders? ResponseHeaders { get; }
 
 		/// <summary>
 		/// Gets the response content type.
 		/// </summary>
 		/// <value>The response content type.</value>
-		public string? ResponseContentType
-		{
-			get { return m_responseContentType; }
-		}
+		public string? ResponseContentType { get; }
 
 		/// <summary>
 		/// Gets the response content length.
 		/// </summary>
 		/// <value>The response content length.</value>
-		public long? ResponseContentLength
-		{
-			get { return m_responseContentLength; }
-		}
+		public long? ResponseContentLength { get; }
 
 		/// <summary>
 		/// Gets the response content preview.
 		/// </summary>
 		/// <value>The response content preview (as a string, possibly abbreviated).</value>
-		public string? ResponseContentPreview
-		{
-			get { return m_responseContentPreview; }
-		}
+		public string? ResponseContentPreview { get; }
 
 		/// <summary>
 		/// Gets the response.
@@ -145,18 +124,18 @@ namespace Faithlife.WebRequests
 				if (message.Length == 0)
 					message.Append("Web service error.");
 
-				if (m_requestUri is object)
-					message.Append(" Request: {0} {1}".FormatInvariant(m_requestMethod ?? "GET", m_requestUri.AbsoluteUri));
+				if (RequestUri is object)
+					message.Append(" Request: {0} {1}".FormatInvariant(RequestMethod ?? "GET", RequestUri.AbsoluteUri));
 
-				if (m_responseStatusCode is object)
+				if (ResponseStatusCode is object)
 				{
-					message.Append(" (status ").Append(m_responseStatusCode.Value);
+					message.Append(" (status ").Append(ResponseStatusCode.Value);
 
-					if (m_responseContentType is object)
-						message.Append(", content type '").Append(m_responseContentType).Append("'");
+					if (ResponseContentType is object)
+						message.Append(", content type '").Append(ResponseContentType).Append("'");
 
-					if (m_responseContentLength is object)
-						message.Append(", content length ").AppendInvariant(m_responseContentLength.Value);
+					if (ResponseContentLength is object)
+						message.Append(", content length ").AppendInvariant(ResponseContentLength.Value);
 
 					message.Append(")");
 				}
@@ -171,10 +150,10 @@ namespace Faithlife.WebRequests
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Don't want exceptions thrown from ToString.")]
 		public override string ToString()
 		{
-			if (m_responseContentPreview is object)
+			if (ResponseContentPreview is object)
 			{
 				StringBuilder result = new StringBuilder(base.ToString());
-				result.AppendLine().Append("content: ").Append(m_responseContentPreview);
+				result.AppendLine().Append("content: ").Append(ResponseContentPreview);
 				return result.ToString();
 			}
 			else if (Response?.Content is object)
@@ -205,13 +184,5 @@ namespace Faithlife.WebRequests
 				return base.ToString();
 			}
 		}
-
-		readonly string? m_requestMethod;
-		readonly Uri? m_requestUri;
-		readonly HttpStatusCode? m_responseStatusCode;
-		readonly string? m_responseContentType;
-		readonly long? m_responseContentLength;
-		readonly HttpHeaders? m_responseHeaders;
-		readonly string? m_responseContentPreview;
 	}
 }

@@ -123,10 +123,7 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the value.
 		/// </summary>
 		/// <value>The value.</value>
-		public TValue Value
-		{
-			get { return m_value; }
-		}
+		public TValue Value { get; }
 
 		/// <summary>
 		/// Initializes a new instance of the JsonWebServiceContent class.
@@ -135,7 +132,7 @@ namespace Faithlife.WebRequests.Json
 		/// <remarks>JsonUtility.ToJson is called just in time when the JSON content is needed.</remarks>
 		protected internal JsonWebServiceContent(TValue value)
 		{
-			m_value = value;
+			Value = value;
 			Headers.ContentType = new MediaTypeHeaderValue(JsonContentType);
 		}
 
@@ -147,7 +144,7 @@ namespace Faithlife.WebRequests.Json
 		/// <remarks>JsonUtility.ToJson is called just in time when the JSON content is needed.</remarks>
 		protected internal JsonWebServiceContent(TValue value, JsonSettings settings)
 		{
-			m_value = value;
+			Value = value;
 			m_outputSettings = settings;
 		}
 
@@ -157,10 +154,9 @@ namespace Faithlife.WebRequests.Json
 		/// <value>The JSON.</value>
 		protected override string GenerateJson()
 		{
-			return JsonUtility.ToJson(m_value, m_outputSettings);
+			return JsonUtility.ToJson(Value, m_outputSettings);
 		}
 
-		readonly TValue m_value;
 		readonly JsonSettings? m_outputSettings;
 	}
 }

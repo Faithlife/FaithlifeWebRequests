@@ -23,31 +23,26 @@ namespace Faithlife.WebRequests
 		public WebServiceRequest(Uri uri)
 			: base(uri)
 		{
-			m_handlers = new Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>>();
+			Handlers = new Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>>();
 		}
 
 		/// <summary>
 		/// Gets the response handlers.
 		/// </summary>
-		public Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>> Handlers
-		{
-			get { return m_handlers; }
-		}
+		public Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>> Handlers { get; }
 
 		/// <summary>
 		/// Overrides HandleResponseCore.
 		/// </summary>
 		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<TResponse> info)
 		{
-			foreach (var handler in m_handlers)
+			foreach (var handler in Handlers)
 			{
 				if (await handler(info).ConfigureAwait(false))
 					return true;
 			}
 			return false;
 		}
-
-		readonly Collection<Func<WebServiceResponseHandlerInfo<TResponse>, Task<bool>>> m_handlers;
 	}
 
 	/// <summary>
