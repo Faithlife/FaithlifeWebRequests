@@ -14,7 +14,7 @@ namespace Faithlife.WebRequests
 		/// <param name="message">The message.</param>
 		/// <param name="innerException">The inner exception.</param>
 		/// <returns>A new exception.</returns>
-		public static WebServiceException CreateWebServiceException(WebServiceResponse response, string message = null, Exception innerException = null)
+		public static WebServiceException CreateWebServiceException(WebServiceResponse response, string? message = null, Exception? innerException = null)
 		{
 			WebServiceException exception = new WebServiceException(
 				message: message,

@@ -50,7 +50,7 @@ namespace Faithlife.WebRequests.Tests
 					await Task.WhenAny(getContext, waitIndefinitely);
 					cancellationToken.ThrowIfCancellationRequested();
 					var context = await getContext;
-					EchoRequestDto requestDto = null;
+					EchoRequestDto? requestDto = null;
 					if (context.Request.HasEntityBody && context.Request.ContentType == "application/json")
 					{
 						using (var inputStream = context.Request.InputStream)
@@ -80,8 +80,8 @@ namespace Faithlife.WebRequests.Tests
 		[OneTimeTearDown]
 		public void TearDown()
 		{
-			m_listener.Stop();
-			m_listenerCts.Cancel();
+			m_listener!.Stop();
+			m_listenerCts!.Cancel();
 		}
 
 		[Test]
@@ -92,7 +92,7 @@ namespace Faithlife.WebRequests.Tests
 				.WithJsonContent(new EchoRequestDto { Message = "hello" });
 			var response = await request.GetResponseAsync();
 			Assert.IsNotNull(response.OK);
-			Assert.AreEqual("POST", response.OK.Method);
+			Assert.AreEqual("POST", response.OK!.Method);
 			Assert.AreEqual("hello", response.OK.Message);
 		}
 
@@ -103,7 +103,7 @@ namespace Faithlife.WebRequests.Tests
 				.WithAccept("text/plain");
 			var response = await request.GetResponseAsync();
 			Assert.IsNotNull(response.OK);
-			Assert.AreEqual("text/plain", response.OK.RequestHeaders.GetValueOrDefault("Accept"));
+			Assert.AreEqual("text/plain", response.OK!.RequestHeaders!.GetValueOrDefault("Accept"));
 		}
 
 		[Test]
@@ -121,7 +121,7 @@ namespace Faithlife.WebRequests.Tests
 			var request = new WebServiceRequest(new Uri(m_uriPrefix + "echo"));
 			var response = await request.GetResponseAsync();
 			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			var contentString = await response.Content.ReadAsStringAsync();
+			var contentString = await response.Content!.ReadAsStringAsync();
 			Assert.IsNotEmpty(contentString);
 		}
 
@@ -175,23 +175,23 @@ namespace Faithlife.WebRequests.Tests
 
 		class EchoRequestDto
 		{
-			public string Message { get; set; }
+			public string? Message { get; set; }
 			public int? StatusCode { get; set; }
 			public bool? SendContent { get; set; }
 		}
 
 		class EchoResponseDto
 		{
-			public string Method { get; set; }
-			public string Path { get; set; }
-			public string Query { get; set; }
-			public Dictionary<string, string> RequestHeaders { get; set; }
-			public string Message { get; set; }
+			public string? Method { get; set; }
+			public string? Path { get; set; }
+			public string? Query { get; set; }
+			public Dictionary<string, string>? RequestHeaders { get; set; }
+			public string? Message { get; set; }
 		}
 
 		class EchoResponseResponse
 		{
-			public EchoResponseDto OK { get; set; }
+			public EchoResponseDto? OK { get; set; }
 			public bool NoContent { get; set; }
 		}
 
@@ -200,9 +200,9 @@ namespace Faithlife.WebRequests.Tests
 			public int StatusCode { get; internal set; }
 		}
 
-		HttpListener m_listener;
-		string m_uriPrefix;
-		Task m_listenerTask;
-		CancellationTokenSource m_listenerCts;
+		HttpListener? m_listener;
+		string? m_uriPrefix;
+		Task? m_listenerTask;
+		CancellationTokenSource? m_listenerCts;
 	}
 }

@@ -14,7 +14,7 @@ namespace Faithlife.WebRequests.Json
 		/// Creates an exception for the response.
 		/// </summary>
 		/// <returns>A new exception for the response.</returns>
-		public WebServiceException CreateException(string message = null, Exception innerException = null)
+		public WebServiceException CreateException(string? message = null, Exception? innerException = null)
 		{
 			return new WebServiceException(
 				message: message,
@@ -41,7 +41,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="info">The web service response handler information.</param>
 		protected virtual async Task OnResponseHandledCoreAsync(WebServiceResponseHandlerInfo info)
 		{
-			m_requestMethod = info.WebResponse.RequestMessage.Method.Method;
+			m_requestMethod = info.WebResponse!.RequestMessage.Method.Method;
 			m_requestUri = info.WebResponse.RequestMessage.RequestUri;
 			m_responseStatusCode = info.WebResponse.StatusCode;
 			m_responseHeaders = info.WebResponse.Headers;
@@ -60,12 +60,12 @@ namespace Faithlife.WebRequests.Json
 			return OnResponseHandledCoreAsync(info);
 		}
 
-		string m_requestMethod;
-		Uri m_requestUri;
+		string? m_requestMethod;
+		Uri? m_requestUri;
 		HttpStatusCode? m_responseStatusCode;
-		HttpHeaders m_responseHeaders;
-		string m_responseContentType;
+		HttpHeaders? m_responseHeaders;
+		string? m_responseContentType;
 		long? m_responseContentLength;
-		string m_responseContentPreview;
+		string? m_responseContentPreview;
 	}
 }

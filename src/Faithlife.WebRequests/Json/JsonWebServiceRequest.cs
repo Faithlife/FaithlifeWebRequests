@@ -41,7 +41,7 @@ namespace Faithlife.WebRequests.Json
 		{
 			HttpStatusCode statusCode = proposedResponse.StatusCode;
 			HttpHeaders headers = proposedResponse.Headers;
-			HttpContent content = proposedResponse.Content;
+			var content = proposedResponse.Content;
 
 			// check for content
 			if (content != null)
@@ -87,12 +87,12 @@ namespace Faithlife.WebRequests.Json
 		/// Gets or sets the JSON settings.
 		/// </summary>
 		/// <value>The JSON settings (used when converting the response from JSON).</value>
-		public JsonSettings JsonSettings { get; set; }
+		public JsonSettings? JsonSettings { get; set; }
 
 		/// <summary>
 		/// Gets the response asynchronously.
 		/// </summary>
-		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(CancellationToken cancellationToken = default(CancellationToken))
+		public new async Task<JsonWebServiceResponse<TResponseValue>> GetResponseAsync(CancellationToken cancellationToken = default)
 		{
 			return (JsonWebServiceResponse<TResponseValue>) await base.GetResponseAsync(cancellationToken).ConfigureAwait(false);
 		}
@@ -108,9 +108,9 @@ namespace Faithlife.WebRequests.Json
 
 			HttpStatusCode statusCode = proposedResponse.StatusCode;
 			HttpHeaders headers = proposedResponse.Headers;
-			HttpContent content = proposedResponse.Content;
+			HttpContent? content = proposedResponse.Content;
 
-			string json = ((JsonWebServiceResponse) proposedResponse).Json;
+			var json = ((JsonWebServiceResponse) proposedResponse).Json;
 			if (json != null)
 			{
 				// don't allow missing JSON

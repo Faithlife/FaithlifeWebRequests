@@ -70,7 +70,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		/// <value>The accepted status codes; if null, all status codes are accepted.</value>
 		/// <remarks>The default value of this property contains HttpStatusCode.OK and HttpStatusCode.Created.</remarks>
-		public IReadOnlyList<HttpStatusCode> AcceptedStatusCodes { get; set; }
+		public IReadOnlyList<HttpStatusCode>? AcceptedStatusCodes { get; set; }
 
 		/// <summary>
 		/// Called to create the response.
@@ -101,7 +101,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<WebServiceResponse> info)
 		{
-			HttpStatusCode statusCode = info.WebResponse.StatusCode;
+			HttpStatusCode statusCode = info.WebResponse!.StatusCode;
 			HttpHeaders headers = info.WebResponse.Headers;
 			HttpContent responseContent = info.WebResponse.Content;
 

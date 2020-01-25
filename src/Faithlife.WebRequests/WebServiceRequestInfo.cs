@@ -20,7 +20,7 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// The request HTTP method.
 		/// </summary>
-		public string Method
+		public string? Method
 		{
 			get { return m_method; }
 		}
@@ -48,6 +48,6 @@ namespace Faithlife.WebRequests
 		}
 
 		readonly Uri m_uri;
-		readonly string m_method;
+		readonly string? m_method;
 	}
 }

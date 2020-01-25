@@ -23,8 +23,9 @@ namespace Faithlife.WebRequests.Json
 		{
 			// Allow null ContentLength
 			bool hasJson = response.Content?.Headers.ContentLength != 0;
-			string contentType = response.Content?.Headers.ContentType?.ToString();
-			hasJson &= !string.IsNullOrEmpty(contentType) && contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
+			var contentType = response.Content?.Headers.ContentType?.ToString();
+			hasJson &= contentType is object && contentType.Length >= JsonWebServiceContent.JsonContentType.Length &&
+				contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
 
 			return hasJson;
 		}
@@ -67,7 +68,7 @@ namespace Faithlife.WebRequests.Json
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
-		public static async Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type, JsonSettings jsonSettings)
+		public static async Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type, JsonSettings? jsonSettings)
 		{
 			try
 			{
@@ -117,7 +118,7 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>An object of the specified type.</returns>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings jsonSettings)
+		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings? jsonSettings)
 		{
 			return response.GetJsonAsAsync(typeof(T), jsonSettings).ContinueWith(x => (T) x.Result);
 		}

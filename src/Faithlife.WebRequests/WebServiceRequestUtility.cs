@@ -20,7 +20,7 @@ namespace Faithlife.WebRequests
 		/// <param name="request">The request.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The request.</returns>
-		public static TWebServiceRequest WithSettings<TWebServiceRequest>(this TWebServiceRequest request, WebServiceRequestSettings settings) where TWebServiceRequest : WebServiceRequestBase
+		public static TWebServiceRequest WithSettings<TWebServiceRequest>(this TWebServiceRequest request, WebServiceRequestSettings? settings) where TWebServiceRequest : WebServiceRequestBase
 		{
 			request.Settings = settings;
 			return request;
@@ -69,9 +69,9 @@ namespace Faithlife.WebRequests
 		/// <param name="request">The request.</param>
 		/// <param name="acceptedStatusCodes">The accepted status codes.</param>
 		/// <returns>The request.</returns>
-		public static TWebServiceRequest WithAcceptedStatusCodes<TWebServiceRequest>(this TWebServiceRequest request, IEnumerable<HttpStatusCode> acceptedStatusCodes) where TWebServiceRequest : WebServiceRequest
+		public static TWebServiceRequest WithAcceptedStatusCodes<TWebServiceRequest>(this TWebServiceRequest request, IEnumerable<HttpStatusCode>? acceptedStatusCodes) where TWebServiceRequest : WebServiceRequest
 		{
-			request.AcceptedStatusCodes = acceptedStatusCodes == null ? null : acceptedStatusCodes.ToList().AsReadOnly();
+			request.AcceptedStatusCodes = acceptedStatusCodes?.ToList().AsReadOnly();
 			return request;
 		}
 

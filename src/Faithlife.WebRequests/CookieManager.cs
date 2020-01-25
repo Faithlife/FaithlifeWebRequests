@@ -115,7 +115,7 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// Raised when cookies are changed.
 		/// </summary>
-		public event EventHandler CookiesChanged;
+		public event EventHandler? CookiesChanged;
 
 		readonly object m_objLock;
 		readonly CookieContainer m_cookieContainer;

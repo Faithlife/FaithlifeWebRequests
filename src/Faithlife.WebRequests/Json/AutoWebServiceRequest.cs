@@ -42,7 +42,7 @@ namespace Faithlife.WebRequests.Json
 		/// Gets or sets the JSON settings.
 		/// </summary>
 		/// <value>The json settings.</value>
-		public JsonSettings JsonSettings { get; set; }
+		public JsonSettings? JsonSettings { get; set; }
 
 		/// <summary>
 		/// Creates an empty response.
@@ -59,16 +59,16 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<TResponse> info)
 		{
-			TResponse response = CreateResponse();
+			var response = CreateResponse()!;
 			Type responseType = response.GetType();
-			HttpResponseMessage webResponse = info.WebResponse;
+			var webResponse = info.WebResponse!;
 
 			// find specific status code property
 			bool isStatusCodeHandled = false;
 			HttpStatusCode statusCode = webResponse.StatusCode;
 			string statusCodeText = statusCode.ToString();
-			PropertyInfo resultProperty = GetProperty(responseType, statusCodeText);
-			object content = null;
+			var resultProperty = GetProperty(responseType, statusCodeText);
+			object? content = null;
 
 			if (resultProperty != null && resultProperty.CanWrite)
 			{
@@ -78,7 +78,7 @@ namespace Faithlife.WebRequests.Json
 				isStatusCodeHandled = true;
 			}
 
-			PropertyInfo statusCodeProperty = GetProperty(responseType, "StatusCode");
+			var statusCodeProperty = GetProperty(responseType, "StatusCode");
 			if (statusCodeProperty != null && statusCodeProperty.CanWrite)
 			{
 				Type statusCodePropertyType = statusCodeProperty.PropertyType;
@@ -102,7 +102,7 @@ namespace Faithlife.WebRequests.Json
 				string headerName = header.Key;
 				// remove hyphens before looking for property setter by name
 				string propertyName = headerName.Replace("-", "");
-				PropertyInfo headerProperty = GetProperty(responseType, propertyName);
+				var headerProperty = GetProperty(responseType, propertyName);
 				if (headerProperty != null && headerProperty.CanWrite)
 				{
 					// get header text
@@ -128,8 +128,7 @@ namespace Faithlife.WebRequests.Json
 			}
 
 			// allow response to read extra data
-			AutoWebServiceResponse autoWebServiceResponse = response as AutoWebServiceResponse;
-			if (autoWebServiceResponse != null)
+			if (response is AutoWebServiceResponse autoWebServiceResponse)
 				await autoWebServiceResponse.OnResponseHandledAsync(info).ConfigureAwait(false);
 
 			// detach response if necessary
@@ -141,7 +140,7 @@ namespace Faithlife.WebRequests.Json
 			return true;
 		}
 
-		private static PropertyInfo GetProperty(Type type, string propertyName)
+		private static PropertyInfo? GetProperty(Type type, string propertyName)
 		{
 			var property = type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod != null && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
 
@@ -153,8 +152,8 @@ namespace Faithlife.WebRequests.Json
 
 		private async Task<object> ReadContentAsAsync(WebServiceResponseHandlerInfo<TResponse> info, Type propertyType)
 		{
-			HttpResponseMessage webResponse = info.WebResponse;
-			object content = null;
+			var webResponse = info.WebResponse!;
+			object? content = null;
 
 			if (propertyType == typeof(bool) || propertyType == typeof(bool?))
 			{
@@ -173,7 +172,7 @@ namespace Faithlife.WebRequests.Json
 			else if (propertyType == typeof(Stream))
 			{
 				info.MarkContentAsRead();
-				content = await WebResponseStream.CreateAsync(info.WebResponse).ConfigureAwait(false);
+				content = await WebResponseStream.CreateAsync(webResponse).ConfigureAwait(false);
 			}
 			else if (webResponse.HasJson() || webResponse.Content.Headers.ContentType == null)
 			{
@@ -191,12 +190,12 @@ namespace Faithlife.WebRequests.Json
 		{
 			if (info.IsContentRead)
 			{
-				return Task.FromResult(HttpResponseMessageUtility.CreateWebServiceException(info.WebResponse, message));
+				return Task.FromResult(HttpResponseMessageUtility.CreateWebServiceException(info.WebResponse!, message));
 			}
 			else
 			{
 				info.MarkContentAsRead();
-				return HttpResponseMessageUtility.CreateWebServiceExceptionWithContentPreviewAsync(info.WebResponse, message);
+				return HttpResponseMessageUtility.CreateWebServiceExceptionWithContentPreviewAsync(info.WebResponse!, message);
 			}
 		}
 

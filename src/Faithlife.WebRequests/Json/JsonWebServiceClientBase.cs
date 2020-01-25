@@ -158,12 +158,12 @@ namespace Faithlife.WebRequests.Json
 			return uri;
 		}
 
-		private Uri DoGetRequestUri(string relativeUriPattern, params string[] parameters)
+		private Uri DoGetRequestUri(string? relativeUriPattern, params string[] parameters)
 		{
 			string uriText = m_baseUri.AbsoluteUri;
 
 			if (!string.IsNullOrEmpty(relativeUriPattern))
-				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
+				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern!.TrimStart('/');
 
 			Uri uri = parameters != null && parameters.Length > 0 ? UriUtility.FromPattern(uriText, parameters) : new Uri(uriText);
 
@@ -174,7 +174,7 @@ namespace Faithlife.WebRequests.Json
 
 		private AutoWebServiceRequest<TResponse> DoCreateRequest<TResponse>(Uri uri)
 		{
-			WebServiceRequestSettings requestSettings = m_clientSettings.RequestSettings ?? (m_clientSettings.RequestSettingsCreator != null ? m_clientSettings.RequestSettingsCreator() : null);
+			var requestSettings = m_clientSettings.RequestSettings ?? (m_clientSettings.RequestSettingsCreator != null ? m_clientSettings.RequestSettingsCreator() : null);
 
 			AutoWebServiceRequest<TResponse> request = new AutoWebServiceRequest<TResponse>(uri) { JsonSettings = m_clientSettings.JsonSettings }.WithSettings(requestSettings);
 

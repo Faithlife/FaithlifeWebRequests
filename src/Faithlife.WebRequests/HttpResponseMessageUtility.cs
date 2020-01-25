@@ -19,7 +19,7 @@ namespace Faithlife.WebRequests
 		/// <param name="contentPreview">The content preview.</param>
 		/// <param name="innerException">The inner exception.</param>
 		/// <returns>A new exception.</returns>
-		public static WebServiceException CreateWebServiceException(HttpResponseMessage response, string message = null, Exception innerException = null, string contentPreview = null)
+		public static WebServiceException CreateWebServiceException(HttpResponseMessage response, string? message = null, Exception? innerException = null, string? contentPreview = null)
 		{
 			return new WebServiceException(
 				message: message,
@@ -41,7 +41,7 @@ namespace Faithlife.WebRequests
 		/// <param name="innerException">The inner exception.</param>
 		/// <returns>A new exception.</returns>
 		/// <remarks>Do not call this method if the response stream has already been retrieved.</remarks>
-		public static async Task<WebServiceException> CreateWebServiceExceptionWithContentPreviewAsync(HttpResponseMessage response, string message = null, Exception innerException = null)
+		public static async Task<WebServiceException> CreateWebServiceExceptionWithContentPreviewAsync(HttpResponseMessage response, string? message = null, Exception? innerException = null)
 		{
 			var contentPreview = await ReadContentPreviewAsync(response).ConfigureAwait(false);
 			return CreateWebServiceException(response, message, innerException, contentPreview);
@@ -52,7 +52,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		/// <param name="response">The response.</param>
 		/// <returns>The content preview.</returns>
-		public static async Task<string> ReadContentPreviewAsync(HttpResponseMessage response)
+		public static async Task<string?> ReadContentPreviewAsync(HttpResponseMessage response)
 		{
 			try
 			{

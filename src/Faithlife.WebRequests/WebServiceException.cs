@@ -51,7 +51,7 @@ namespace Faithlife.WebRequests
 		/// <param name="responseContentLength">The response content length.</param>
 		/// <param name="responseContentPreview">A preview of the response content (as a string, possibly abbreviated).</param>
 		/// <param name="innerException">The inner exception.</param>
-		public WebServiceException(string message = null, string requestMethod = null, Uri requestUri = null, HttpStatusCode? responseStatusCode = null, HttpHeaders responseHeaders = null, string responseContentType = null, long? responseContentLength = null, string responseContentPreview = null, Exception innerException = null)
+		public WebServiceException(string? message = null, string? requestMethod = null, Uri? requestUri = null, HttpStatusCode? responseStatusCode = null, HttpHeaders? responseHeaders = null, string? responseContentType = null, long? responseContentLength = null, string? responseContentPreview = null, Exception? innerException = null)
 			: base(message, innerException)
 		{
 			m_requestMethod = requestMethod;
@@ -67,7 +67,7 @@ namespace Faithlife.WebRequests
 		/// Gets the request method.
 		/// </summary>]
 		/// <value>The request method.</value>
-		public string RequestMethod
+		public string? RequestMethod
 		{
 			get { return m_requestMethod; }
 		}
@@ -76,7 +76,7 @@ namespace Faithlife.WebRequests
 		/// Gets the request URI.
 		/// </summary>
 		/// <value>The request URI.</value>
-		public Uri RequestUri
+		public Uri? RequestUri
 		{
 			get { return m_requestUri; }
 		}
@@ -94,7 +94,7 @@ namespace Faithlife.WebRequests
 		/// Gets the response headers.
 		/// </summary>
 		/// <value>The response headers.</value>
-		public HttpHeaders ResponseHeaders
+		public HttpHeaders? ResponseHeaders
 		{
 			get { return m_responseHeaders; }
 		}
@@ -103,7 +103,7 @@ namespace Faithlife.WebRequests
 		/// Gets the response content type.
 		/// </summary>
 		/// <value>The response content type.</value>
-		public string ResponseContentType
+		public string? ResponseContentType
 		{
 			get { return m_responseContentType; }
 		}
@@ -121,7 +121,7 @@ namespace Faithlife.WebRequests
 		/// Gets the response content preview.
 		/// </summary>
 		/// <value>The response content preview (as a string, possibly abbreviated).</value>
-		public string ResponseContentPreview
+		public string? ResponseContentPreview
 		{
 			get { return m_responseContentPreview; }
 		}
@@ -130,7 +130,7 @@ namespace Faithlife.WebRequests
 		/// Gets the response.
 		/// </summary>
 		/// <value>The response.</value>
-		public WebServiceResponse Response { get; internal set; }
+		public WebServiceResponse? Response { get; internal set; }
 
 		/// <summary>
 		/// Gets a message that describes the current exception.
@@ -206,12 +206,12 @@ namespace Faithlife.WebRequests
 			}
 		}
 
-		readonly string m_requestMethod;
-		readonly Uri m_requestUri;
+		readonly string? m_requestMethod;
+		readonly Uri? m_requestUri;
 		readonly HttpStatusCode? m_responseStatusCode;
-		readonly string m_responseContentType;
+		readonly string? m_responseContentType;
 		readonly long? m_responseContentLength;
-		readonly HttpHeaders m_responseHeaders;
-		readonly string m_responseContentPreview;
+		readonly HttpHeaders? m_responseHeaders;
+		readonly string? m_responseContentPreview;
 	}
 }

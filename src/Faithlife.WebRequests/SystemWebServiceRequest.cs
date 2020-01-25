@@ -24,7 +24,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		protected override Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<HttpResponseMessage> info)
 		{
-			info.Response = info.DetachWebResponse();
+			info.Response = info.DetachWebResponse()!;
 			return Task.FromResult(true);
 		}
 	}

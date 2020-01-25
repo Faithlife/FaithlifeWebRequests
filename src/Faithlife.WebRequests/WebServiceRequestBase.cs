@@ -41,7 +41,7 @@ namespace Faithlife.WebRequests
 		/// Gets or sets the settings.
 		/// </summary>
 		/// <value>The settings.</value>
-		public WebServiceRequestSettings Settings { get; set; }
+		public WebServiceRequestSettings? Settings { get; set; }
 
 		/// <summary>
 		/// Gets or sets the method.
@@ -58,13 +58,13 @@ namespace Faithlife.WebRequests
 		/// Gets or sets the content.
 		/// </summary>
 		/// <value>The content.</value>
-		public HttpContent Content { get; set; }
+		public HttpContent? Content { get; set; }
 
 		/// <summary>
 		/// Gets or sets the If-Match header.
 		/// </summary>
 		/// <value>The If-Match ETag.</value>
-		public string IfMatch { get; set; }
+		public string? IfMatch { get; set; }
 
 		/// <summary>
 		/// Gets or sets if modified since.
@@ -76,7 +76,7 @@ namespace Faithlife.WebRequests
 		/// Gets or sets the If-None-Match header.
 		/// </summary>
 		/// <value>The If-None-Match ETag.</value>
-		public string IfNoneMatch { get; set; }
+		public string? IfNoneMatch { get; set; }
 
 		/// <summary>
 		/// Gets or sets the timeout. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
@@ -90,25 +90,25 @@ namespace Faithlife.WebRequests
 		/// <value>A collection of additional headers to include in the request.</value>
 		/// <remarks>Use this property to specify headers that are not already exposed by other
 		/// properties on the request.</remarks>
-		public WebHeaderCollection AdditionalHeaders { get; set; }
+		public WebHeaderCollection? AdditionalHeaders { get; set; }
 
 		/// <summary>
 		/// Gets or sets the value of the Accept HTTP header.
 		/// </summary>
 		/// <value>The value of the Accept HTTP header. The default value is null.</value>
-		public string Accept { get; set; }
+		public string? Accept { get; set; }
 
 		/// <summary>
 		/// Gets or sets the value of the Referer HTTP header.
 		/// </summary>
 		/// <value>The value of the Referer HTTP header. The default value is null.</value>
-		public string Referer { get; set; }
+		public string? Referer { get; set; }
 
 		/// <summary>
 		/// Gets or sets the value of the User-agent HTTP header.
 		/// </summary>
 		/// <value>The value of the User-agent HTTP header. The default value is null.</value>
-		public string UserAgent { get; set; }
+		public string? UserAgent { get; set; }
 
 		/// <summary>
 		/// True if the request content compression is allowed.
@@ -122,7 +122,7 @@ namespace Faithlife.WebRequests
 		/// Gets or sets the byte range to be used by the Range header.
 		/// </summary>
 		/// <value>The byte range.</value>
-		public ByteRange Range { get; set; }
+		public ByteRange? Range { get; set; }
 
 		/// <summary>
 		/// True if HTTP redirects should not be followed automatically. If <see cref="WebServiceRequestSettings.GetHttpClient"/> is set, then this property is ignored.
@@ -130,7 +130,7 @@ namespace Faithlife.WebRequests
 		public bool DisableAutoRedirect { get; set; }
 
 		readonly Uri m_uri;
-		string m_method;
+		string? m_method;
 	}
 
 	/// <summary>
@@ -154,7 +154,7 @@ namespace Faithlife.WebRequests
 		{
 			HttpClient client;
 			HttpRequestMessage webRequest = CreateWebRequest(out client);
-			HttpContent requestContent = GetRequestContent(webRequest);
+			var requestContent = GetRequestContent(webRequest);
 			if (requestContent != null)
 				webRequest.Content = requestContent;
 			using (Settings?.StartTrace?.Invoke(webRequest))
@@ -272,9 +272,9 @@ namespace Faithlife.WebRequests
 			return CreateHttpRequestMessage(settings);
 		}
 
-		private HttpContent GetRequestContent(HttpRequestMessage webRequest)
+		private HttpContent? GetRequestContent(HttpRequestMessage webRequest)
 		{
-			HttpContent requestContent = Content;
+			var requestContent = Content;
 
 			// IIS doesn't like a POST/PUT with implicitly empty content (TODO: confirm, case 34924)
 			if (requestContent == null && (webRequest.Method == HttpMethod.Post || webRequest.Method == HttpMethod.Put))
@@ -312,9 +312,8 @@ namespace Faithlife.WebRequests
 			}
 			finally
 			{
-				// dispose HttpResponseMessage unless detached
-				if (info.WebResponse != null)
-					((IDisposable) info.DetachWebResponse()).Dispose();
+				// dispose HttpResponseMessage if not already detached
+				info.DetachWebResponse()?.Dispose();
 			}
 
 			// return result

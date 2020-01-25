@@ -16,7 +16,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="statusCode">The status code.</param>
 		/// <param name="headers">The headers.</param>
 		/// <param name="content">The content.</param>
-		public JsonWebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent content)
+		public JsonWebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent? content)
 			: base(request, statusCode, headers, content)
 		{
 		}
@@ -26,12 +26,11 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <value>The value, if any.</value>
 		/// <remarks>The Value will be null if the response content was not JSON.</remarks>
-		public string Json
+		public string? Json
 		{
 			get
 			{
-				JsonWebServiceContent content = Content as JsonWebServiceContent;
-				return content != null ? content.Json : null;
+				return Content is JsonWebServiceContent content ? content.Json : null;
 			}
 		}
 	}
@@ -49,7 +48,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="statusCode">The status code.</param>
 		/// <param name="headers">The headers.</param>
 		/// <param name="content">The content.</param>
-		public JsonWebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent content)
+		public JsonWebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent? content)
 			: base(request, statusCode, headers, content)
 		{
 		}
@@ -64,8 +63,7 @@ namespace Faithlife.WebRequests.Json
 		{
 			get
 			{
-				JsonWebServiceContent<TValue> content = Content as JsonWebServiceContent<TValue>;
-				return content != null ? content.Value : default(TValue);
+				return Content is JsonWebServiceContent<TValue> content ? content.Value : default!;
 			}
 		}
 	}

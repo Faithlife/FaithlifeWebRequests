@@ -17,7 +17,7 @@ namespace Faithlife.WebRequests
 		/// <param name="statusCode">The status code.</param>
 		/// <param name="headers">The headers.</param>
 		/// <param name="content">The content.</param>
-		public WebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent content)
+		public WebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, HttpHeaders headers, HttpContent? content)
 		{
 			// store just the values we need (not the whole request object), so that we don't keep large objects (request.Content) alive longer than necessary
 			m_requestUri = request.RequestUri;
@@ -66,7 +66,7 @@ namespace Faithlife.WebRequests
 		/// Gets the content.
 		/// </summary>
 		/// <value>The content.</value>
-		public HttpContent Content
+		public HttpContent? Content
 		{
 			get { return m_content; }
 		}
@@ -75,6 +75,6 @@ namespace Faithlife.WebRequests
 		readonly Uri m_requestUri;
 		readonly HttpStatusCode m_statusCode;
 		readonly HttpHeaders m_headers;
-		readonly HttpContent m_content;
+		readonly HttpContent? m_content;
 	}
 }

@@ -51,7 +51,7 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the JSON.
 		/// </summary>
 		/// <value>The JSON.</value>
-		public string Json
+		public string? Json
 		{
 			get { return m_json ?? (m_json = GenerateJson()); }
 		}
@@ -82,7 +82,7 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <returns>The JSON.</returns>
 		/// <remarks>Used by derived classes that generate the JSON just in time.</remarks>
-		protected virtual string GenerateJson()
+		protected virtual string? GenerateJson()
 		{
 			return null;
 		}
@@ -95,7 +95,7 @@ namespace Faithlife.WebRequests.Json
 			return stream;
 		}
 
-		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context)
 		{
 			// don't let StreamWriter close the stream
 			using (WrappingStream wrappingStream = new WrappingStream(stream, Ownership.None))
@@ -110,7 +110,7 @@ namespace Faithlife.WebRequests.Json
 			return Json != null;
 		}
 
-		string m_json;
+		string? m_json;
 	}
 
 	/// <summary>
@@ -161,6 +161,6 @@ namespace Faithlife.WebRequests.Json
 		}
 
 		readonly TValue m_value;
-		readonly JsonSettings m_outputSettings;
+		readonly JsonSettings? m_outputSettings;
 	}
 }

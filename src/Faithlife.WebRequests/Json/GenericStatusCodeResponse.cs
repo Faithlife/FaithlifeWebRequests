@@ -17,7 +17,7 @@ namespace Faithlife.WebRequests.Json
 		/// <summary>
 		/// Exposes the response headers.
 		/// </summary>
-		public HttpResponseHeaders Headers { get; private set; }
+		public HttpResponseHeaders? Headers { get; private set; }
 
 		/// <summary>
 		/// Sets Headers property.
@@ -26,7 +26,7 @@ namespace Faithlife.WebRequests.Json
 		protected override async Task OnResponseHandledCoreAsync(WebServiceResponseHandlerInfo info)
 		{
 			await base.OnResponseHandledCoreAsync(info).ConfigureAwait(false);
-			Headers = info.WebResponse.Headers;
+			Headers = info.WebResponse!.Headers;
 		}
 	}
 }

@@ -21,8 +21,9 @@ namespace Faithlife.WebRequests.Json
 		public static bool HasJson(this WebServiceResponse response)
 		{
 			bool hasJson = response.Content?.Headers.ContentLength > 0;
-			string contentType = response.Content?.Headers.ContentType?.ToString();
-			hasJson &= !string.IsNullOrEmpty(contentType) && contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
+			var contentType = response.Content?.Headers.ContentType?.ToString();
+			hasJson &= contentType is object && contentType.Length >= JsonWebServiceContent.JsonContentType.Length &&
+				contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
 
 			return hasJson;
 		}
@@ -38,7 +39,7 @@ namespace Faithlife.WebRequests.Json
 			if (!response.HasJson())
 				throw WebServiceResponseUtility.CreateWebServiceException(response, "The response does not have JSON content.");
 
-			return response.Content.ReadAsStringAsync();
+			return response.Content!.ReadAsStringAsync();
 		}
 
 		/// <summary>
@@ -64,12 +65,12 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>An object of the specified type.</returns>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static async Task<T> GetJsonAsAsync<T>(this WebServiceResponse response, JsonSettings jsonSettings)
+		public static async Task<T> GetJsonAsAsync<T>(this WebServiceResponse response, JsonSettings? jsonSettings)
 		{
 			try
 			{
 				// parse JSON to desired value
-				using (Stream responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+				using (Stream responseStream = await response.Content!.ReadAsStreamAsync().ConfigureAwait(false))
 				using (StreamReader reader = new StreamReader(responseStream))
 					return JsonUtility.FromJsonTextReader<T>(reader, jsonSettings);
 			}
