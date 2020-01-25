@@ -145,17 +145,17 @@ namespace Faithlife.WebRequests
 				if (message.Length == 0)
 					message.Append("Web service error.");
 
-				if (m_requestUri != null)
+				if (m_requestUri is object)
 					message.Append(" Request: {0} {1}".FormatInvariant(m_requestMethod ?? "GET", m_requestUri.AbsoluteUri));
 
-				if (m_responseStatusCode != null)
+				if (m_responseStatusCode is object)
 				{
 					message.Append(" (status ").Append(m_responseStatusCode.Value);
 
-					if (m_responseContentType != null)
+					if (m_responseContentType is object)
 						message.Append(", content type '").Append(m_responseContentType).Append("'");
 
-					if (m_responseContentLength != null)
+					if (m_responseContentLength is object)
 						message.Append(", content length ").AppendInvariant(m_responseContentLength.Value);
 
 					message.Append(")");
@@ -171,13 +171,13 @@ namespace Faithlife.WebRequests
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Don't want exceptions thrown from ToString.")]
 		public override string ToString()
 		{
-			if (m_responseContentPreview != null)
+			if (m_responseContentPreview is object)
 			{
 				StringBuilder result = new StringBuilder(base.ToString());
 				result.AppendLine().Append("content: ").Append(m_responseContentPreview);
 				return result.ToString();
 			}
-			else if (Response != null && Response.Content != null)
+			else if (Response?.Content is object)
 			{
 				StringBuilder result = new StringBuilder(base.ToString());
 

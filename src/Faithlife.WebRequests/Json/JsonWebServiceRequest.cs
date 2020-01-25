@@ -44,7 +44,7 @@ namespace Faithlife.WebRequests.Json
 			var content = proposedResponse.Content;
 
 			// check for content
-			if (content != null)
+			if (content is object)
 			{
 				// check content type
 				if (proposedResponse.HasJson())
@@ -111,7 +111,7 @@ namespace Faithlife.WebRequests.Json
 			HttpContent? content = proposedResponse.Content;
 
 			var json = ((JsonWebServiceResponse) proposedResponse).Json;
-			if (json != null)
+			if (json is object)
 			{
 				// don't allow missing JSON
 				if (json.Length == 0)

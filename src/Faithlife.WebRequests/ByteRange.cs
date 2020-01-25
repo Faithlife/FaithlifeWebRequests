@@ -16,7 +16,7 @@ namespace Faithlife.WebRequests
 			if (from < 0)
 				throw new ArgumentOutOfRangeException("from", from, "The parameter must be a non-negative number.");
 
-			m_from = from;
+			From = from;
 			m_to = null;
 		}
 
@@ -34,41 +34,25 @@ namespace Faithlife.WebRequests
 			if (from > to)
 				throw new ArgumentOutOfRangeException("from", "from cannot be greater than to.");
 
-			m_from = from;
+			From = from;
 			m_to = to;
 		}
 
 		/// <summary>
 		/// Start of the byte range.
 		/// </summary>
-		public long From
-		{
-			get { return m_from; }
-		}
+		public long From { get; }
 
 		/// <summary>
 		/// End of the byte range.
 		/// </summary>
-		public long To
-		{
-			get
-			{
-				if (m_to == null)
-					throw new InvalidOperationException("The byte range does not have an end value.");
-
-				return m_to.Value;
-			}
-		}
+		public long To => m_to ?? throw new InvalidOperationException("The byte range does not have an end value.");
 
 		/// <summary>
 		/// Whether or not the byte range has a definite end.
 		/// </summary>
-		public bool HasEnd
-		{
-			get { return m_to != null; }
-		}
+		public bool HasEnd => m_to.HasValue;
 
-		readonly long m_from;
 		readonly long? m_to;
 	}
 }

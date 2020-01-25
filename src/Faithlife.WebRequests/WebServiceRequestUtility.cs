@@ -58,7 +58,7 @@ namespace Faithlife.WebRequests
 		/// <returns>The request.</returns>
 		public static TWebServiceRequest WithAcceptedStatusCodes<TWebServiceRequest>(this TWebServiceRequest request, params HttpStatusCode[] acceptedStatusCodes) where TWebServiceRequest : WebServiceRequest
 		{
-			request.AcceptedStatusCodes = acceptedStatusCodes == null ? null : acceptedStatusCodes.AsReadOnly();
+			request.AcceptedStatusCodes = acceptedStatusCodes?.AsReadOnly();
 			return request;
 		}
 
@@ -260,10 +260,10 @@ namespace Faithlife.WebRequests
 		/// <returns>The request.</returns>
 		public static TWebServiceRequest WithAdditionalHeaders<TWebServiceRequest>(this TWebServiceRequest request, WebHeaderCollection headers) where TWebServiceRequest : WebServiceRequestBase
 		{
-			if (headers == null)
-				throw new ArgumentNullException("headers");
+			if (headers is null)
+				throw new ArgumentNullException(nameof(headers));
 
-			if (request.AdditionalHeaders == null || request.AdditionalHeaders.Count == 0)
+			if (request.AdditionalHeaders is null || request.AdditionalHeaders.Count == 0)
 			{
 				// replace the existing collection if it is null or empty
 				request.AdditionalHeaders = headers;

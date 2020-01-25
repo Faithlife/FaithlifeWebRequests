@@ -70,7 +70,7 @@ namespace Faithlife.WebRequests.Json
 			var resultProperty = GetProperty(responseType, statusCodeText);
 			object? content = null;
 
-			if (resultProperty != null && resultProperty.CanWrite)
+			if (resultProperty?.CanWrite ?? false)
 			{
 				Type resultPropertyType = resultProperty.PropertyType;
 				content = await ReadContentAsAsync(info, resultPropertyType).ConfigureAwait(false);
@@ -79,7 +79,7 @@ namespace Faithlife.WebRequests.Json
 			}
 
 			var statusCodeProperty = GetProperty(responseType, "StatusCode");
-			if (statusCodeProperty != null && statusCodeProperty.CanWrite)
+			if (statusCodeProperty?.CanWrite ?? false)
 			{
 				Type statusCodePropertyType = statusCodeProperty.PropertyType;
 				if (statusCodePropertyType == typeof(HttpStatusCode))
@@ -103,7 +103,7 @@ namespace Faithlife.WebRequests.Json
 				// remove hyphens before looking for property setter by name
 				string propertyName = headerName.Replace("-", "");
 				var headerProperty = GetProperty(responseType, propertyName);
-				if (headerProperty != null && headerProperty.CanWrite)
+				if (headerProperty?.CanWrite ?? false)
 				{
 					// get header text
 					string headerText = header.Value.Join("; ");
@@ -142,9 +142,9 @@ namespace Faithlife.WebRequests.Json
 
 		private static PropertyInfo? GetProperty(Type type, string propertyName)
 		{
-			var property = type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod != null && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+			var property = type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod is object && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
 
-			if (property != null && property.SetMethod == null)
+			if (property is object && property.SetMethod is null)
 				property = property.DeclaringType.GetRuntimeProperty(property.Name);
 
 			return property;
@@ -174,13 +174,13 @@ namespace Faithlife.WebRequests.Json
 				info.MarkContentAsRead();
 				content = await WebResponseStream.CreateAsync(webResponse).ConfigureAwait(false);
 			}
-			else if (webResponse.HasJson() || webResponse.Content.Headers.ContentType == null)
+			else if (webResponse.HasJson() || webResponse.Content.Headers.ContentType is null)
 			{
 				info.MarkContentAsRead();
 				content = await webResponse.GetJsonAsAsync(propertyType, JsonSettings).ConfigureAwait(false);
 			}
 
-			if (content == null)
+			if (content is null)
 				throw await CreateExceptionAsync(info, "Web response content cannot be read as {0}.".FormatInvariant(propertyType)).ConfigureAwait(false);
 
 			return content;

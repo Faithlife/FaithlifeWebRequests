@@ -16,11 +16,11 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="clientSettings">The client settings.</param>
 		protected JsonWebServiceClientBase(Uri baseUri, JsonWebServiceClientSettings clientSettings)
 		{
-			if (baseUri == null)
+			if (baseUri is null)
 				throw new ArgumentNullException("baseUri");
-			if (clientSettings == null)
+			if (clientSettings is null)
 				throw new ArgumentNullException("clientSettings");
-			if (clientSettings.RequestSettings != null && clientSettings.RequestSettingsCreator != null)
+			if (clientSettings.RequestSettings is object && clientSettings.RequestSettingsCreator is object)
 				throw new ArgumentException("Only one of RequestSettings and RequestSettingsCreator may be set.", "clientSettings");
 
 			m_baseUri = baseUri;
@@ -41,13 +41,7 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <param name="relativeUri">The relative URI.</param>
 		/// <returns>The web request URI.</returns>
-		protected Uri GetRequestUri(string relativeUri)
-		{
-			if (relativeUri == null)
-				throw new ArgumentNullException("relativeUri");
-
-			return DoGetRequestUri(relativeUri);
-		}
+		protected Uri GetRequestUri(string relativeUri) => DoGetRequestUri(relativeUri ?? throw new ArgumentNullException(nameof(relativeUri)));
 
 		/// <summary>
 		/// Creates a web request URI using the specified relative URI pattern and parameters.
@@ -56,15 +50,8 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The web request URI.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected Uri GetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
-		{
-			if (relativeUriPattern == null)
-				throw new ArgumentNullException("relativeUriPattern");
-			if (uriParameters == null)
-				throw new ArgumentNullException("uriParameters");
-
-			return DoGetRequestUri(relativeUriPattern, uriParameters);
-		}
+		protected Uri GetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters) =>
+			DoGetRequestUri(relativeUriPattern ?? throw new ArgumentNullException(nameof(relativeUriPattern)), uriParameters ?? throw new ArgumentNullException(nameof(uriParameters)));
 
 		/// <summary>
 		/// Creates a web request URI using the specified relative URI pattern and parameters.
@@ -73,13 +60,8 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="parameters">The URI parameters.</param>
 		/// <returns>The web request URI.</returns>
 		/// <remarks>Each pair of parameters represents a key and a value. See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected Uri GetRequestUri(string relativeUriPattern, params string[] parameters)
-		{
-			if (relativeUriPattern == null)
-				throw new ArgumentNullException("relativeUriPattern");
-
-			return DoGetRequestUri(relativeUriPattern, parameters);
-		}
+		protected Uri GetRequestUri(string relativeUriPattern, params string[] parameters) =>
+			DoGetRequestUri(relativeUriPattern ?? throw new ArgumentNullException(nameof(relativeUriPattern)), parameters);
 
 		/// <summary>
 		/// Creates a new AutoWebServiceRequest.
@@ -151,7 +133,7 @@ namespace Faithlife.WebRequests.Json
 			if (!string.IsNullOrEmpty(relativeUriPattern))
 				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern.TrimStart('/');
 
-			Uri uri = uriParameters != null ? UriUtility.FromPattern(uriText, uriParameters) : new Uri(uriText);
+			Uri uri = uriParameters is object ? UriUtility.FromPattern(uriText, uriParameters) : new Uri(uriText);
 
 			OnGetRequestUri(ref uri);
 
@@ -165,7 +147,7 @@ namespace Faithlife.WebRequests.Json
 			if (!string.IsNullOrEmpty(relativeUriPattern))
 				uriText = uriText.TrimEnd('/') + "/" + relativeUriPattern!.TrimStart('/');
 
-			Uri uri = parameters != null && parameters.Length > 0 ? UriUtility.FromPattern(uriText, parameters) : new Uri(uriText);
+			Uri uri = parameters?.Length > 0 ? UriUtility.FromPattern(uriText, parameters) : new Uri(uriText);
 
 			OnGetRequestUri(ref uri);
 
@@ -174,7 +156,7 @@ namespace Faithlife.WebRequests.Json
 
 		private AutoWebServiceRequest<TResponse> DoCreateRequest<TResponse>(Uri uri)
 		{
-			var requestSettings = m_clientSettings.RequestSettings ?? (m_clientSettings.RequestSettingsCreator != null ? m_clientSettings.RequestSettingsCreator() : null);
+			var requestSettings = m_clientSettings.RequestSettings ?? m_clientSettings.RequestSettingsCreator?.Invoke();
 
 			AutoWebServiceRequest<TResponse> request = new AutoWebServiceRequest<TResponse>(uri) { JsonSettings = m_clientSettings.JsonSettings }.WithSettings(requestSettings);
 

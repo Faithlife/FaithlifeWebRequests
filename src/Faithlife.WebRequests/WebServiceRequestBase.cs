@@ -20,8 +20,8 @@ namespace Faithlife.WebRequests
 		/// <param name="uri">The URI.</param>
 		protected WebServiceRequestBase(Uri uri)
 		{
-			if (uri == null)
-				throw new ArgumentNullException("uri");
+			if (uri is null)
+				throw new ArgumentNullException(nameof(uri));
 			if (uri.Scheme != "http" && uri.Scheme != "https")
 				throw new ArgumentException("Expected URI with http or https scheme; received {0}".FormatInvariant(uri.Scheme));
 
@@ -155,7 +155,7 @@ namespace Faithlife.WebRequests
 			HttpClient client;
 			HttpRequestMessage webRequest = CreateWebRequest(out client);
 			var requestContent = GetRequestContent(webRequest);
-			if (requestContent != null)
+			if (requestContent is object)
 				webRequest.Content = requestContent;
 			using (Settings?.StartTrace?.Invoke(webRequest))
 			{
@@ -194,7 +194,7 @@ namespace Faithlife.WebRequests
 		private HttpClientHandler CreateHttpClientHandler(WebServiceRequestSettings settings)
 		{
 			var handler = new HttpClientHandler();
-			if (settings.CookieManager != null)
+			if (settings.CookieManager is object)
 				handler.CookieContainer = settings.CookieManager.CookieContainer;
 
 			handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
@@ -207,7 +207,7 @@ namespace Faithlife.WebRequests
 
 		private HttpClient CreateHttpClient(WebServiceRequestSettings settings)
 		{
-			if (settings.GetHttpClient != null)
+			if (settings.GetHttpClient is object)
 				return settings.GetHttpClient();
 
 			var client = new HttpClient(CreateHttpClientHandler(settings));
@@ -220,10 +220,10 @@ namespace Faithlife.WebRequests
 		{
 			var request = new HttpRequestMessage(new HttpMethod(Method ?? "GET"), RequestUri);
 
-			if (settings.DefaultHeaders != null)
+			if (settings.DefaultHeaders is object)
 				request.Headers.AddWebHeaders(settings.DefaultHeaders);
 
-			if (AdditionalHeaders != null)
+			if (AdditionalHeaders is object)
 				request.Headers.AddWebHeaders(AdditionalHeaders);
 
 			if (!string.IsNullOrEmpty(Accept))
@@ -242,23 +242,23 @@ namespace Faithlife.WebRequests
 			if (settings.DisableKeepAlive)
 				request.Headers.ConnectionClose = true;
 
-			if (settings.Host != null)
+			if (settings.Host is object)
 				request.Headers.Host = settings.Host;
 
 			var authorizationHeader = settings.AuthorizationHeader ?? settings.AuthorizationHeaderCreator?.Invoke(new WebServiceRequestInfo(request));
-			if (authorizationHeader != null)
+			if (authorizationHeader is object)
 				request.Headers.Authorization = AuthenticationHeaderValue.Parse(authorizationHeader);
 
-			if (IfMatch != null)
+			if (IfMatch is object)
 				request.Headers.IfMatch.ParseAdd(IfMatch);
 
 			if (IfModifiedSince.HasValue)
 				request.Headers.IfModifiedSince = IfModifiedSince.Value;
 
-			if (IfNoneMatch != null)
+			if (IfNoneMatch is object)
 				request.Headers.IfNoneMatch.ParseAdd(IfNoneMatch);
 
-			if (Range != null)
+			if (Range is object)
 				request.Headers.Range = new RangeHeaderValue(Range.From, Range.HasEnd ? Range.To : default(long?));
 
 			OnWebRequestCreated(request);
@@ -277,7 +277,7 @@ namespace Faithlife.WebRequests
 			var requestContent = Content;
 
 			// IIS doesn't like a POST/PUT with implicitly empty content (TODO: confirm, case 34924)
-			if (requestContent == null && (webRequest.Method == HttpMethod.Post || webRequest.Method == HttpMethod.Put))
+			if (requestContent is null && (webRequest.Method == HttpMethod.Post || webRequest.Method == HttpMethod.Put))
 				requestContent = new StreamContent(Stream.Null) { Headers = { ContentType = new MediaTypeHeaderValue(c_octetStreamContentType) } };
 
 			return requestContent;
@@ -322,9 +322,9 @@ namespace Faithlife.WebRequests
 
 		private void SetCookie(HttpResponseHeaders headers, Uri requestUri)
 		{
-			if (headers == null)
+			if (headers is null)
 				return;
-			if (Settings == null || Settings.CookieManager == null)
+			if (Settings is null || Settings.CookieManager is null)
 				return;
 
 			if (headers.TryGetValues("Set-Cookie", out var values))

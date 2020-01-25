@@ -20,7 +20,7 @@ namespace Faithlife.WebRequests.Json
 		{
 			TProperty propertyValue = getProperty(response);
 
-			if (propertyValue == null || EqualityComparer<TProperty>.Default.Equals(propertyValue, default!))
+			if (propertyValue is null || EqualityComparer<TProperty>.Default.Equals(propertyValue, default!))
 				throw response.CreateException("Unexpected response encountered.");
 
 			return propertyValue;

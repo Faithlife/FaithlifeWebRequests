@@ -105,9 +105,9 @@ namespace Faithlife.WebRequests.Json
 
 		protected override bool TryComputeLength(out long length)
 		{
-			length = Json != null ? Encoding.UTF8.GetByteCount(Json) : 0;
+			length = Json is object ? Encoding.UTF8.GetByteCount(Json) : 0;
 
-			return Json != null;
+			return Json is object;
 		}
 
 		string? m_json;

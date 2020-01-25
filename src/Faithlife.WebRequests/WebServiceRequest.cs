@@ -107,7 +107,7 @@ namespace Faithlife.WebRequests
 
 			WebServiceResponse response = new WebServiceResponse(this, statusCode, headers, responseContent);
 
-			if (AcceptedStatusCodes != null && !AcceptedStatusCodes.Contains(statusCode))
+			if (AcceptedStatusCodes is object && !AcceptedStatusCodes.Contains(statusCode))
 				throw WebServiceResponseUtility.CreateWebServiceException(response);
 
 			info.Response = await CreateResponseAsync(response).ConfigureAwait(false);
