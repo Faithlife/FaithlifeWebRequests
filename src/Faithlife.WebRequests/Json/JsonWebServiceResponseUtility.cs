@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -51,7 +52,8 @@ namespace Faithlife.WebRequests.Json
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this WebServiceResponse response) => response.GetJsonAsAsync<T>(null);
+		[return: MaybeNull]
+		public static Task<T> GetJsonAsAsync<T>(this WebServiceResponse response) => response.GetJsonAsAsync<T>(null)!;
 
 		/// <summary>
 		/// Parses the JSON into an object of the specified type.
@@ -62,6 +64,7 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>An object of the specified type.</returns>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
+		[return: MaybeNull]
 		public static async Task<T> GetJsonAsAsync<T>(this WebServiceResponse response, JsonSettings? jsonSettings)
 		{
 			try
@@ -69,7 +72,7 @@ namespace Faithlife.WebRequests.Json
 				// parse JSON to desired value
 				using var responseStream = await response.Content!.ReadAsStreamAsync().ConfigureAwait(false);
 				using var reader = new StreamReader(responseStream);
-				return JsonUtility.FromJsonTextReader<T>(reader, jsonSettings);
+				return JsonUtility.FromJsonTextReader<T>(reader, jsonSettings)!;
 			}
 			catch (JsonReaderException x)
 			{

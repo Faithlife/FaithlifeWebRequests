@@ -47,7 +47,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The web request URI.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected Uri GetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters) =>
+		protected Uri GetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters) =>
 			DoGetRequestUri(relativeUriPattern ?? throw new ArgumentNullException(nameof(relativeUriPattern)), uriParameters ?? throw new ArgumentNullException(nameof(uriParameters)));
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="uriParameters">The URI parameters.</param>
 		/// <returns>The new AutoWebServiceRequest.</returns>
 		/// <remarks>See UriUtility.FromPattern for acceptable parameter values.</remarks>
-		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters) =>
+		protected AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters) =>
 			DoCreateRequest<TResponse>(GetRequestUri(relativeUriPattern, uriParameters));
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace Faithlife.WebRequests.Json
 		{
 		}
 
-		private Uri DoGetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
+		private Uri DoGetRequestUri(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters)
 		{
 			string uriText = m_baseUri.AbsoluteUri;
 

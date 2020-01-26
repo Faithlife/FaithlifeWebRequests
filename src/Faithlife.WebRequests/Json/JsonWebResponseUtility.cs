@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -22,7 +23,7 @@ namespace Faithlife.WebRequests.Json
 		public static bool HasJson(this HttpResponseMessage response)
 		{
 			// Allow null ContentLength
-			bool hasJson = response.Content?.Headers.ContentLength != 0;
+			var hasJson = response.Content?.Headers.ContentLength != 0;
 			var contentType = response.Content?.Headers.ContentType?.ToString();
 			hasJson &= contentType is object && contentType.Length >= JsonWebServiceContent.JsonContentType.Length &&
 				contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
@@ -53,7 +54,7 @@ namespace Faithlife.WebRequests.Json
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
-		public static Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type) => response.GetJsonAsAsync(type, null);
+		public static Task<object?> GetJsonAsAsync(this HttpResponseMessage response, Type type) => response.GetJsonAsAsync(type, null);
 
 		/// <summary>
 		/// Parses the JSON into an object of the specified type.
@@ -65,7 +66,7 @@ namespace Faithlife.WebRequests.Json
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
-		public static async Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type, JsonSettings? jsonSettings)
+		public static async Task<object?> GetJsonAsAsync(this HttpResponseMessage response, Type type, JsonSettings? jsonSettings)
 		{
 			try
 			{
@@ -101,7 +102,8 @@ namespace Faithlife.WebRequests.Json
 		/// <remarks>Use JToken as the type to parse arbitrary JSON.</remarks>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response) => response.GetJsonAsAsync<T>(null);
+		[return: MaybeNull]
+		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response) => response.GetJsonAsAsync<T>(null)!;
 
 		/// <summary>
 		/// Parses the JSON into an object of the specified type.
@@ -112,7 +114,11 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>An object of the specified type.</returns>
 		/// <exception cref="WebServiceException">The response content does not use the JSON content type, or the content is empty,
 		/// or the text is not valid JSON, or the JSON cannot be deserialized into the specified type.</exception>
-		public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings? jsonSettings) =>
-			response.GetJsonAsAsync(typeof(T), jsonSettings).ContinueWith(x => (T) x.Result);
+		[return: MaybeNull]
+		public static async Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, JsonSettings? jsonSettings)
+		{
+			var result = await response.GetJsonAsAsync(typeof(T), jsonSettings).ConfigureAwait(false);
+			return (T) result!;
+		}
 	}
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -27,7 +28,7 @@ namespace Faithlife.WebRequests.Json
 		/// <typeparam name="TValue">The type of the value.</typeparam>
 		/// <param name="value">The value.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value) =>
+		public static JsonWebServiceContent<TValue> FromValue<TValue>([AllowNull] TValue value) =>
 			new JsonWebServiceContent<TValue>(value);
 
 		/// <summary>
@@ -37,7 +38,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="value">The value.</param>
 		/// <param name="settings">The settings.</param>
 		/// <returns>The new instance.</returns>
-		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings settings) =>
+		public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings? settings) =>
 			new JsonWebServiceContent<TValue>(value, settings);
 
 		/// <summary>
@@ -112,6 +113,7 @@ namespace Faithlife.WebRequests.Json
 		/// Gets the value.
 		/// </summary>
 		/// <value>The value.</value>
+		[AllowNull]
 		public TValue Value { get; }
 
 		/// <summary>
@@ -119,7 +121,7 @@ namespace Faithlife.WebRequests.Json
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <remarks>JsonUtility.ToJson is called just in time when the JSON content is needed.</remarks>
-		protected internal JsonWebServiceContent(TValue value)
+		protected internal JsonWebServiceContent([AllowNull] TValue value)
 		{
 			Value = value;
 			Headers.ContentType = new MediaTypeHeaderValue(JsonContentType);
@@ -131,7 +133,7 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="value">The content.</param>
 		/// <param name="settings">The settings.</param>
 		/// <remarks>JsonUtility.ToJson is called just in time when the JSON content is needed.</remarks>
-		protected internal JsonWebServiceContent(TValue value, JsonSettings settings)
+		protected internal JsonWebServiceContent(TValue value, JsonSettings? settings)
 		{
 			Value = value;
 			m_outputSettings = settings;

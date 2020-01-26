@@ -14,7 +14,7 @@ namespace Faithlife.WebRequests.Tests
 		{
 			var client = CreateMockClient();
 
-			var parameters = new Dictionary<string, object>();
+			var parameters = new Dictionary<string, object?>();
 			parameters.Add("id", "1234");
 			parameters.Add("test", "1");
 
@@ -48,7 +48,7 @@ namespace Faithlife.WebRequests.Tests
 		{
 		}
 
-		public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object>> uriParameters)
+		public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters)
 		{
 			return base.CreateRequest<TResponse>(relativeUriPattern, uriParameters);
 		}

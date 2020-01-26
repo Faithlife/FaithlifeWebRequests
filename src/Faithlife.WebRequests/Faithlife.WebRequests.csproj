@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net472;netstandard2.1</TargetFrameworks>
     <Description>Strongly-typed web service request client library</Description>
     <PackageTags></PackageTags>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Faithlife.Json" Version="0.5.0" />
-    <PackageReference Include="Faithlife.Utility" Version="0.8.0" />
+    <PackageReference Include="Faithlife.Json" Version="0.7.0-beta1" />
+    <PackageReference Include="Faithlife.Utility" Version="0.9.0-beta1" />
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <Reference Include="System.Net.Http" Condition="'$(TargetFramework)' == 'net472'" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" Condition=" '$(OS)' != 'Windows_NT' AND '$(TargetFramework)' == 'net472' "/>
+    <PackageReference Include="Nullable" Version="1.2.0" Condition=" '$(TargetFramework)' != 'netstandard2.1' " IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" PrivateAssets="all" />
   </ItemGroup>
 </Project>
