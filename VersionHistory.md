@@ -8,6 +8,12 @@ Prefix the description of the change with `[major]`, `[minor]`, or `[patch]` in 
 
 ## Released
 
+### 0.9.0 Beta 1
+
+* Add `netstandard2.1` target framework.
+* Add C# 8 nullable annotations.
+* Update dependencies to Faithlife.Utility 0.9.0-beta1, Faithlife.Json 0.7.0-beta1
+
 ### 0.8.0
 
 * Wrap more exceptions thrown from `WebServiceRequestBase.GetResponseAsync` in `WebServiceException`.

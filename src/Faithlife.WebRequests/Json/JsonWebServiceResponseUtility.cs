@@ -1,10 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
 using Newtonsoft.Json;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Faithlife.WebRequests.Json
 {

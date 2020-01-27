@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -6,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Faithlife.Utility;
 using Faithlife.Json;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Faithlife.WebRequests.Json
 {
