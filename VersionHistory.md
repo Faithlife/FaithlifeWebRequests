@@ -1,10 +1,10 @@
 # Version History
 
-### 0.9.0 Beta 1
+### 0.9.0
 
 * Add `netstandard2.1` target framework.
 * Add C# 8 nullable annotations.
-* Update dependencies to Faithlife.Utility 0.9.0-beta1, Faithlife.Json 0.7.0-beta1
+* Update dependencies to Faithlife.Utility 0.9.0, Faithlife.Json 0.7.0.
 
 ### 0.8.0
 
