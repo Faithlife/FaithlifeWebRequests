@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <ItemGroup>                   
+  <ItemGroup>
     <InternalsVisibleTo Include="Faithlife.WebRequests.Tests" />
     <PackageReference Include="Faithlife.Json" Version="0.7.0" />
     <PackageReference Include="Faithlife.Utility" Version="0.9.0" />
