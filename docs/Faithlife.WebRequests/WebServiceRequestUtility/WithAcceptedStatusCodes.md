@@ -1,22 +1,12 @@
 # WebServiceRequestUtility.WithAcceptedStatusCodes&lt;TWebServiceRequest&gt; method (1 of 2)
 
-Sets the ErrorStrategy of the WebServiceRequest.
+Sets the AcceptedStatusCodes of the WebServiceRequest.
 
 ```csharp
 public static TWebServiceRequest WithAcceptedStatusCodes<TWebServiceRequest>(
     this TWebServiceRequest request, params HttpStatusCode[] acceptedStatusCodes)
     where TWebServiceRequest : WebServiceRequest
 ```
-
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| acceptedStatusCodes | The accepted status codes. |
-
-## Return Value
-
-The request.
 
 ## See Also
 
@@ -28,23 +18,13 @@ The request.
 
 # WebServiceRequestUtility.WithAcceptedStatusCodes&lt;TWebServiceRequest&gt; method (2 of 2)
 
-Sets the ErrorStrategy of the WebServiceRequest.
+Sets the AcceptedStatusCodes of the WebServiceRequest.
 
 ```csharp
 public static TWebServiceRequest WithAcceptedStatusCodes<TWebServiceRequest>(
-    this TWebServiceRequest request, IEnumerable<HttpStatusCode> acceptedStatusCodes)
+    this TWebServiceRequest request, IEnumerable<HttpStatusCode>? acceptedStatusCodes)
     where TWebServiceRequest : WebServiceRequest
 ```
-
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| acceptedStatusCodes | The accepted status codes. |
-
-## Return Value
-
-The request.
 
 ## See Also
 

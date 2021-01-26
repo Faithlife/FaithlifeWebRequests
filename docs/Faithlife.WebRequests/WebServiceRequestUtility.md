@@ -11,7 +11,7 @@ public static class WebServiceRequestUtility
 | name | description |
 | --- | --- |
 | static [WithAccept&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithAccept.md)(…) | Sets the Accept of the WebServiceRequest. |
-| static [WithAcceptedStatusCodes&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithAcceptedStatusCodes.md)(…) | Sets the ErrorStrategy of the WebServiceRequest. (2 methods) |
+| static [WithAcceptedStatusCodes&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithAcceptedStatusCodes.md)(…) | Sets the AcceptedStatusCodes of the WebServiceRequest. (2 methods) |
 | static [WithAdditionalHeaders&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithAdditionalHeaders.md)(…) | Adds to the Additional Headers of the WebServiceRequest. |
 | static [WithAuthorizationHeader&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithAuthorizationHeader.md)(…) | Add authorization header to [`WebServiceRequestBase`](WebServiceRequestBase.md) |
 | static [WithContent&lt;TWebServiceRequest&gt;](WebServiceRequestUtility/WithContent.md)(…) | Sets the Content of the WebServiceRequest. |

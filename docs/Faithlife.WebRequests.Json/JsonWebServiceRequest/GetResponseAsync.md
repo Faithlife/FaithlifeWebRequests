@@ -3,8 +3,7 @@
 Gets the response asynchronously.
 
 ```csharp
-public Task<JsonWebServiceResponse> GetResponseAsync(
-    CancellationToken cancellationToken = default(CancellationToken))
+public Task<JsonWebServiceResponse> GetResponseAsync(CancellationToken cancellationToken = default)
 ```
 
 ## See Also

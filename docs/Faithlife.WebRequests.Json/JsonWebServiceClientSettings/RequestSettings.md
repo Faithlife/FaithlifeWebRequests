@@ -3,7 +3,7 @@
 Gets or sets the request settings.
 
 ```csharp
-public WebServiceRequestSettings RequestSettings { get; set; }
+public WebServiceRequestSettings? RequestSettings { get; set; }
 ```
 
 ## Property Value

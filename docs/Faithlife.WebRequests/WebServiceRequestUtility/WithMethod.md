@@ -8,16 +8,6 @@ public static TWebServiceRequest WithMethod<TWebServiceRequest>(this TWebService
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| method | The method. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)

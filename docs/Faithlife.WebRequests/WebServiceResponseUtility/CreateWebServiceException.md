@@ -4,7 +4,7 @@ Creates an exception for the specified response.
 
 ```csharp
 public static WebServiceException CreateWebServiceException(WebServiceResponse response, 
-    string message = null, Exception innerException = null)
+    string? message = null, Exception? innerException = null)
 ```
 
 | parameter | description |

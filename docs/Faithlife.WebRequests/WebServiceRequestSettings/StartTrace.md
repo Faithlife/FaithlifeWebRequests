@@ -3,7 +3,7 @@
 A Func that, if set, is called to start a trace when a web request begins; its return value will be disposed when the web request ends.
 
 ```csharp
-public Func<HttpRequestMessage, IDisposable> StartTrace { get; set; }
+public Func<HttpRequestMessage, IDisposable>? StartTrace { get; set; }
 ```
 
 ## See Also

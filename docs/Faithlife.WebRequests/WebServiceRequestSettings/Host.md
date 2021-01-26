@@ -3,7 +3,7 @@
 Gets or sets the host.
 
 ```csharp
-public string Host { get; set; }
+public string? Host { get; set; }
 ```
 
 ## Property Value

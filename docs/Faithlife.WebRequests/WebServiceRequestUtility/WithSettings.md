@@ -4,19 +4,9 @@ Sets the Settings of the WebServiceRequest.
 
 ```csharp
 public static TWebServiceRequest WithSettings<TWebServiceRequest>(this TWebServiceRequest request, 
-    WebServiceRequestSettings settings)
+    WebServiceRequestSettings? settings)
     where TWebServiceRequest : WebServiceRequestBase
 ```
-
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| settings | The settings. |
-
-## Return Value
-
-The request.
 
 ## See Also
 

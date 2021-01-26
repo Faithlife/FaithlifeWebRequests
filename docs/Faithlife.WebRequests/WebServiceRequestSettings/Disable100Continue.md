@@ -6,10 +6,6 @@ True if 100-Continue behavior should be disabled.
 public bool Disable100Continue { get; set; }
 ```
 
-## Property Value
-
-True if 100-Continue behavior should be disabled.
-
 ## Remarks
 
 May not be supported on all platforms.

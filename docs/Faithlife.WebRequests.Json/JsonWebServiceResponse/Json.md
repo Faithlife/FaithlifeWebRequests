@@ -3,7 +3,7 @@
 Gets the value, if any.
 
 ```csharp
-public string Json { get; }
+public string? Json { get; }
 ```
 
 ## Property Value

@@ -3,7 +3,7 @@
 Gets or sets the additional headers.
 
 ```csharp
-public WebHeaderCollection AdditionalHeaders { get; set; }
+public WebHeaderCollection? AdditionalHeaders { get; set; }
 ```
 
 ## Property Value

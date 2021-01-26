@@ -3,7 +3,7 @@
 Gets or sets the cookie manager. If [`GetHttpClient`](GetHttpClient.md) is set, then this property is ignored.
 
 ```csharp
-public CookieManager CookieManager { get; set; }
+public CookieManager? CookieManager { get; set; }
 ```
 
 ## Property Value

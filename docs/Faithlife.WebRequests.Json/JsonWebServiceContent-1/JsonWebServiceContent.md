@@ -26,7 +26,7 @@ JsonUtility.ToJson is called just in time when the JSON content is needed.
 Initializes a new instance of the JsonWebServiceContent class.
 
 ```csharp
-protected internal JsonWebServiceContent(TValue value, JsonSettings settings)
+protected internal JsonWebServiceContent(TValue value, JsonSettings? settings)
 ```
 
 | parameter | description |

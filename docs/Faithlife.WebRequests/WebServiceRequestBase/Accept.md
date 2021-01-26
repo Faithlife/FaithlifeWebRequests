@@ -3,7 +3,7 @@
 Gets or sets the value of the Accept HTTP header.
 
 ```csharp
-public string Accept { get; set; }
+public string? Accept { get; set; }
 ```
 
 ## Property Value

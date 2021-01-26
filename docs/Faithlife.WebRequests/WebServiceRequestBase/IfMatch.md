@@ -3,7 +3,7 @@
 Gets or sets the If-Match header.
 
 ```csharp
-public string IfMatch { get; set; }
+public string? IfMatch { get; set; }
 ```
 
 ## Property Value

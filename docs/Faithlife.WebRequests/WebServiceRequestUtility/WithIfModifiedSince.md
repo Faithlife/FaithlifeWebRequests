@@ -8,16 +8,6 @@ public static TWebServiceRequest WithIfModifiedSince<TWebServiceRequest>(
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| ifModifiedSince | The ifModifiedSince. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)

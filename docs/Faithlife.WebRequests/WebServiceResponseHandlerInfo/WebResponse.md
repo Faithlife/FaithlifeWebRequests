@@ -3,7 +3,7 @@
 Gets the web response.
 
 ```csharp
-public HttpResponseMessage WebResponse { get; }
+public HttpResponseMessage? WebResponse { get; }
 ```
 
 ## Property Value

@@ -4,15 +4,15 @@ Creates an exception for the specified response.
 
 ```csharp
 public static WebServiceException CreateWebServiceException(HttpResponseMessage response, 
-    string message = null, Exception innerException = null, string contentPreview = null)
+    string? message = null, Exception? innerException = null, string? contentPreview = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | response | The response. |
 | message | The message. |
-| contentPreview | The content preview. |
 | innerException | The inner exception. |
+| contentPreview | The content preview. |
 
 ## Return Value
 

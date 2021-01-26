@@ -8,16 +8,6 @@ public static TWebServiceRequest WithTimeout<TWebServiceRequest>(this TWebServic
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| timeout | The timeout. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)

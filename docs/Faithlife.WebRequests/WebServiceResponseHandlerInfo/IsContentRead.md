@@ -6,10 +6,6 @@ True if the content has been read from the web response.
 public bool IsContentRead { get; }
 ```
 
-## Property Value
-
-True if the content has been read from the web response.
-
 ## See Also
 
 * class [WebServiceResponseHandlerInfo](../WebServiceResponseHandlerInfo.md)

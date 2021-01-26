@@ -3,7 +3,7 @@
 Gets or sets the default headers.
 
 ```csharp
-public WebHeaderCollection DefaultHeaders { get; set; }
+public WebHeaderCollection? DefaultHeaders { get; set; }
 ```
 
 ## Property Value

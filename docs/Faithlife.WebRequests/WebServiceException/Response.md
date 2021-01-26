@@ -3,7 +3,7 @@
 Gets the response.
 
 ```csharp
-public WebServiceResponse Response { get; }
+public WebServiceResponse? Response { get; }
 ```
 
 ## Property Value

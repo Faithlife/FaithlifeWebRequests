@@ -3,7 +3,7 @@
 Creates an exception for the response.
 
 ```csharp
-public WebServiceException CreateException(string message = null, Exception innerException = null)
+public WebServiceException CreateException(string? message = null, Exception? innerException = null)
 ```
 
 ## Return Value

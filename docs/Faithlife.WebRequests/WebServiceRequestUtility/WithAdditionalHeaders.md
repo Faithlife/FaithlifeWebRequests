@@ -8,16 +8,6 @@ public static TWebServiceRequest WithAdditionalHeaders<TWebServiceRequest>(
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| headers | The additional headers. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)

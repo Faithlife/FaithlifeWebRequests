@@ -28,7 +28,7 @@ The new instance.
 Creates a new instance of the JsonWebServiceContent class from a value to be serialized.
 
 ```csharp
-public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings settings)
+public static JsonWebServiceContent<TValue> FromValue<TValue>(TValue value, JsonSettings? settings)
 ```
 
 | parameter | description |

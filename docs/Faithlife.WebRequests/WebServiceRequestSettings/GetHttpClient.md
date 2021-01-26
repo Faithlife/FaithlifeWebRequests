@@ -3,7 +3,7 @@
 A delegate that, if set, is called to retrieve an HttpClient. If this property is set, then the consumer is responsible for the entire lifetime of the HttpClient, including disposal.
 
 ```csharp
-public Func<HttpClient> GetHttpClient { get; set; }
+public Func<HttpClient>? GetHttpClient { get; set; }
 ```
 
 ## Remarks

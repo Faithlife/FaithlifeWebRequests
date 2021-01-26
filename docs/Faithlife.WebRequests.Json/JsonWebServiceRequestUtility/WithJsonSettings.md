@@ -1,21 +1,11 @@
 # JsonWebServiceRequestUtility.WithJsonSettings&lt;TResponseContent&gt; method
 
-Sets the InputSettings of the WebServiceRequest.
+Sets the JsonSettings of the WebServiceRequest.
 
 ```csharp
 public static JsonWebServiceRequest<TResponseContent> WithJsonSettings<TResponseContent>(
     this JsonWebServiceRequest<TResponseContent> request, JsonSettings settings)
 ```
-
-| parameter | description |
-| --- | --- |
-| TResponseContent | The type of the response content. |
-| request | The request. |
-| settings | The settings. |
-
-## Return Value
-
-The request.
 
 ## See Also
 

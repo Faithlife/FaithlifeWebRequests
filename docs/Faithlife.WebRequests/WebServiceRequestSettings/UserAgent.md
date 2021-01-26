@@ -3,7 +3,7 @@
 Gets or sets the user agent.
 
 ```csharp
-public string UserAgent { get; set; }
+public string? UserAgent { get; set; }
 ```
 
 ## Property Value

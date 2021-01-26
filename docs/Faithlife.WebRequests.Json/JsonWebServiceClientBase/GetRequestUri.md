@@ -46,7 +46,7 @@ Creates a web request URI using the specified relative URI pattern and parameter
 
 ```csharp
 protected Uri GetRequestUri(string relativeUriPattern, 
-    IEnumerable<KeyValuePair<string, object>> uriParameters)
+    IEnumerable<KeyValuePair<string, object?>> uriParameters)
 ```
 
 | parameter | description |

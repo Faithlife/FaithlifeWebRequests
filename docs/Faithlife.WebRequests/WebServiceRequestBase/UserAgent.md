@@ -3,7 +3,7 @@
 Gets or sets the value of the User-agent HTTP header.
 
 ```csharp
-public string UserAgent { get; set; }
+public string? UserAgent { get; set; }
 ```
 
 ## Property Value

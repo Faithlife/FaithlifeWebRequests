@@ -3,7 +3,7 @@
 Gets or sets the request settings creator.
 
 ```csharp
-public Func<WebServiceRequestSettings> RequestSettingsCreator { get; set; }
+public Func<WebServiceRequestSettings>? RequestSettingsCreator { get; set; }
 ```
 
 ## Property Value

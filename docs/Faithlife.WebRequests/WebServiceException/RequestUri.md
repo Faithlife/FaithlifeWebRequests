@@ -3,7 +3,7 @@
 Gets the request URI.
 
 ```csharp
-public Uri RequestUri { get; }
+public Uri? RequestUri { get; }
 ```
 
 ## Property Value

@@ -3,7 +3,7 @@
 Gets the response content preview.
 
 ```csharp
-public string ResponseContentPreview { get; }
+public string? ResponseContentPreview { get; }
 ```
 
 ## Property Value

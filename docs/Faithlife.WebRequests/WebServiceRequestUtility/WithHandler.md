@@ -8,16 +8,6 @@ public static WebServiceRequest<TWebServiceResponse> WithHandler<TWebServiceResp
     Func<WebServiceResponseHandlerInfo<TWebServiceResponse>, Task<bool>> handler)
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceResponse | The type of the web service response. |
-| request | The request. |
-| handler | The handler. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequest&lt;TResponse&gt;](../WebServiceRequest-1.md)

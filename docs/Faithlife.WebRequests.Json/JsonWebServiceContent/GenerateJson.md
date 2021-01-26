@@ -3,7 +3,7 @@
 Generates the JSON.
 
 ```csharp
-protected virtual string GenerateJson()
+protected virtual string? GenerateJson()
 ```
 
 ## Return Value

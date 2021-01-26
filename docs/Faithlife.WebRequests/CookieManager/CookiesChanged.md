@@ -3,7 +3,7 @@
 Raised when cookies are changed.
 
 ```csharp
-public event EventHandler CookiesChanged;
+public event EventHandler? CookiesChanged;
 ```
 
 ## See Also

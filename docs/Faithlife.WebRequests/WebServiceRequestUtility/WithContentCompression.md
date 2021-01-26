@@ -8,15 +8,6 @@ public static TWebServiceRequest WithContentCompression<TWebServiceRequest>(
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)
@@ -34,16 +25,6 @@ public static TWebServiceRequest WithContentCompression<TWebServiceRequest>(
     this TWebServiceRequest request, bool isEnabled)
     where TWebServiceRequest : WebServiceRequestBase
 ```
-
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| isEnabled | True if content compression should be allowed.. |
-
-## Return Value
-
-The request.
 
 ## See Also
 

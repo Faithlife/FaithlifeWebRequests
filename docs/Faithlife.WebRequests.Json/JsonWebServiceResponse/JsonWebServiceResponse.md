@@ -4,7 +4,7 @@ Initializes a new instance of the [`JsonWebServiceResponse`](../JsonWebServiceRe
 
 ```csharp
 public JsonWebServiceResponse(WebServiceRequest request, HttpStatusCode statusCode, 
-    HttpHeaders headers, HttpContent content)
+    HttpHeaders headers, HttpContent? content)
 ```
 
 | parameter | description |

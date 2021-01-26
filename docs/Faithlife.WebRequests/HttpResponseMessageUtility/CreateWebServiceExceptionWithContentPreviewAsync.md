@@ -4,7 +4,7 @@ Creates an exception for the specified response, reading a content preview from 
 
 ```csharp
 public static Task<WebServiceException> CreateWebServiceExceptionWithContentPreviewAsync(
-    HttpResponseMessage response, string message = null, Exception innerException = null)
+    HttpResponseMessage response, string? message = null, Exception? innerException = null)
 ```
 
 | parameter | description |

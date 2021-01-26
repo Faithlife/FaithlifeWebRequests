@@ -8,16 +8,6 @@ public static TWebServiceRequest WithIfMatch<TWebServiceRequest>(this TWebServic
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| request | The request. |
-| eTag | The ETag. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../WebServiceRequestBase.md)

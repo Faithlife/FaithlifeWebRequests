@@ -3,7 +3,7 @@
 Gets the request method.
 
 ```csharp
-public string RequestMethod { get; }
+public string? RequestMethod { get; }
 ```
 
 ## Property Value

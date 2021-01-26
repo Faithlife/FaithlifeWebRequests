@@ -3,7 +3,7 @@
 Gets the JSON.
 
 ```csharp
-public string Json { get; }
+public string? Json { get; }
 ```
 
 ## Property Value

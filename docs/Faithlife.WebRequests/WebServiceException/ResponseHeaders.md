@@ -3,7 +3,7 @@
 Gets the response headers.
 
 ```csharp
-public HttpHeaders ResponseHeaders { get; }
+public HttpHeaders? ResponseHeaders { get; }
 ```
 
 ## Property Value

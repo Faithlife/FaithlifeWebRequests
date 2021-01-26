@@ -3,7 +3,7 @@
 Reads a content preview from the response.
 
 ```csharp
-public static Task<string> ReadContentPreviewAsync(HttpResponseMessage response)
+public static Task<string?> ReadContentPreviewAsync(HttpResponseMessage response)
 ```
 
 | parameter | description |

@@ -3,7 +3,7 @@
 Gets or sets the authorization header.
 
 ```csharp
-public string AuthorizationHeader { get; set; }
+public string? AuthorizationHeader { get; set; }
 ```
 
 ## Property Value

@@ -3,7 +3,7 @@
 Called when an error occurs while building a request or handling a response.
 
 ```csharp
-public Action<WebServiceErrorInfo> ErrorReporter { get; set; }
+public Action<WebServiceErrorInfo>? ErrorReporter { get; set; }
 ```
 
 ## See Also

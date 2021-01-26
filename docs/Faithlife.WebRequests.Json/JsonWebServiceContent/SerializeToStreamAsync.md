@@ -1,7 +1,7 @@
 # JsonWebServiceContent.SerializeToStreamAsync method
 
 ```csharp
-protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context)
 ```
 
 ## See Also

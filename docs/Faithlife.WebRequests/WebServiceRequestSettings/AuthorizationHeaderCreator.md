@@ -3,7 +3,7 @@
 Gets or sets the authorization header creator.
 
 ```csharp
-public Func<WebServiceRequestInfo, string> AuthorizationHeaderCreator { get; set; }
+public Func<WebServiceRequestInfo, string>? AuthorizationHeaderCreator { get; set; }
 ```
 
 ## Property Value

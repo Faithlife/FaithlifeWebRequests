@@ -8,17 +8,6 @@ public static TWebServiceRequest WithJsonContent<TWebServiceRequest, TContentVal
     where TWebServiceRequest : WebServiceRequestBase
 ```
 
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| TContentValue | The type of the content value. |
-| request | The request. |
-| contentValue | The content value. |
-
-## Return Value
-
-The request.
-
 ## See Also
 
 * class [WebServiceRequestBase](../../Faithlife.WebRequests/WebServiceRequestBase.md)
@@ -36,18 +25,6 @@ public static TWebServiceRequest WithJsonContent<TWebServiceRequest, TContentVal
     this TWebServiceRequest request, TContentValue contentValue, JsonSettings settings)
     where TWebServiceRequest : WebServiceRequestBase
 ```
-
-| parameter | description |
-| --- | --- |
-| TWebServiceRequest | The type of the web service request. |
-| TContentValue | The type of the content value. |
-| request | The request. |
-| contentValue | The content value. |
-| settings | The settings. |
-
-## Return Value
-
-The request.
 
 ## See Also
 

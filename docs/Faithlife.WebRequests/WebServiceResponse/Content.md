@@ -3,7 +3,7 @@
 Gets the content.
 
 ```csharp
-public HttpContent Content { get; }
+public HttpContent? Content { get; }
 ```
 
 ## Property Value

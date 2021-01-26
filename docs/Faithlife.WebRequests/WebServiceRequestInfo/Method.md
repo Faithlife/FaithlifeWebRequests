@@ -3,7 +3,7 @@
 The request HTTP method.
 
 ```csharp
-public string Method { get; }
+public string? Method { get; }
 ```
 
 ## See Also

@@ -38,7 +38,8 @@ Use JToken as the type to parse arbitrary JSON.
 Parses the JSON into an object of the specified type.
 
 ```csharp
-public static Task<T> GetJsonAsAsync<T>(this WebServiceResponse response, JsonSettings jsonSettings)
+public static Task<T> GetJsonAsAsync<T>(this WebServiceResponse response, 
+    JsonSettings? jsonSettings)
 ```
 
 | parameter | description |

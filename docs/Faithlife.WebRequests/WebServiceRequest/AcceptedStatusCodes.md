@@ -3,7 +3,7 @@
 Gets or sets the accepted status codes.
 
 ```csharp
-public IReadOnlyList<HttpStatusCode> AcceptedStatusCodes { get; set; }
+public IReadOnlyList<HttpStatusCode>? AcceptedStatusCodes { get; set; }
 ```
 
 ## Property Value

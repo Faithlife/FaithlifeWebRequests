@@ -3,7 +3,7 @@
 Exposes the response headers.
 
 ```csharp
-public HttpResponseHeaders Headers { get; }
+public HttpResponseHeaders? Headers { get; }
 ```
 
 ## See Also

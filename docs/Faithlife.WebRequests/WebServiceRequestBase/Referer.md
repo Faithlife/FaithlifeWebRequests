@@ -3,7 +3,7 @@
 Gets or sets the value of the Referer HTTP header.
 
 ```csharp
-public string Referer { get; set; }
+public string? Referer { get; set; }
 ```
 
 ## Property Value

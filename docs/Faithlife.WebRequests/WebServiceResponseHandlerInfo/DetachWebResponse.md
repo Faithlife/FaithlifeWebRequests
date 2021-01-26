@@ -3,7 +3,7 @@
 Detaches the web response.
 
 ```csharp
-public HttpResponseMessage DetachWebResponse()
+public HttpResponseMessage? DetachWebResponse()
 ```
 
 ## Return Value

@@ -3,7 +3,7 @@
 Parses the JSON into an object of the specified type.
 
 ```csharp
-public static Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type)
+public static Task<object?> GetJsonAsAsync(this HttpResponseMessage response, Type type)
 ```
 
 | parameter | description |
@@ -37,8 +37,8 @@ Use JToken as the type to parse arbitrary JSON.
 Parses the JSON into an object of the specified type.
 
 ```csharp
-public static Task<object> GetJsonAsAsync(this HttpResponseMessage response, Type type, 
-    JsonSettings jsonSettings)
+public static Task<object?> GetJsonAsAsync(this HttpResponseMessage response, Type type, 
+    JsonSettings? jsonSettings)
 ```
 
 | parameter | description |
@@ -108,7 +108,7 @@ Parses the JSON into an object of the specified type.
 
 ```csharp
 public static Task<T> GetJsonAsAsync<T>(this HttpResponseMessage response, 
-    JsonSettings jsonSettings)
+    JsonSettings? jsonSettings)
 ```
 
 | parameter | description |

@@ -57,11 +57,11 @@ public WebServiceException(string message, Exception innerException)
 Initializes a new instance of the [`WebServiceException`](../WebServiceException.md) class.
 
 ```csharp
-public WebServiceException(string message = null, string requestMethod = null, 
-    Uri requestUri = null, HttpStatusCode? responseStatusCode = default(HttpStatusCode?), 
-    HttpHeaders responseHeaders = null, string responseContentType = null, 
-    long? responseContentLength = null, string responseContentPreview = null, 
-    Exception innerException = null)
+public WebServiceException(string? message = null, string? requestMethod = null, 
+    Uri? requestUri = null, HttpStatusCode? responseStatusCode = default, 
+    HttpHeaders? responseHeaders = null, string? responseContentType = null, 
+    long? responseContentLength = null, string? responseContentPreview = null, 
+    Exception? innerException = null)
 ```
 
 | parameter | description |

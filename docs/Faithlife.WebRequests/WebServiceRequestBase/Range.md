@@ -3,7 +3,7 @@
 Gets or sets the byte range to be used by the Range header.
 
 ```csharp
-public ByteRange Range { get; set; }
+public ByteRange? Range { get; set; }
 ```
 
 ## Property Value

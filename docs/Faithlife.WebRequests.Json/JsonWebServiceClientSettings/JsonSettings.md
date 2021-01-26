@@ -3,7 +3,7 @@
 Gets or sets the JSON settings.
 
 ```csharp
-public JsonSettings JsonSettings { get; set; }
+public JsonSettings? JsonSettings { get; set; }
 ```
 
 ## Property Value

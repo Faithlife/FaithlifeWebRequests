@@ -12,7 +12,7 @@ public static bool HasJson(this WebServiceResponse response)
 
 ## Return Value
 
-True if the response content uses the JSON content type ("application/json") and the content is not empty.
+True if the response content uses the JSON content type ("application/json" or "application/schema+json") and the content is not empty.
 
 ## See Also
 

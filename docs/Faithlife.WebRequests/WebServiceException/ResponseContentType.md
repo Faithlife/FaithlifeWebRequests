@@ -3,7 +3,7 @@
 Gets the response content type.
 
 ```csharp
-public string ResponseContentType { get; }
+public string? ResponseContentType { get; }
 ```
 
 ## Property Value
