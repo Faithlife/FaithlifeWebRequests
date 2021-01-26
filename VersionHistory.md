@@ -1,6 +1,6 @@
 # Version History
 
-### 0.9.1
+### 0.10.0
 
 * Support additional json content types (e.g., application/vnd.api+json).
 * Breaking change! Content-type must not have extra text after "json" (aside from parameters after a semicolon).
