@@ -17,9 +17,6 @@ namespace Faithlife.WebRequests.Tests
 		[TestCase(false, "text/html; charset=application/json")]
 		[TestCase(false, "application/html; charset=application/json")]
 		[TestCase(false, "application/html; charset=application/vnd.api+json")]
-		public void TestIsJsonContentType(bool isJson, string contentType)
-		{
-			Assert.AreEqual(isJson, JsonResponseUtility.IsJsonContentType(contentType));
-		}
+		public void TestIsJsonContentType(bool isJson, string contentType) => Assert.AreEqual(isJson, JsonResponseUtility.IsJsonContentType(contentType));
 	}
 }
