@@ -45,7 +45,7 @@ namespace Faithlife.WebRequests
 		}
 
 		/// <summary>
-		/// Returns a reference to the <see cref="CookieContainer"/> for this instance. 
+		/// Returns a reference to the <see cref="CookieContainer"/> for this instance.
 		/// </summary>
 		public CookieContainer CookieContainer { get; }
 
@@ -114,7 +114,7 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		public event EventHandler? CookiesChanged;
 
-		readonly object m_objLock;
-		readonly HashSet<Uri> m_setUris;
+		private readonly object m_objLock;
+		private readonly HashSet<Uri> m_setUris;
 	}
 }

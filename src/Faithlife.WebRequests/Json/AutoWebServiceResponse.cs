@@ -60,12 +60,12 @@ namespace Faithlife.WebRequests.Json
 			return OnResponseHandledCoreAsync(info);
 		}
 
-		string? m_requestMethod;
-		Uri? m_requestUri;
-		HttpStatusCode? m_responseStatusCode;
-		HttpHeaders? m_responseHeaders;
-		string? m_responseContentType;
-		long? m_responseContentLength;
-		string? m_responseContentPreview;
+		private string? m_requestMethod;
+		private Uri? m_requestUri;
+		private HttpStatusCode? m_responseStatusCode;
+		private HttpHeaders? m_responseHeaders;
+		private string? m_responseContentType;
+		private long? m_responseContentLength;
+		private string? m_responseContentPreview;
 	}
 }

@@ -38,24 +38,24 @@ namespace Faithlife.WebRequests.Tests
 			return new MockWebServiceClient(s_baseUri, new JsonWebServiceClientSettings());
 		}
 
-		private static Uri s_baseUri = new Uri("https://testapi.faithlife.com/v1/");
-	}
-
-	sealed class MockWebServiceClient : JsonWebServiceClientBase
-	{
-		public MockWebServiceClient(Uri baseUri, JsonWebServiceClientSettings clientSettings)
-			: base(baseUri, clientSettings)
+		private sealed class MockWebServiceClient : JsonWebServiceClientBase
 		{
+			public MockWebServiceClient(Uri baseUri, JsonWebServiceClientSettings clientSettings)
+				: base(baseUri, clientSettings)
+			{
+			}
+
+			public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters)
+			{
+				return base.CreateRequest<TResponse>(relativeUriPattern, uriParameters);
+			}
+
+			public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] parameters)
+			{
+				return base.CreateRequest<TResponse>(relativeUriPattern, parameters);
+			}
 		}
 
-		public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, IEnumerable<KeyValuePair<string, object?>> uriParameters)
-		{
-			return base.CreateRequest<TResponse>(relativeUriPattern, uriParameters);
-		}
-
-		public new AutoWebServiceRequest<TResponse> CreateRequest<TResponse>(string relativeUriPattern, params string[] parameters)
-		{
-			return base.CreateRequest<TResponse>(relativeUriPattern, parameters);
-		}
+		private static readonly Uri s_baseUri = new Uri("https://testapi.faithlife.com/v1/");
 	}
 }

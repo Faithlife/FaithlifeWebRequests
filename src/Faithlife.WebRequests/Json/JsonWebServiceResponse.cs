@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -39,6 +40,7 @@ namespace Faithlife.WebRequests.Json
 	/// A JSON web response.
 	/// </summary>
 	/// <typeparam name="TValue">The type of the value.</typeparam>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public class JsonWebServiceResponse<TValue> : JsonWebServiceResponse
 	{
 		/// <summary>

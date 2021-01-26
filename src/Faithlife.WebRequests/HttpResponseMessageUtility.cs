@@ -16,8 +16,8 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		/// <param name="response">The response.</param>
 		/// <param name="message">The message.</param>
-		/// <param name="contentPreview">The content preview.</param>
 		/// <param name="innerException">The inner exception.</param>
+		/// <param name="contentPreview">The content preview.</param>
 		/// <returns>A new exception.</returns>
 		public static WebServiceException CreateWebServiceException(HttpResponseMessage response, string? message = null, Exception? innerException = null, string? contentPreview = null)
 		{
@@ -72,6 +72,6 @@ namespace Faithlife.WebRequests
 			}
 		}
 
-		const int c_contentPreviewCharacterCount = 2000;
+		private const int c_contentPreviewCharacterCount = 2000;
 	}
 }

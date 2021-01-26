@@ -154,7 +154,7 @@ namespace Faithlife.WebRequests.Json
 			return request;
 		}
 
-		readonly Uri m_baseUri;
-		readonly JsonWebServiceClientSettings m_clientSettings;
+		private readonly Uri m_baseUri;
+		private readonly JsonWebServiceClientSettings m_clientSettings;
 	}
 }

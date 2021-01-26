@@ -1,11 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Faithlife.Utility;
 using Faithlife.Json;
+using Faithlife.Utility;
 using Newtonsoft.Json;
 
 namespace Faithlife.WebRequests.Json
@@ -70,6 +71,7 @@ namespace Faithlife.WebRequests.Json
 	/// A JSON web service request.
 	/// </summary>
 	/// <typeparam name="TResponseValue">The type of the response value.</typeparam>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public class JsonWebServiceRequest<TResponseValue> : JsonWebServiceRequest
 	{
 		/// <summary>

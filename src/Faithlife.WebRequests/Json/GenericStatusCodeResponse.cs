@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Faithlife.WebRequests.Json
 {
 	/// <summary>
-	/// AutoWebServiceRequest responses with an explicitly set status code. 
+	/// AutoWebServiceRequest responses with an explicitly set status code.
 	/// </summary>
 	public class GenericStatusCodeResponse : AutoWebServiceResponse
 	{

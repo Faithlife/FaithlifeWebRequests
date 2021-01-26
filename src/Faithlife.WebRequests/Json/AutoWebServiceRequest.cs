@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading.Tasks;
-using Faithlife.Utility;
-using Faithlife.Json;
 using System.Threading;
+using System.Threading.Tasks;
+using Faithlife.Json;
+using Faithlife.Utility;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -96,8 +96,8 @@ namespace Faithlife.WebRequests.Json
 			// read headers
 			foreach (var header in webResponse.Headers)
 			{
-				string headerName = header.Key;
 				// remove hyphens before looking for property setter by name
+				string headerName = header.Key;
 				string propertyName = headerName.Replace("-", "");
 				var headerProperty = GetProperty(responseType, propertyName);
 				if (headerProperty?.CanWrite ?? false)
@@ -235,7 +235,7 @@ namespace Faithlife.WebRequests.Json
 				}
 			}
 
-			readonly HttpResponseMessage m_webResponse;
+			private readonly HttpResponseMessage m_webResponse;
 		}
 	}
 }

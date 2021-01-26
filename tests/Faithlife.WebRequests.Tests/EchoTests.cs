@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,9 +13,12 @@ using NUnit.Framework;
 namespace Faithlife.WebRequests.Tests
 {
 	[TestFixture]
+	[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "Test fixture.")]
 	public sealed class EchoTests
 	{
 		[OneTimeSetUp]
+		[SuppressMessage("Security", "CA5394:Do not use insecure randomness", Justification = "Doesn't need to be secure.")]
+		[SuppressMessage("Maintainability", "CA1508:Avoid dead conditional code", Justification = "Analyzer bug.")]
 		public void CreateEchoServer()
 		{
 			var random = new Random();
@@ -47,9 +51,9 @@ namespace Faithlife.WebRequests.Tests
 				while (m_listener.IsListening)
 				{
 					var getContext = m_listener.GetContextAsync();
-					await Task.WhenAny(getContext, waitIndefinitely);
+					await Task.WhenAny(getContext, waitIndefinitely).ConfigureAwait(false);
 					cancellationToken.ThrowIfCancellationRequested();
-					var context = await getContext;
+					var context = await getContext.ConfigureAwait(false);
 					EchoRequestDto? requestDto = null;
 					if (context.Request.HasEntityBody && context.Request.ContentType == "application/json")
 					{
@@ -63,10 +67,10 @@ namespace Faithlife.WebRequests.Tests
 						var responseDto = new EchoResponseDto
 						{
 							Method = context.Request.HttpMethod,
-							Path = context.Request.Url.AbsolutePath,
+							Path = context.Request.Url!.AbsolutePath,
 							Query = context.Request.Url.Query,
 							RequestHeaders = context.Request.Headers.Cast<string>()
-								.ToDictionary(name => name, name => string.Join("; ", context.Request.Headers.GetValues(name))),
+								.ToDictionary(name => name, name => string.Join("; ", context.Request.Headers.GetValues(name)!)),
 							Message = requestDto?.Message,
 						};
 						context.Response.ContentType = "application/json";
@@ -90,7 +94,7 @@ namespace Faithlife.WebRequests.Tests
 			var request = new AutoWebServiceRequest<EchoResponseResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithPostMethod()
 				.WithJsonContent(new EchoRequestDto { Message = "hello" });
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.IsNotNull(response.OK);
 			Assert.AreEqual("POST", response.OK!.Method);
 			Assert.AreEqual("hello", response.OK.Message);
@@ -101,7 +105,7 @@ namespace Faithlife.WebRequests.Tests
 		{
 			var request = new AutoWebServiceRequest<EchoResponseResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithAccept("text/plain");
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.IsNotNull(response.OK);
 			Assert.AreEqual("text/plain", response.OK!.RequestHeaders!.GetValueOrDefault("Accept"));
 		}
@@ -111,7 +115,7 @@ namespace Faithlife.WebRequests.Tests
 		{
 			var request = new AutoWebServiceRequest<EchoResponseResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = 204, SendContent = false });
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.IsTrue(response.NoContent);
 		}
 
@@ -119,9 +123,9 @@ namespace Faithlife.WebRequests.Tests
 		public async Task EchoPlainTextResponseAsync()
 		{
 			var request = new WebServiceRequest(new Uri(m_uriPrefix + "echo"));
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			var contentString = await response.Content!.ReadAsStringAsync();
+			var contentString = await response.Content!.ReadAsStringAsync().ConfigureAwait(false);
 			Assert.IsNotEmpty(contentString);
 		}
 
@@ -130,8 +134,8 @@ namespace Faithlife.WebRequests.Tests
 		{
 			var request = new AutoWebServiceRequest<EchoResponseResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = 500 });
-			var exception = Assert.ThrowsAsync<WebServiceException>(async () => await request.GetResponseAsync());
-			Assert.AreEqual(HttpStatusCode.InternalServerError, exception.ResponseStatusCode);
+			var exception = Assert.ThrowsAsync<WebServiceException>(async () => await request.GetResponseAsync().ConfigureAwait(false));
+			Assert.AreEqual(HttpStatusCode.InternalServerError, exception!.ResponseStatusCode);
 		}
 
 		[TestCase(HttpStatusCode.OK)]
@@ -149,7 +153,7 @@ namespace Faithlife.WebRequests.Tests
 			var request = new AutoWebServiceRequest<GenericStatusCodeResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
 
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.AreEqual(statusCode, response.StatusCode);
 			CollectionAssert.IsNotEmpty(response.Headers);
 		}
@@ -169,18 +173,18 @@ namespace Faithlife.WebRequests.Tests
 			var request = new AutoWebServiceRequest<EchoResponseGenericStatusCodeAsIntResponse>(new Uri(m_uriPrefix + "echo"))
 				.WithJsonContent(new EchoRequestDto { StatusCode = (int) statusCode });
 
-			var response = await request.GetResponseAsync();
+			var response = await request.GetResponseAsync().ConfigureAwait(false);
 			Assert.AreEqual((int) statusCode, response.StatusCode);
 		}
 
-		class EchoRequestDto
+		private class EchoRequestDto
 		{
 			public string? Message { get; set; }
 			public int? StatusCode { get; set; }
 			public bool? SendContent { get; set; }
 		}
 
-		class EchoResponseDto
+		private class EchoResponseDto
 		{
 			public string? Method { get; set; }
 			public string? Path { get; set; }
@@ -189,20 +193,20 @@ namespace Faithlife.WebRequests.Tests
 			public string? Message { get; set; }
 		}
 
-		class EchoResponseResponse
+		private class EchoResponseResponse
 		{
 			public EchoResponseDto? OK { get; set; }
 			public bool NoContent { get; set; }
 		}
 
-		class EchoResponseGenericStatusCodeAsIntResponse : AutoWebServiceResponse
+		private class EchoResponseGenericStatusCodeAsIntResponse : AutoWebServiceResponse
 		{
 			public int StatusCode { get; internal set; }
 		}
 
-		HttpListener? m_listener;
-		string? m_uriPrefix;
-		Task? m_listenerTask;
-		CancellationTokenSource? m_listenerCts;
+		private HttpListener? m_listener;
+		private string? m_uriPrefix;
+		private Task? m_listenerTask;
+		private CancellationTokenSource? m_listenerCts;
 	}
 }

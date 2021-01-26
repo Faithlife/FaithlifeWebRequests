@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 
@@ -28,7 +29,6 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// True if the content has been read from the web response.
 		/// </summary>
-		/// <value>True if the content has been read from the web response.</value>
 		public bool IsContentRead { get; private set; }
 
 		/// <summary>
@@ -57,6 +57,7 @@ namespace Faithlife.WebRequests
 	/// <summary>
 	/// Information provided to web service response handlers.
 	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public sealed class WebServiceResponseHandlerInfo<TResponse> : WebServiceResponseHandlerInfo
 	{
 		/// <summary>

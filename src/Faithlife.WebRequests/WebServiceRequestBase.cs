@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -110,7 +111,6 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// True if the request content compression is allowed.
 		/// </summary>
-		/// <value>True if the request content compression is allowed.</value>
 		/// <remarks>If it significantly reduces the content length, the request content will be compressed
 		/// and the content type will be wrapped with application/x-vnd.logos.compressed; type="...".</remarks>
 		public bool AllowsRequestContentCompression { get; set; }
@@ -126,12 +126,13 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		public bool DisableAutoRedirect { get; set; }
 
-		string? m_method;
+		private string? m_method;
 	}
 
 	/// <summary>
 	/// A base class for web service requests.
 	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public abstract class WebServiceRequestBase<TResponse> : WebServiceRequestBase
 	{
 		/// <summary>
@@ -340,23 +341,6 @@ namespace Faithlife.WebRequests
 				exception is ProtocolViolationException;
 		}
 
-		const string c_octetStreamContentType = "application/octet-stream";
-	}
-
-	internal static class HttpHeadersUtility
-	{
-		public static void AddWebHeaders(this HttpHeaders self, WebHeaderCollection headers)
-		{
-			foreach (var headerName in headers.AllKeys)
-				self.Add(headerName, headers[headerName]);
-		}
-
-		public static WebHeaderCollection ToWebHeaderCollection(this HttpHeaders self)
-		{
-			var collection = new WebHeaderCollection();
-			foreach (var pair in self)
-				collection.Add(pair.Key, pair.Value.Join("; "));
-			return collection;
-		}
+		private const string c_octetStreamContentType = "application/octet-stream";
 	}
 }

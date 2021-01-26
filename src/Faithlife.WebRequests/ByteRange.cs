@@ -53,6 +53,6 @@ namespace Faithlife.WebRequests
 		/// </summary>
 		public bool HasEnd => m_to.HasValue;
 
-		readonly long? m_to;
+		private readonly long? m_to;
 	}
 }

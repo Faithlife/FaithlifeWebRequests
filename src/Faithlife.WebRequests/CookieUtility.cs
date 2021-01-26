@@ -10,7 +10,7 @@ namespace Faithlife.WebRequests
 	public static class CookieUtility
 	{
 		/// <summary>
-		/// Returns a <see cref="String"/> representing the specified cookie, in the format prescribed by
+		/// Returns a <see cref="string"/> representing the specified cookie, in the format prescribed by
 		/// RFC 2965 for the Set-Cookie HTTP header value.
 		/// </summary>
 		/// <param name="cookie">The cookie.</param>

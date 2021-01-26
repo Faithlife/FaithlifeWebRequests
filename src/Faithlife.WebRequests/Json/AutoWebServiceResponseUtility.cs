@@ -16,7 +16,8 @@ namespace Faithlife.WebRequests.Json
 		/// <param name="response">The AutoWebServiceResponse to read the property from.</param>
 		/// <param name="getProperty">The func that reads the desired property.</param>
 		/// <returns>The value of the property.</returns>
-		public static TProperty GetExpectedResult<TResponse, TProperty>(this TResponse response, Func<TResponse, TProperty> getProperty) where TResponse : AutoWebServiceResponse
+		public static TProperty GetExpectedResult<TResponse, TProperty>(this TResponse response, Func<TResponse, TProperty> getProperty)
+			where TResponse : AutoWebServiceResponse
 		{
 			TProperty propertyValue = getProperty(response);
 
@@ -33,7 +34,8 @@ namespace Faithlife.WebRequests.Json
 		/// <typeparam name="TProperty">The type of the property.</typeparam>
 		/// <param name="response">The AutoWebServiceResponse to read the property from.</param>
 		/// <param name="getProperty">The func that reads the desired property.</param>
-		public static void VerifyResultIsExpected<TResponse, TProperty>(this TResponse response, Func<TResponse, TProperty> getProperty) where TResponse : AutoWebServiceResponse
+		public static void VerifyResultIsExpected<TResponse, TProperty>(this TResponse response, Func<TResponse, TProperty> getProperty)
+			where TResponse : AutoWebServiceResponse
 		{
 			GetExpectedResult(response, getProperty);
 		}

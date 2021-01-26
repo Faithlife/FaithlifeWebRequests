@@ -5,8 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Faithlife.Utility;
 using Faithlife.Json;
+using Faithlife.Utility;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -100,13 +100,14 @@ namespace Faithlife.WebRequests.Json
 			return Json is object;
 		}
 
-		string? m_json;
+		private string? m_json;
 	}
 
 	/// <summary>
 	/// JSON web service content.
 	/// </summary>
 	/// <typeparam name="TValue">The type of the value.</typeparam>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public class JsonWebServiceContent<TValue> : JsonWebServiceContent
 	{
 		/// <summary>
@@ -145,6 +146,6 @@ namespace Faithlife.WebRequests.Json
 		/// <value>The JSON.</value>
 		protected override string GenerateJson() => JsonUtility.ToJson(Value, m_outputSettings);
 
-		readonly JsonSettings? m_outputSettings;
+		private readonly JsonSettings? m_outputSettings;
 	}
 }

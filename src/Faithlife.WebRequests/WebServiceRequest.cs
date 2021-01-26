@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,7 @@ namespace Faithlife.WebRequests
 	/// <summary>
 	/// A web service request.
 	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Generic.")]
 	public class WebServiceRequest<TResponse> : WebServiceRequestBase<TResponse>
 	{
 		/// <summary>
@@ -109,8 +111,20 @@ namespace Faithlife.WebRequests
 			return true;
 		}
 
-		static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodes = new[] { HttpStatusCode.OK, HttpStatusCode.Created }.AsReadOnly();
-		static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodesWithRedirect = new[] { HttpStatusCode.OK, HttpStatusCode.Created,
-			HttpStatusCode.Moved, HttpStatusCode.Redirect, HttpStatusCode.RedirectMethod,  HttpStatusCode.RedirectKeepVerb }.AsReadOnly();
+		private static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodes = new[]
+		{
+			HttpStatusCode.OK,
+			HttpStatusCode.Created,
+		}.AsReadOnly();
+
+		private static readonly IReadOnlyList<HttpStatusCode> s_defaultAcceptedStatusCodesWithRedirect = new[]
+		{
+			HttpStatusCode.OK,
+			HttpStatusCode.Created,
+			HttpStatusCode.Moved,
+			HttpStatusCode.Redirect,
+			HttpStatusCode.RedirectMethod,
+			HttpStatusCode.RedirectKeepVerb,
+		}.AsReadOnly();
 	}
 }

@@ -13,6 +13,6 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// The error occurred while handling the response.
 		/// </summary>
-		Response
+		Response,
 	}
 }

@@ -144,7 +144,7 @@ namespace Faithlife.WebRequests
 		}
 
 		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents this instance.
+		/// Returns a <see cref="string"/> that represents this instance.
 		/// </summary>
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Don't want exceptions thrown from ToString.")]
 		public override string ToString()

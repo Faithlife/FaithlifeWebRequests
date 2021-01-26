@@ -59,7 +59,6 @@ namespace Faithlife.WebRequests
 		/// <summary>
 		/// True if 100-Continue behavior should be disabled.
 		/// </summary>
-		/// <value>True if 100-Continue behavior should be disabled.</value>
 		/// <remarks>May not be supported on all platforms.</remarks>
 		public bool Disable100Continue { get; set; }
 
