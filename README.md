@@ -2,9 +2,7 @@
 
 Strongly-typed web service request client library.
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/Faithlife/faithlifewebrequests/master.svg)](https://ci.appveyor.com/project/Faithlife/faithlifewebrequests) [![NuGet](https://img.shields.io/nuget/v/Faithlife.WebRequests.svg)](https://www.nuget.org/packages/Faithlife.WebRequests)
+[![Build](https://github.com/Faithlife/FaithlifeWebRequests/workflows/Build/badge.svg)](https://github.com/Faithlife/FaithlifeWebRequests/actions?query=workflow%3ABuild) [![NuGet](https://img.shields.io/nuget/v/Faithlife.WebRequests.svg)](https://www.nuget.org/packages/Faithlife.WebRequests)
 
-* Documentation: https://faithlife.github.io/FaithlifeWebRequests/
-* License: [MIT](LICENSE)
-* [Version History](VersionHistory.md)
-* [Contributing Guidelines](CONTRIBUTING.md)
+* [Documentation](https://faithlife.github.io/FaithlifeWebRequests/)
+* [Release Notes](ReleaseNotes.md)
