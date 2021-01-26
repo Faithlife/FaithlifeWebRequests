@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 using Faithlife.Utility;
@@ -18,13 +16,12 @@ namespace Faithlife.WebRequests.Json
 		/// Returns true if the response content uses the JSON content type.
 		/// </summary>
 		/// <param name="response">The response.</param>
-		/// <returns>True if the response content uses the JSON content type ("application/json") and the content is not empty.</returns>
+		/// <returns>True if the response content uses the JSON content type ("application/json" or "application/schema+json") and the content is not empty.</returns>
 		public static bool HasJson(this WebServiceResponse response)
 		{
 			bool hasJson = response.Content?.Headers.ContentLength > 0;
 			var contentType = response.Content?.Headers.ContentType?.ToString();
-			hasJson &= contentType is object && contentType.Length >= JsonWebServiceContent.JsonContentType.Length &&
-				contentType.Trim().StartsWith(JsonWebServiceContent.JsonContentType, StringComparison.Ordinal);
+			hasJson &= contentType is object && JsonResponseUtility.IsJsonContentType(contentType);
 
 			return hasJson;
 		}

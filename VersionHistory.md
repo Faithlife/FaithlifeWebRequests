@@ -1,5 +1,10 @@
 # Version History
 
+### 0.10.0
+
+* Support additional json content types (e.g., application/vnd.api+json).
+* Breaking change! Content-type must not have extra text after "json" (aside from parameters after a semicolon).
+
 ### 0.9.0
 
 * Add `netstandard2.1` target framework.
