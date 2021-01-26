@@ -18,6 +18,6 @@ namespace Faithlife.WebRequests.Json
 			return s_jsonContentTypeRegex.IsMatch(contentType);
 		}
 
-		private static readonly Regex s_jsonContentTypeRegex = new Regex(@"^\s*application\/([^\s;]+\+)?json");
+		private static readonly Regex s_jsonContentTypeRegex = new Regex(@"^\s*application\/([^\s;]+\+)?json\s*($|;)");
 	}
 }
