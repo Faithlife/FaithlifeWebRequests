@@ -1,10 +1,8 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Faithlife.Json;
@@ -57,14 +55,13 @@ namespace Faithlife.WebRequests.Json
 		protected override async Task<bool> HandleResponseCoreAsync(WebServiceResponseHandlerInfo<TResponse> info)
 		{
 			var response = CreateResponse()!;
-			Type responseType = response.GetType();
 			var webResponse = info.WebResponse!;
 
 			// find specific status code property
 			bool isStatusCodeHandled = false;
 			HttpStatusCode statusCode = webResponse.StatusCode;
 			string statusCodeText = statusCode.ToString();
-			var resultProperty = GetProperty(responseType, statusCodeText);
+			var resultProperty = AutoWebServiceResponseUtility.GetStatusCodeProperty(response, statusCodeText);
 			object? content = null;
 
 			if (resultProperty?.CanWrite ?? false)
@@ -75,7 +72,7 @@ namespace Faithlife.WebRequests.Json
 				isStatusCodeHandled = true;
 			}
 
-			var statusCodeProperty = GetProperty(responseType, "StatusCode");
+			var statusCodeProperty = AutoWebServiceResponseUtility.GetStatusCodeProperty(response, "StatusCode");
 			if (statusCodeProperty?.CanWrite ?? false)
 			{
 				Type statusCodePropertyType = statusCodeProperty.PropertyType;
@@ -101,7 +98,7 @@ namespace Faithlife.WebRequests.Json
 #pragma warning disable CA1307 // Specify StringComparison for clarity
 				string propertyName = headerName.Replace("-", "");
 #pragma warning restore CA1307 // Specify StringComparison for clarity
-				var headerProperty = GetProperty(responseType, propertyName);
+				var headerProperty = AutoWebServiceResponseUtility.GetStatusCodeProperty(response, propertyName);
 				if (headerProperty?.CanWrite ?? false)
 				{
 					// get header text
@@ -137,16 +134,6 @@ namespace Faithlife.WebRequests.Json
 			// success
 			info.Response = response;
 			return true;
-		}
-
-		private static PropertyInfo? GetProperty(Type type, string propertyName)
-		{
-			var property = type.GetRuntimeProperties().FirstOrDefault(x => x.GetMethod is object && !x.GetMethod.IsStatic && string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
-
-			if (property is object && property.SetMethod is null)
-				property = property.DeclaringType.GetRuntimeProperty(property.Name);
-
-			return property;
 		}
 
 		private async Task<object> ReadContentAsAsync(WebServiceResponseHandlerInfo<TResponse> info, Type propertyType)

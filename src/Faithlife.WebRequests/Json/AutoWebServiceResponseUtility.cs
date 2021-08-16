@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -38,6 +40,23 @@ namespace Faithlife.WebRequests.Json
 			where TResponse : AutoWebServiceResponse
 		{
 			GetExpectedResult(response, getProperty);
+		}
+
+		/// <summary>
+		/// Returns PropertyInfo of the desired property.
+		/// </summary>
+		/// <param name="response">The response.</param>
+		/// <param name="propertyName">The name of the property.</param>
+		/// <returns>The PropertyInfo of the property.</returns>
+		internal static PropertyInfo? GetStatusCodeProperty(object response, string? propertyName)
+		{
+			if (propertyName == null)
+				return null;
+
+			return response.GetType().GetRuntimeProperties().FirstOrDefault(x =>
+				x.GetMethod != null &&
+				!x.GetMethod.IsStatic &&
+				string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
 		}
 	}
 }
