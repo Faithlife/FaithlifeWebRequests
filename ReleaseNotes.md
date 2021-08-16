@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.0
+
+* Populate `AutoWebServiceResponse.ResponseContentPreview` when creating a `WebServiceException` from the response.
+
 ## 0.10.0
 
 * Support additional json content types (e.g., application/vnd.api+json).
