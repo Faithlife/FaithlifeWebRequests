@@ -53,10 +53,15 @@ namespace Faithlife.WebRequests.Json
 			if (propertyName == null)
 				return null;
 
-			return response.GetType().GetRuntimeProperties().FirstOrDefault(x =>
-				x.GetMethod != null &&
+			var property = response.GetType().GetRuntimeProperties().FirstOrDefault(x =>
+				x.GetMethod is object &&
 				!x.GetMethod.IsStatic &&
 				string.Equals(x.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+
+			if (property is object && property.SetMethod is null)
+				property = property.DeclaringType.GetRuntimeProperty(property.Name);
+
+			return property;
 		}
 	}
 }
