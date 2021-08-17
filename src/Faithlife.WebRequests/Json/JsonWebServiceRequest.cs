@@ -118,7 +118,7 @@ namespace Faithlife.WebRequests.Json
 				try
 				{
 					// parse JSON to desired value
-					TResponseValue value = JsonUtility.FromJson<TResponseValue>(json, JsonSettings);
+					TResponseValue value = JsonUtility.FromJson<TResponseValue>(json, JsonSettings)!;
 					return new JsonWebServiceResponse<TResponseValue>(this, statusCode, headers, JsonWebServiceContent.FromValue(value));
 				}
 				catch (JsonReaderException x)

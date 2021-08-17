@@ -23,9 +23,9 @@ namespace Faithlife.WebRequests
 		public static void Add(this WebHeaderCollection headers, string name, string value)
 		{
 			if (string.IsNullOrEmpty(name))
-				throw new ArgumentException("Invalid name", "name");
+				throw new ArgumentException("Invalid name", nameof(name));
 			if (value?.Length > 65535)
-				throw new ArgumentOutOfRangeException("value");
+				throw new ArgumentOutOfRangeException(nameof(value));
 
 			string currentValue = headers[name];
 			headers[name] = currentValue is null ? value : currentValue + ", " + value;
@@ -37,7 +37,7 @@ namespace Faithlife.WebRequests
 		public static void Add(this WebHeaderCollection headers, HttpRequestHeader header, string value)
 		{
 			if (value?.Length > 65535)
-				throw new ArgumentOutOfRangeException("value");
+				throw new ArgumentOutOfRangeException(nameof(value));
 
 			string currentValue = headers[header];
 			headers[header] = currentValue is null ? value : currentValue + ", " + value;

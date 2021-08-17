@@ -14,7 +14,7 @@ namespace Faithlife.WebRequests
 		public ByteRange(long from)
 		{
 			if (from < 0)
-				throw new ArgumentOutOfRangeException("from", from, "The parameter must be a non-negative number.");
+				throw new ArgumentOutOfRangeException(nameof(from), from, "The parameter must be a non-negative number.");
 
 			From = from;
 			m_to = null;
@@ -28,11 +28,11 @@ namespace Faithlife.WebRequests
 		public ByteRange(long from, long to)
 		{
 			if (from < 0)
-				throw new ArgumentOutOfRangeException("from", from, "The parameter must be a non-negative number.");
+				throw new ArgumentOutOfRangeException(nameof(from), from, "The parameter must be a non-negative number.");
 			if (to < 0)
-				throw new ArgumentOutOfRangeException("to", to, "The parameter must be a non-negative number.");
+				throw new ArgumentOutOfRangeException(nameof(to), to, "The parameter must be a non-negative number.");
 			if (from > to)
-				throw new ArgumentOutOfRangeException("from", "from cannot be greater than to.");
+				throw new ArgumentOutOfRangeException(nameof(from), "from cannot be greater than to.");
 
 			From = from;
 			m_to = to;

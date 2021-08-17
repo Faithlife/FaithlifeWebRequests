@@ -131,12 +131,12 @@ namespace Faithlife.WebRequests
 					message.Append(" (status ").Append(ResponseStatusCode.Value);
 
 					if (ResponseContentType is object)
-						message.Append(", content type '").Append(ResponseContentType).Append("'");
+						message.Append(", content type '").Append(ResponseContentType).Append('\'');
 
 					if (ResponseContentLength is object)
 						message.Append(", content length ").AppendInvariant(ResponseContentLength.Value);
 
-					message.Append(")");
+					message.Append(')');
 				}
 
 				return message.ToString();

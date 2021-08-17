@@ -206,7 +206,9 @@ namespace Faithlife.WebRequests
 			if (settings.GetHttpClient is object)
 				return settings.GetHttpClient();
 
+#pragma warning disable CA5399 // HttpClient is created without enabling CheckCertificateRevocationList
 			var client = new HttpClient(CreateHttpClientHandler(settings));
+#pragma warning restore CA5399 // HttpClient is created without enabling CheckCertificateRevocationList
 			var timeout = Timeout ?? settings.DefaultTimeout;
 			client.Timeout = timeout ?? System.Threading.Timeout.InfiniteTimeSpan;
 			return client;
@@ -326,7 +328,7 @@ namespace Faithlife.WebRequests
 			if (headers.TryGetValues("Set-Cookie", out var values))
 			{
 				string cookieHeader = values.Join("; ");
-				if (cookieHeader != "")
+				if (!string.IsNullOrEmpty(cookieHeader))
 					Settings.CookieManager.SetCookies(requestUri, cookieHeader);
 			}
 		}

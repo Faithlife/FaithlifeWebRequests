@@ -17,11 +17,11 @@ namespace Faithlife.WebRequests.Json
 		protected JsonWebServiceClientBase(Uri baseUri, JsonWebServiceClientSettings clientSettings)
 		{
 			if (baseUri is null)
-				throw new ArgumentNullException("baseUri");
+				throw new ArgumentNullException(nameof(baseUri));
 			if (clientSettings is null)
-				throw new ArgumentNullException("clientSettings");
+				throw new ArgumentNullException(nameof(clientSettings));
 			if (clientSettings.RequestSettings is object && clientSettings.RequestSettingsCreator is object)
-				throw new ArgumentException("Only one of RequestSettings and RequestSettingsCreator may be set.", "clientSettings");
+				throw new ArgumentException("Only one of RequestSettings and RequestSettingsCreator may be set.", nameof(clientSettings));
 
 			m_baseUri = baseUri;
 			m_clientSettings = clientSettings;

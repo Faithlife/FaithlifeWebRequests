@@ -98,7 +98,9 @@ namespace Faithlife.WebRequests.Json
 			{
 				// remove hyphens before looking for property setter by name
 				string headerName = header.Key;
+#pragma warning disable CA1307 // Specify StringComparison for clarity
 				string propertyName = headerName.Replace("-", "");
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 				var headerProperty = GetProperty(responseType, propertyName);
 				if (headerProperty?.CanWrite ?? false)
 				{
