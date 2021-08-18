@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Faithlife.Json;
 
 namespace Faithlife.WebRequests.Json
 {
@@ -16,6 +17,20 @@ namespace Faithlife.WebRequests.Json
 		/// <returns>A new exception for the response.</returns>
 		public WebServiceException CreateException(string? message = null, Exception? innerException = null)
 		{
+			if (m_responseContentPreview == null)
+			{
+				var statusCodeProperty = AutoWebServiceResponseUtility.GetStatusCodeProperty(this, m_responseStatusCode?.ToString());
+
+				if (statusCodeProperty?.CanRead == true)
+				{
+					const int maxPreviewContentLength = 1000;
+					m_responseContentPreview = JsonUtility.ToJson(statusCodeProperty.GetValue(this));
+
+					if (m_responseContentPreview.Length > maxPreviewContentLength)
+						m_responseContentPreview = m_responseContentPreview.Substring(0, maxPreviewContentLength) + "...";
+				}
+			}
+
 			return new WebServiceException(
 				message: message,
 				requestMethod: m_requestMethod,
