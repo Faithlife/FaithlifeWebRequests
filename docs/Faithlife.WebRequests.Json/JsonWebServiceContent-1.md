@@ -25,7 +25,7 @@ public class JsonWebServiceContent<TValue> : JsonWebServiceContent
 
 ## See Also
 
-* class [JsonWebServiceContent](JsonWebServiceContent.md)
+* class [JsonWebServiceContent](./JsonWebServiceContent.md)
 * namespace [Faithlife.WebRequests.Json](../Faithlife.WebRequests.md)
 * [JsonWebServiceContent.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/Json/JsonWebServiceContent.cs)
 

@@ -1,6 +1,6 @@
 # WebServiceRequestSettings.DefaultTimeout property
 
-Gets or sets the default timeout. If [`GetHttpClient`](GetHttpClient.md) is set, then this property is ignored.
+Gets or sets the default timeout. If [`GetHttpClient`](./GetHttpClient.md) is set, then this property is ignored.
 
 ```csharp
 public TimeSpan? DefaultTimeout { get; set; }

@@ -10,12 +10,12 @@ public sealed class WebServiceResponseHandlerInfo<TResponse> : WebServiceRespons
 
 | name | description |
 | --- | --- |
-| [WebServiceResponseHandlerInfo](WebServiceResponseHandlerInfo-1/WebServiceResponseHandlerInfo.md)(…) | Initializes a new instance of the [`WebServiceResponseHandlerInfo`](WebServiceResponseHandlerInfo-1.md) class. |
+| [WebServiceResponseHandlerInfo](WebServiceResponseHandlerInfo-1/WebServiceResponseHandlerInfo.md)(…) | Initializes a new instance of the [`WebServiceResponseHandlerInfo`](./WebServiceResponseHandlerInfo-1.md) class. |
 | [Response](WebServiceResponseHandlerInfo-1/Response.md) { get; set; } | Gets or sets the response. |
 
 ## See Also
 
-* class [WebServiceResponseHandlerInfo](WebServiceResponseHandlerInfo.md)
+* class [WebServiceResponseHandlerInfo](./WebServiceResponseHandlerInfo.md)
 * namespace [Faithlife.WebRequests](../Faithlife.WebRequests.md)
 * [WebServiceResponseHandlerInfo.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/WebServiceResponseHandlerInfo.cs)
 

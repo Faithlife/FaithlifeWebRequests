@@ -10,7 +10,7 @@ public class WebServiceRequest<TResponse> : WebServiceRequestBase<TResponse>
 
 | name | description |
 | --- | --- |
-| [WebServiceRequest](WebServiceRequest-1/WebServiceRequest.md)(…) | Initializes a new instance of the [`WebServiceRequest`](WebServiceRequest.md) class. |
+| [WebServiceRequest](WebServiceRequest-1/WebServiceRequest.md)(…) | Initializes a new instance of the [`WebServiceRequest`](./WebServiceRequest.md) class. |
 | [Handlers](WebServiceRequest-1/Handlers.md) { get; } | Gets the response handlers. |
 
 ## Protected Members
@@ -21,7 +21,7 @@ public class WebServiceRequest<TResponse> : WebServiceRequestBase<TResponse>
 
 ## See Also
 
-* class [WebServiceRequestBase&lt;TResponse&gt;](WebServiceRequestBase-1.md)
+* class [WebServiceRequestBase&lt;TResponse&gt;](./WebServiceRequestBase-1.md)
 * namespace [Faithlife.WebRequests](../Faithlife.WebRequests.md)
 * [WebServiceRequest.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/WebServiceRequest.cs)
 

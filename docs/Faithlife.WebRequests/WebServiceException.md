@@ -10,8 +10,8 @@ public class WebServiceException : Exception
 
 | name | description |
 | --- | --- |
-| [WebServiceException](WebServiceException/WebServiceException.md)() | Initializes a new instance of the [`WebServiceException`](WebServiceException.md) class. |
-| [WebServiceException](WebServiceException/WebServiceException.md)(…) | Initializes a new instance of the [`WebServiceException`](WebServiceException.md) class. (3 constructors) |
+| [WebServiceException](WebServiceException/WebServiceException.md)() | Initializes a new instance of the [`WebServiceException`](./WebServiceException.md) class. |
+| [WebServiceException](WebServiceException/WebServiceException.md)(…) | Initializes a new instance of the [`WebServiceException`](./WebServiceException.md) class. (3 constructors) |
 | override [Message](WebServiceException/Message.md) { get; } | Gets a message that describes the current exception. |
 | [RequestMethod](WebServiceException/RequestMethod.md) { get; } | Gets the request method. |
 | [RequestUri](WebServiceException/RequestUri.md) { get; } | Gets the request URI. |

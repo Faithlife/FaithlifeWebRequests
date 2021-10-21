@@ -1,6 +1,6 @@
 # UriCookieHeader class
 
-Stores a [`Uri`](UriCookieHeader/Uri.md) and an associated Set-Cookie HTTP header.
+Stores a [`Uri`](./UriCookieHeader/Uri.md) and an associated Set-Cookie HTTP header.
 
 ```csharp
 public sealed class UriCookieHeader
@@ -10,7 +10,7 @@ public sealed class UriCookieHeader
 
 | name | description |
 | --- | --- |
-| [UriCookieHeader](UriCookieHeader/UriCookieHeader.md)(…) | Initializes a new instance of the [`UriCookieHeader`](UriCookieHeader.md) class. |
+| [UriCookieHeader](UriCookieHeader/UriCookieHeader.md)(…) | Initializes a new instance of the [`UriCookieHeader`](./UriCookieHeader.md) class. |
 | [CookieHeader](UriCookieHeader/CookieHeader.md) { get; } | Gets the cookie header. |
 | [Uri](UriCookieHeader/Uri.md) { get; } | Gets the URI. |
 

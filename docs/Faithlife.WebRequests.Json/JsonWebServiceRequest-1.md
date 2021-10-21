@@ -14,7 +14,7 @@ public class JsonWebServiceRequest<TResponseValue> : JsonWebServiceRequest
 
 | name | description |
 | --- | --- |
-| [JsonWebServiceRequest](JsonWebServiceRequest-1/JsonWebServiceRequest.md)(…) | Initializes a new instance of the [`JsonWebServiceRequest`](JsonWebServiceRequest-1.md) class. |
+| [JsonWebServiceRequest](JsonWebServiceRequest-1/JsonWebServiceRequest.md)(…) | Initializes a new instance of the [`JsonWebServiceRequest`](./JsonWebServiceRequest-1.md) class. |
 | [JsonSettings](JsonWebServiceRequest-1/JsonSettings.md) { get; set; } | Gets or sets the JSON settings. |
 | [GetResponseAsync](JsonWebServiceRequest-1/GetResponseAsync.md)(…) | Gets the response asynchronously. |
 
@@ -26,7 +26,7 @@ public class JsonWebServiceRequest<TResponseValue> : JsonWebServiceRequest
 
 ## See Also
 
-* class [JsonWebServiceRequest](JsonWebServiceRequest.md)
+* class [JsonWebServiceRequest](./JsonWebServiceRequest.md)
 * namespace [Faithlife.WebRequests.Json](../Faithlife.WebRequests.md)
 * [JsonWebServiceRequest.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/Json/JsonWebServiceRequest.cs)
 

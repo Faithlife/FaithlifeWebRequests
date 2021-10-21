@@ -14,12 +14,12 @@ public class JsonWebServiceResponse<TValue> : JsonWebServiceResponse
 
 | name | description |
 | --- | --- |
-| [JsonWebServiceResponse](JsonWebServiceResponse-1/JsonWebServiceResponse.md)(…) | Initializes a new instance of the [`JsonWebServiceResponse`](JsonWebServiceResponse-1.md) class. |
+| [JsonWebServiceResponse](JsonWebServiceResponse-1/JsonWebServiceResponse.md)(…) | Initializes a new instance of the [`JsonWebServiceResponse`](./JsonWebServiceResponse-1.md) class. |
 | [Value](JsonWebServiceResponse-1/Value.md) { get; } | Gets the value, if any. |
 
 ## See Also
 
-* class [JsonWebServiceResponse](JsonWebServiceResponse.md)
+* class [JsonWebServiceResponse](./JsonWebServiceResponse.md)
 * namespace [Faithlife.WebRequests.Json](../Faithlife.WebRequests.md)
 * [JsonWebServiceResponse.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/Json/JsonWebServiceResponse.cs)
 

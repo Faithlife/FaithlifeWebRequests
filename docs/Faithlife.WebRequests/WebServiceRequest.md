@@ -10,7 +10,7 @@ public class WebServiceRequest : WebServiceRequestBase<WebServiceResponse>
 
 | name | description |
 | --- | --- |
-| [WebServiceRequest](WebServiceRequest/WebServiceRequest.md)(…) | Initializes a new instance of the [`WebServiceRequest`](WebServiceRequest.md) class. |
+| [WebServiceRequest](WebServiceRequest/WebServiceRequest.md)(…) | Initializes a new instance of the [`WebServiceRequest`](./WebServiceRequest.md) class. |
 | [AcceptedStatusCodes](WebServiceRequest/AcceptedStatusCodes.md) { get; set; } | Gets or sets the accepted status codes. |
 
 ## Protected Members
@@ -23,8 +23,8 @@ public class WebServiceRequest : WebServiceRequestBase<WebServiceResponse>
 
 ## See Also
 
-* class [WebServiceRequestBase&lt;TResponse&gt;](WebServiceRequestBase-1.md)
-* class [WebServiceResponse](WebServiceResponse.md)
+* class [WebServiceRequestBase&lt;TResponse&gt;](./WebServiceRequestBase-1.md)
+* class [WebServiceResponse](./WebServiceResponse.md)
 * namespace [Faithlife.WebRequests](../Faithlife.WebRequests.md)
 * [WebServiceRequest.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/WebServiceRequest.cs)
 

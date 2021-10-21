@@ -10,15 +10,15 @@ public sealed class CookieManager
 
 | name | description |
 | --- | --- |
-| [CookieManager](CookieManager/CookieManager.md)() | Initializes a new instance of the [`CookieManager`](CookieManager.md) class. |
-| [CookieManager](CookieManager/CookieManager.md)(…) | Initializes a new instance of the [`CookieManager`](CookieManager.md) class. |
-| [CookieContainer](CookieManager/CookieContainer.md) { get; } | Returns a reference to the [`CookieContainer`](CookieManager/CookieContainer.md) for this instance. |
+| [CookieManager](CookieManager/CookieManager.md)() | Initializes a new instance of the [`CookieManager`](./CookieManager.md) class. |
+| [CookieManager](CookieManager/CookieManager.md)(…) | Initializes a new instance of the [`CookieManager`](./CookieManager.md) class. |
+| [CookieContainer](CookieManager/CookieContainer.md) { get; } | Returns a reference to the [`CookieContainer`](./CookieManager/CookieContainer.md) for this instance. |
 | event [CookiesChanged](CookieManager/CookiesChanged.md) | Raised when cookies are changed. |
-| [ExpireCookies](CookieManager/ExpireCookies.md)() | Expires the cookies, and raising the [`CookiesChanged`](CookieManager/CookiesChanged.md) event if there were any cookies (even potentially already expired ones). |
+| [ExpireCookies](CookieManager/ExpireCookies.md)() | Expires the cookies, and raising the [`CookiesChanged`](./CookieManager/CookiesChanged.md) event if there were any cookies (even potentially already expired ones). |
 | [GetCookieHeader](CookieManager/GetCookieHeader.md)(…) | Gets the HTTP Cookie header for the specified URI. |
-| [GetCookies](CookieManager/GetCookies.md)() | Gets the collection of cookies contained in this [`CookieManager`](CookieManager.md) instance. |
-| [GetUriCookies](CookieManager/GetUriCookies.md)() | Gets the collection of cookies contained in this [`CookieManager`](CookieManager.md) instance. |
-| [SetCookies](CookieManager/SetCookies.md)(…) | Adds [`UriCookieHeader`](UriCookieHeader.md) instances for one or more cookies from an HTTP cookie header to the [`CookieManager`](CookieManager.md) for a specific URI. |
+| [GetCookies](CookieManager/GetCookies.md)() | Gets the collection of cookies contained in this [`CookieManager`](./CookieManager.md) instance. |
+| [GetUriCookies](CookieManager/GetUriCookies.md)() | Gets the collection of cookies contained in this [`CookieManager`](./CookieManager.md) instance. |
+| [SetCookies](CookieManager/SetCookies.md)(…) | Adds [`UriCookieHeader`](./UriCookieHeader.md) instances for one or more cookies from an HTTP cookie header to the [`CookieManager`](./CookieManager.md) for a specific URI. |
 
 ## Remarks
 

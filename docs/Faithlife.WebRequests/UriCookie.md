@@ -1,6 +1,6 @@
 # UriCookie class
 
-Stores a [`Uri`](UriCookie/Uri.md) and an associated Cookie.
+Stores a [`Uri`](./UriCookie/Uri.md) and an associated Cookie.
 
 ```csharp
 public sealed class UriCookie
@@ -10,7 +10,7 @@ public sealed class UriCookie
 
 | name | description |
 | --- | --- |
-| [UriCookie](UriCookie/UriCookie.md)(…) | Initializes a new instance of the [`UriCookieHeader`](UriCookieHeader.md) class. |
+| [UriCookie](UriCookie/UriCookie.md)(…) | Initializes a new instance of the [`UriCookieHeader`](./UriCookieHeader.md) class. |
 | [Cookie](UriCookie/Cookie.md) { get; } | Gets the cookie. |
 | [Uri](UriCookie/Uri.md) { get; } | Gets the URI. |
 

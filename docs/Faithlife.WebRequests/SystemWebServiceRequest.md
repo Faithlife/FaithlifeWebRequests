@@ -10,7 +10,7 @@ public class SystemWebServiceRequest : WebServiceRequestBase<HttpResponseMessage
 
 | name | description |
 | --- | --- |
-| [SystemWebServiceRequest](SystemWebServiceRequest/SystemWebServiceRequest.md)(…) | Initializes a new instance of the [`SystemWebServiceRequest`](SystemWebServiceRequest.md) class. |
+| [SystemWebServiceRequest](SystemWebServiceRequest/SystemWebServiceRequest.md)(…) | Initializes a new instance of the [`SystemWebServiceRequest`](./SystemWebServiceRequest.md) class. |
 
 ## Protected Members
 
@@ -20,7 +20,7 @@ public class SystemWebServiceRequest : WebServiceRequestBase<HttpResponseMessage
 
 ## See Also
 
-* class [WebServiceRequestBase&lt;TResponse&gt;](WebServiceRequestBase-1.md)
+* class [WebServiceRequestBase&lt;TResponse&gt;](./WebServiceRequestBase-1.md)
 * namespace [Faithlife.WebRequests](../Faithlife.WebRequests.md)
 * [SystemWebServiceRequest.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/SystemWebServiceRequest.cs)
 

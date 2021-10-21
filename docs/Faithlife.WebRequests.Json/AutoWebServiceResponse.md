@@ -16,7 +16,7 @@ public abstract class AutoWebServiceResponse
 
 | name | description |
 | --- | --- |
-| [AutoWebServiceResponse](AutoWebServiceResponse/AutoWebServiceResponse.md)() | Initializes a new instance of the [`AutoWebServiceResponse`](AutoWebServiceResponse.md) class. |
+| [AutoWebServiceResponse](AutoWebServiceResponse/AutoWebServiceResponse.md)() | Initializes a new instance of the [`AutoWebServiceResponse`](./AutoWebServiceResponse.md) class. |
 | virtual [OnResponseHandledCoreAsync](AutoWebServiceResponse/OnResponseHandledCoreAsync.md)(…) | Called when the response has been handled, i.e. immediately before it is returned. |
 
 ## See Also

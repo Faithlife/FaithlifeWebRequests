@@ -8,7 +8,7 @@ public Func<HttpClient>? GetHttpClient { get; set; }
 
 ## Remarks
 
-If this property is set, then [`CookieManager`](CookieManager.md), [`DisableAutoRedirect`](../WebServiceRequestBase/DisableAutoRedirect.md), [`DefaultTimeout`](DefaultTimeout.md), and [`Timeout`](../WebServiceRequestBase/Timeout.md) are ignored.
+If this property is set, then [`CookieManager`](./CookieManager.md), [`DisableAutoRedirect`](../WebServiceRequestBase/DisableAutoRedirect.md), [`DefaultTimeout`](./DefaultTimeout.md), and [`Timeout`](../WebServiceRequestBase/Timeout.md) are ignored.
 
 ## See Also
 

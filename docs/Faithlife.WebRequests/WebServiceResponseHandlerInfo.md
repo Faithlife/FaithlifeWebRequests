@@ -20,7 +20,7 @@ public abstract class WebServiceResponseHandlerInfo
 
 | name | description |
 | --- | --- |
-| [WebServiceResponseHandlerInfo](WebServiceResponseHandlerInfo/WebServiceResponseHandlerInfo.md)(…) | Initializes a new instance of the [`WebServiceResponseHandlerInfo`](WebServiceResponseHandlerInfo-1.md) class. |
+| [WebServiceResponseHandlerInfo](WebServiceResponseHandlerInfo/WebServiceResponseHandlerInfo.md)(…) | Initializes a new instance of the [`WebServiceResponseHandlerInfo`](./WebServiceResponseHandlerInfo-1.md) class. |
 
 ## See Also
 

@@ -1,6 +1,6 @@
 # WebServiceResponseUtility class
 
-Provides helper methods for working with [`WebServiceResponse`](WebServiceResponse.md).
+Provides helper methods for working with [`WebServiceResponse`](./WebServiceResponse.md).
 
 ```csharp
 public static class WebServiceResponseUtility

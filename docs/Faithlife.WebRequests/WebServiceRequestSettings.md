@@ -10,12 +10,12 @@ public class WebServiceRequestSettings
 
 | name | description |
 | --- | --- |
-| [WebServiceRequestSettings](WebServiceRequestSettings/WebServiceRequestSettings.md)() | Initializes a new instance of the [`WebServiceRequestSettings`](WebServiceRequestSettings.md) class. |
+| [WebServiceRequestSettings](WebServiceRequestSettings/WebServiceRequestSettings.md)() | Initializes a new instance of the [`WebServiceRequestSettings`](./WebServiceRequestSettings.md) class. |
 | [AuthorizationHeader](WebServiceRequestSettings/AuthorizationHeader.md) { get; set; } | Gets or sets the authorization header. |
 | [AuthorizationHeaderCreator](WebServiceRequestSettings/AuthorizationHeaderCreator.md) { get; set; } | Gets or sets the authorization header creator. |
-| [CookieManager](WebServiceRequestSettings/CookieManager.md) { get; set; } | Gets or sets the cookie manager. If [`GetHttpClient`](WebServiceRequestSettings/GetHttpClient.md) is set, then this property is ignored. |
+| [CookieManager](WebServiceRequestSettings/CookieManager.md) { get; set; } | Gets or sets the cookie manager. If [`GetHttpClient`](./WebServiceRequestSettings/GetHttpClient.md) is set, then this property is ignored. |
 | [DefaultHeaders](WebServiceRequestSettings/DefaultHeaders.md) { get; set; } | Gets or sets the default headers. |
-| [DefaultTimeout](WebServiceRequestSettings/DefaultTimeout.md) { get; set; } | Gets or sets the default timeout. If [`GetHttpClient`](WebServiceRequestSettings/GetHttpClient.md) is set, then this property is ignored. |
+| [DefaultTimeout](WebServiceRequestSettings/DefaultTimeout.md) { get; set; } | Gets or sets the default timeout. If [`GetHttpClient`](./WebServiceRequestSettings/GetHttpClient.md) is set, then this property is ignored. |
 | [Disable100Continue](WebServiceRequestSettings/Disable100Continue.md) { get; set; } | True if 100-Continue behavior should be disabled. |
 | [DisableKeepAlive](WebServiceRequestSettings/DisableKeepAlive.md) { get; set; } | True if the connection should be closed after this web service request is made. |
 | [ErrorReporter](WebServiceRequestSettings/ErrorReporter.md) { get; set; } | Called when an error occurs while building a request or handling a response. |

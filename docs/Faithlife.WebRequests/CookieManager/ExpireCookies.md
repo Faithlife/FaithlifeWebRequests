@@ -1,6 +1,6 @@
 # CookieManager.ExpireCookies method
 
-Expires the cookies, and raising the [`CookiesChanged`](CookiesChanged.md) event if there were any cookies (even potentially already expired ones).
+Expires the cookies, and raising the [`CookiesChanged`](./CookiesChanged.md) event if there were any cookies (even potentially already expired ones).
 
 ```csharp
 public void ExpireCookies()

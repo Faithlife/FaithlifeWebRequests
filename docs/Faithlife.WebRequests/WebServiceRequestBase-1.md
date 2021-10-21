@@ -16,13 +16,13 @@ public abstract class WebServiceRequestBase<TResponse> : WebServiceRequestBase
 
 | name | description |
 | --- | --- |
-| [WebServiceRequestBase](WebServiceRequestBase-1/WebServiceRequestBase.md)(…) | Initializes a new instance of the [`WebServiceRequestBase`](WebServiceRequestBase.md) class. |
+| [WebServiceRequestBase](WebServiceRequestBase-1/WebServiceRequestBase.md)(…) | Initializes a new instance of the [`WebServiceRequestBase`](./WebServiceRequestBase.md) class. |
 | abstract [HandleResponseCoreAsync](WebServiceRequestBase-1/HandleResponseCoreAsync.md)(…) | Called to handle the response. |
 | virtual [OnWebRequestCreated](WebServiceRequestBase-1/OnWebRequestCreated.md)(…) | Called to modify the request before it is sent. |
 
 ## See Also
 
-* class [WebServiceRequestBase](WebServiceRequestBase.md)
+* class [WebServiceRequestBase](./WebServiceRequestBase.md)
 * namespace [Faithlife.WebRequests](../Faithlife.WebRequests.md)
 * [WebServiceRequestBase.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/WebServiceRequestBase.cs)
 

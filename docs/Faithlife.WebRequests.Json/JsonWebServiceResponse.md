@@ -10,7 +10,7 @@ public class JsonWebServiceResponse : WebServiceResponse
 
 | name | description |
 | --- | --- |
-| [JsonWebServiceResponse](JsonWebServiceResponse/JsonWebServiceResponse.md)(…) | Initializes a new instance of the [`JsonWebServiceResponse`](JsonWebServiceResponse-1.md) class. |
+| [JsonWebServiceResponse](JsonWebServiceResponse/JsonWebServiceResponse.md)(…) | Initializes a new instance of the [`JsonWebServiceResponse`](./JsonWebServiceResponse-1.md) class. |
 | [Json](JsonWebServiceResponse/Json.md) { get; } | Gets the value, if any. |
 
 ## See Also

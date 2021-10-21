@@ -22,7 +22,7 @@ public class GenericStatusCodeResponse : AutoWebServiceResponse
 
 ## See Also
 
-* class [AutoWebServiceResponse](AutoWebServiceResponse.md)
+* class [AutoWebServiceResponse](./AutoWebServiceResponse.md)
 * namespace [Faithlife.WebRequests.Json](../Faithlife.WebRequests.md)
 * [GenericStatusCodeResponse.cs](https://github.com/Faithlife/FaithlifeWebRequests/tree/master/src/Faithlife.WebRequests/Json/GenericStatusCodeResponse.cs)
 

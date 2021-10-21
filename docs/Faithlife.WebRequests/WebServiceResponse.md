@@ -10,7 +10,7 @@ public class WebServiceResponse
 
 | name | description |
 | --- | --- |
-| [WebServiceResponse](WebServiceResponse/WebServiceResponse.md)(…) | Initializes a new instance of the [`WebServiceResponse`](WebServiceResponse.md) class. |
+| [WebServiceResponse](WebServiceResponse/WebServiceResponse.md)(…) | Initializes a new instance of the [`WebServiceResponse`](./WebServiceResponse.md) class. |
 | [Content](WebServiceResponse/Content.md) { get; } | Gets the content. |
 | [Headers](WebServiceResponse/Headers.md) { get; } | Gets the headers. |
 | [RequestMethod](WebServiceResponse/RequestMethod.md) { get; } | The method used by the request. |
