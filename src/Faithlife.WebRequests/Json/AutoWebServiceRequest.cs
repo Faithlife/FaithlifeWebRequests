@@ -205,11 +205,21 @@ namespace Faithlife.WebRequests.Json
 			public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
 				=> WrappedStream.ReadAsync(buffer, offset, count, cancellationToken);
 
+#if NETSTANDARD2_1
+			public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+				=> WrappedStream.ReadAsync(buffer, cancellationToken);
+#endif
+
 			public override void Write(byte[] buffer, int offset, int count)
 				=> throw new NotSupportedException();
 
 			public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
 				=> throw new NotSupportedException();
+
+#if NETSTANDARD2_1
+			public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+				=> throw new NotSupportedException();
+#endif
 
 			protected override void Dispose(bool disposing)
 			{

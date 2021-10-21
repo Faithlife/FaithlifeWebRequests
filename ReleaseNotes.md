@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.1
+
+* Fix compatibility with Faithlife.Utility 0.12.0.
+
 ## 0.11.0
 
 * Populate `AutoWebServiceResponse.ResponseContentPreview` when creating a `WebServiceException` from the response.
